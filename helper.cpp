@@ -184,6 +184,7 @@ int insertStruct(string structName)
 
 void printSymbolTable(vector<SymbolTableEntry> v)
 {
+	return;
 	cout << "\t\tName\t" << "DataType\t" << "Scope\t" << "pointer\t"<< endl;
 	for( auto i : v )
 	{
@@ -200,17 +201,17 @@ void printFunctions(vector<FunctionTable> v)
 {
 	for( auto f : v )
 	{
-		cout << endl;
-		cout << "\t\tfunction Name = " << f.functionName << endl;
-		cout << "\t\t\tlabel = " << f.label << endl;
-		cout << "\t\t\treturn value : " << f.returnType << endl;
-		cout << "\t\t\tparameters : " << endl << "\t\t";
-		printSymbolTable(f.parameters);
-		cout << "\t\t\tlocalVariables : " << endl << "\t\t";
-		printSymbolTable(f.localVariables);
-		cout << "\t\t\ttempVariables = " << endl << "\t\t";
-		printSymbolTable(f.tempVariables);
-		cout << "\t\t\tCode = " << endl;
+		// cout << endl;
+		// cout << "\t\tfunction Name = " << f.functionName << endl;
+		// cout << "\t\t\tlabel = " << f.label << endl;
+		// cout << "\t\t\treturn value : " << f.returnType << endl;
+		// cout << "\t\t\tparameters : " << endl << "\t\t";
+		// printSymbolTable(f.parameters);
+		// cout << "\t\t\tlocalVariables : " << endl << "\t\t";
+		// printSymbolTable(f.localVariables);
+		// cout << "\t\t\ttempVariables = " << endl << "\t\t";
+		// printSymbolTable(f.tempVariables);
+		// cout << "\t\t\tCode = " << endl;
 		for( auto c : f.code )
 		{
 			cout << "\t\t\t\t" << c << endl;
@@ -222,12 +223,12 @@ void printTable()
 {
 	for( auto st : globalTable )
 	{
-		cout << "Struct Name = " << st.structName << endl;
-		cout << "\tAttributes = " << endl << "\t\t";
-		printSymbolTable(st.attributes);
-		cout << "\tConstants = " << endl << "\t\t";
-		printSymbolTable(st.constants);
-		cout << "\tFunctions = " << endl;
+		// cout << "Struct Name = " << st.structName << endl;
+		// cout << "\tAttributes = " << endl << "\t\t";
+		// printSymbolTable(st.attributes);
+		// cout << "\tConstants = " << endl << "\t\t";
+		// printSymbolTable(st.constants);
+		// cout << "\tFunctions = " << endl;
 		printFunctions(st.functionTables);
 	}
 }

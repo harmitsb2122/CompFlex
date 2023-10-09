@@ -1,121 +1,6 @@
-INT : int
-Identifier : f 
-( : (
-INT : int
-Identifier : a 
-, : ,
-INT : int
-Identifier : b 
-) : )
-line no is 1
-{ : {
-line no is 2
-RETURN : return
-Identifier : a 
-+ : +
-Identifier : b 
-;: ;
-line no is 3
-} : }
-line no is 4
-INT : int
-Identifier : main 
-( : (
-) : )
-line no is 5
-{ : {
-line no is 6
-INT : int
-Identifier : a 
-, : ,
-Identifier : b 
-;: ;
-line no is 7
-INT : int
-Identifier : c 
-[ : [
-I CONST: (10)
-] : ]
-;: ;
-line no is 8
-Identifier : c 
-[ : [
-I CONST: (2)
-] : ]
-= : =
-I CONST: (1)
-;: ;
-line no is 9
-Identifier : a 
-= : =
-I CONST: (1)
-;: ;
-line no is 10
-Identifier : b 
-= : =
-I CONST: (1)
-;: ;
-line no is 11
-Identifier : f 
-( : (
-Identifier : a 
-, : ,
-Identifier : b 
-) : )
-;: ;
-line no is 12
-RETURN : return
-I CONST: (0)
-;: ;
-line no is 13
-} : }
-Struct Name = main
-	Attributes = 
-				Name	DataType	Scope	pointer	
-	Constants = 
-				Name	DataType	Scope	pointer	
-	Functions = 
-
-		function Name = f
-			label = label_1
-			return value : int
-			parameters : 
-				Name	DataType	Scope	pointer	
-				a		int			2		
-				b		int			2		
-			localVariables : 
-				Name	DataType	Scope	pointer	
-			tempVariables = 
-				Name	DataType	Scope	pointer	
-				_t1		int			2		
-			Code = 
-				label_1:
+				label_1:
 				_t1_2 = a_2 + b_2
 				Return _t1_2
-
-		function Name = main
-			label = label_2
-			return value : int
-			parameters : 
-				Name	DataType	Scope	pointer	
-			localVariables : 
-				Name	DataType	Scope	pointer	
-				a		int			3		
-				b		int			3		
-				c_0		int			3		
-				c		*int			3		c_0*
-			tempVariables = 
-				Name	DataType	Scope	pointer	
-				_t2		int			3		
-				_t3		int			3		
-				_t4		int			3		
-				_t5		*int			3		
-				_t6		int			3		
-				_t7		int			3		
-				_t8		int			3		
-				_t9		int			3		
-				_t10		int			3		
-			Code = 
 				label_2:
 				_t2_3 = #10
 				c_0_3 = _t2_3
