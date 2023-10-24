@@ -10,6 +10,7 @@ using namespace std;
 
 string currentStruct;
 string currentFunction;
+
 int currentScope;
 
 int tempInt;
@@ -26,6 +27,8 @@ stack<SymbolTableEntry> callStack;
 vector<string> declevels;
 vector<pair<string, string>> stdeclevels;
 string dtype;
+string lambdaReturnType;
+vector<string> lambdaParamStack;
 int starsCount;
 int dlevels;
 int parseDebug;
@@ -341,6 +344,26 @@ int insertParam(string name, string type)
 
 	vector<SymbolTableEntry> table;
 	return globalTable[gindex].functionTables[findex].insertParam(name, type, table);
+}
+
+bool verifyParams(vector<string> types)
+{
+	int gindex = getStructIndex(currentStruct);
+	int findex = getFunctionIndex(gindex, currentFunction);
+
+	vector<SymbolTableEntry> params = globalTable[gindex].functionTables[findex].parameters;
+
+	if (types.size() != params.size())
+	{
+		return false;
+	}
+
+	for (int i = 0; i < params.size(); i++)
+	{
+		if (params[i].dataType != types[i])
+			return false;
+	}
+	return true;
 }
 
 int insertConstant(string name, string value)

@@ -72,6 +72,8 @@ extern stack<SymbolTableEntry> callStack;
 extern vector<string> declevels;
 extern vector<pair<string, string>> stdeclevels;
 extern string dtype;
+extern string lambdaReturnType;
+extern vector<string> lambdaParamStack;
 extern int starsCount;
 extern int dlevels;
 extern int parseDebug;
@@ -105,5 +107,5 @@ void setLabel(string fn, string label);
 string getFunctionLabel(string functionName);
 string getFunctionReturnType(string functionName);
 void setCallStack(string functionName);
-
+bool verifyParams(vector<string> types);
 void translate();

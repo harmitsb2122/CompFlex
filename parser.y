@@ -46,7 +46,7 @@ extern "C"
 	} var;
 };
 
-%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER STRUCT_IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC ASM
+%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER STRUCT_IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM
 
 %start begin
 
@@ -370,7 +370,7 @@ extern "C"
 	type_name		
 		:	INT	{dtype = "int"; starsCount = 0; }
 			| CHAR {dtype = "char"; starsCount = 0; }
-			| STRUCT {dtype = "struct"; starsCount = 0;}						
+			| STRUCT {dtype = "struct"; starsCount = 0; }						
 			;
 
 	stars
@@ -1002,8 +1002,96 @@ extern "C"
 			;
 
 
+	lambda_expression
+		:	 LMFUNCTION 
+				{
+					lambdaParamStack.clear();
+				}
+			'<'
+			lamda_return_type 
+			'('
+			lambda_param_types
+			')'
+			'>'
+			IDENTIFIER
+				{
+					if(currentFunction != "main")
+					{
+						cout << "COMPILETIME ERROR: Lambda functions need to be declared inside main" << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+					}
+
+					string functionName($<str>9);
+					string type = lambdaReturnType;
+					string returnType = type;
+					int res = insertFunction(functionName,returnType);
+					currentFunction = functionName;
+					string functionStart = getLabel();
+					appendCode(functionStart + ":");
+					setLabel(currentFunction, functionStart);
+
+				}
+			'='
+			'['
+			'&'
+			']'
+			'('
+				{
+					currentScope++;
+					scopeStack.push(currentScope);
+				}
+			lambda_params
+				{
+					currentScope--;
+					scopeStack.pop();
+				}
+			')'
+				{
+					if(!verifyParams(lambdaParamStack))
+					{
+						cout << "COMPILETIME ERROR: Inconsistent Parameters" << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+					}
+					currentScope++;
+					scopeStack.push(currentScope);
+				}
+			'{'
+			lambda_body
+			'}'
+				{
+					currentScope--;
+					scopeStack.pop();
+					currentFunction = "main";
+				}
+			;
+
+	lamda_return_type : type_name {lambdaReturnType = dtype;};
+	
+	lambda_param_types :
+			type_name
+				{
+					lambdaParamStack.push_back(dtype);
+				} 
+			',' lambda_param_types
+			| type_name 				{
+					lambdaParamStack.push_back(dtype);
+				} 
+			|
+			;
+
+	lambda_params : functionArguments
+			;
+	
+	lambda_body :
+			statement_list ;
+	
 	statement
-		: 	assignment_expression ';'
+		:  lambda_expression ';'
+			| assignment_expression ';'
 			| declaration_expression ';'
 			| conditional_expression
 			| for_expression

@@ -139,6 +139,11 @@ struct_identifier {identifier}[.]{identifier}
 							printf("MALLOC : %s\n", yytext);
 						return MALLOC;
 					}
+"function"			{
+						if( DEBUG == 1 )
+							printf("LMFUNCTION : %s\n", yytext);
+						return LMFUNCTION;
+					}
 "__asm__"			{
 						if( DEBUG == 1 )
 							printf("ASM : %s\n", yytext);
