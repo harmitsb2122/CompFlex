@@ -46,13 +46,30 @@ extern "C"
 	} var;
 };
 
-%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC ASM
+%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER STRUCT_IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC ASM
 
 %start begin
 
 %% 
 	primary_expression
 			:	IDENTIFIER	{	
+					string str($<str>1);
+					if( !is_Variable(str) ){
+						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+						$<var.type>$ = getCharArray("UNKNOWN TYPE");
+						$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
+					}
+					else{
+						SymbolTableEntry ste = getVariable(str);
+						$<var.type>$ = getCharArray(ste.dataType);
+						$<var.addr>$ = getCharArray(ste.name + "_" + to_string(ste.scope));
+					}
+					debug(1);
+				}	
+			| STRUCT_IDENTIFIER {	
 					string str($<str>1);
 					if( !is_Variable(str) ){
 						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
@@ -352,7 +369,8 @@ extern "C"
 
 	type_name		
 		:	INT	{dtype = "int"; starsCount = 0; }
-			| CHAR {dtype = "char"; starsCount = 0; }						
+			| CHAR {dtype = "char"; starsCount = 0; }
+			| STRUCT {dtype = "struct"; starsCount = 0;}						
 			;
 
 	stars
@@ -1112,8 +1130,7 @@ extern "C"
 						return 1;
 					}
 				}
-			';'
-	;
+			';';
 
 	struct_body
 		: '{' 
@@ -1121,9 +1138,7 @@ extern "C"
 					stdeclevels.clear();
 				}
 
-			struct_attributes '}'
-
-	;
+			struct_attributes '}';
 	
 	struct_attributes
 		: type_name stars 
@@ -1140,8 +1155,7 @@ extern "C"
 					stdeclevels.push_back({var,type});
 				} 
 			struct_attributes
-		| 
-	;
+		| ;
 
 	functionPrefix:
 		type_name stars IDENTIFIER '('

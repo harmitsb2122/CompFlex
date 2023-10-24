@@ -13,7 +13,7 @@ char			'[a-zA-Z\\n]'
 string			(\"([^"\\\n]|(\\['"\?\\abfnrtv]))*\")+
 bool			true|false
 identifier		{letter}({letter}|{digit})*
-
+struct_identifier {identifier}[.]{identifier}
 %%
 "//".*				{
 					}
@@ -384,6 +384,13 @@ identifier		{letter}({letter}|{digit})*
 						if(DEBUG == 1) printf("Identifier : %s \n", yytext);
 						yylval.str = strdup(yytext);
 						return IDENTIFIER;
+
+					}
+
+{struct_identifier} 		{
+						if(DEBUG == 1) printf("Identifier : %s \n", yytext);
+						yylval.str = strdup(yytext);
+						return STRUCT_IDENTIFIER;
 
 					}
 "\n"				{

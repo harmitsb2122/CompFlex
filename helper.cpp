@@ -315,7 +315,8 @@ int insertVariable(string variableName, string dataType, vector<string> levels)
 	{
 		string name = variableName + "_" + to_string(i);
 		vector<SymbolTableEntry> v;
-		if (globalTable[gindex].functionTables[findex].insertVariable(name, "int", v) != 0)
+		// if (globalTable[gindex].functionTables[findex].insertVariable(name, "int", v) != 0)
+		if (globalTable[gindex].functionTables[findex].insertVariable(name, dataType, v) != 0)
 		{
 			return -1;
 		}
