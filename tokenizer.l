@@ -72,6 +72,11 @@ identifier		{letter}({letter}|{digit})*
 							printf("INT : %s\n",yytext);
 						return INT;
 					}
+"struct"				{
+						if( DEBUG == 1) 
+							printf("STRUCT : %s\n",yytext);
+						return STRUCT;
+					}
 "let"				{
 						if( DEBUG == 1) 
 							printf("LET : %s\n",yytext);

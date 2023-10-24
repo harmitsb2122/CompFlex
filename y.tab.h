@@ -65,39 +65,40 @@ extern int yydebug;
     IN = 266,                      /* IN  */
     IF = 267,                      /* IF  */
     INT = 268,                     /* INT  */
-    RETURN = 269,                  /* RETURN  */
-    SIZEOF = 270,                  /* SIZEOF  */
-    VOID = 271,                    /* VOID  */
-    BOOL = 272,                    /* BOOL  */
-    STRING = 273,                  /* STRING  */
-    ADD_ASSIGN = 274,              /* ADD_ASSIGN  */
-    SUB_ASSIGN = 275,              /* SUB_ASSIGN  */
-    MUL_ASSIGN = 276,              /* MUL_ASSIGN  */
-    DIV_ASSIGN = 277,              /* DIV_ASSIGN  */
-    MOD_ASSIGN = 278,              /* MOD_ASSIGN  */
-    POW_ASSIGN = 279,              /* POW_ASSIGN  */
-    INC_OP = 280,                  /* INC_OP  */
-    DEC_OP = 281,                  /* DEC_OP  */
-    OR_OP = 282,                   /* OR_OP  */
-    AND_OP = 283,                  /* AND_OP  */
-    LE_OP = 284,                   /* LE_OP  */
-    GE_OP = 285,                   /* GE_OP  */
-    EQ_OP = 286,                   /* EQ_OP  */
-    NE_OP = 287,                   /* NE_OP  */
-    C_CONST = 288,                 /* C_CONST  */
-    S_CONST = 289,                 /* S_CONST  */
-    B_CONST = 290,                 /* B_CONST  */
-    I_CONST = 291,                 /* I_CONST  */
-    F_CONST = 292,                 /* F_CONST  */
-    IDENTIFIER = 293,              /* IDENTIFIER  */
-    LET = 294,                     /* LET  */
-    PRINT = 295,                   /* PRINT  */
-    PRINTS = 296,                  /* PRINTS  */
-    SCAN = 297,                    /* SCAN  */
-    VAR = 298,                     /* VAR  */
-    NULL_ = 299,                   /* NULL_  */
-    MALLOC = 300,                  /* MALLOC  */
-    ASM = 301                      /* ASM  */
+    STRUCT = 269,                  /* STRUCT  */
+    RETURN = 270,                  /* RETURN  */
+    SIZEOF = 271,                  /* SIZEOF  */
+    VOID = 272,                    /* VOID  */
+    BOOL = 273,                    /* BOOL  */
+    STRING = 274,                  /* STRING  */
+    ADD_ASSIGN = 275,              /* ADD_ASSIGN  */
+    SUB_ASSIGN = 276,              /* SUB_ASSIGN  */
+    MUL_ASSIGN = 277,              /* MUL_ASSIGN  */
+    DIV_ASSIGN = 278,              /* DIV_ASSIGN  */
+    MOD_ASSIGN = 279,              /* MOD_ASSIGN  */
+    POW_ASSIGN = 280,              /* POW_ASSIGN  */
+    INC_OP = 281,                  /* INC_OP  */
+    DEC_OP = 282,                  /* DEC_OP  */
+    OR_OP = 283,                   /* OR_OP  */
+    AND_OP = 284,                  /* AND_OP  */
+    LE_OP = 285,                   /* LE_OP  */
+    GE_OP = 286,                   /* GE_OP  */
+    EQ_OP = 287,                   /* EQ_OP  */
+    NE_OP = 288,                   /* NE_OP  */
+    C_CONST = 289,                 /* C_CONST  */
+    S_CONST = 290,                 /* S_CONST  */
+    B_CONST = 291,                 /* B_CONST  */
+    I_CONST = 292,                 /* I_CONST  */
+    F_CONST = 293,                 /* F_CONST  */
+    IDENTIFIER = 294,              /* IDENTIFIER  */
+    LET = 295,                     /* LET  */
+    PRINT = 296,                   /* PRINT  */
+    PRINTS = 297,                  /* PRINTS  */
+    SCAN = 298,                    /* SCAN  */
+    VAR = 299,                     /* VAR  */
+    NULL_ = 300,                   /* NULL_  */
+    MALLOC = 301,                  /* MALLOC  */
+    ASM = 302                      /* ASM  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -117,39 +118,40 @@ extern int yydebug;
 #define IN 266
 #define IF 267
 #define INT 268
-#define RETURN 269
-#define SIZEOF 270
-#define VOID 271
-#define BOOL 272
-#define STRING 273
-#define ADD_ASSIGN 274
-#define SUB_ASSIGN 275
-#define MUL_ASSIGN 276
-#define DIV_ASSIGN 277
-#define MOD_ASSIGN 278
-#define POW_ASSIGN 279
-#define INC_OP 280
-#define DEC_OP 281
-#define OR_OP 282
-#define AND_OP 283
-#define LE_OP 284
-#define GE_OP 285
-#define EQ_OP 286
-#define NE_OP 287
-#define C_CONST 288
-#define S_CONST 289
-#define B_CONST 290
-#define I_CONST 291
-#define F_CONST 292
-#define IDENTIFIER 293
-#define LET 294
-#define PRINT 295
-#define PRINTS 296
-#define SCAN 297
-#define VAR 298
-#define NULL_ 299
-#define MALLOC 300
-#define ASM 301
+#define STRUCT 269
+#define RETURN 270
+#define SIZEOF 271
+#define VOID 272
+#define BOOL 273
+#define STRING 274
+#define ADD_ASSIGN 275
+#define SUB_ASSIGN 276
+#define MUL_ASSIGN 277
+#define DIV_ASSIGN 278
+#define MOD_ASSIGN 279
+#define POW_ASSIGN 280
+#define INC_OP 281
+#define DEC_OP 282
+#define OR_OP 283
+#define AND_OP 284
+#define LE_OP 285
+#define GE_OP 286
+#define EQ_OP 287
+#define NE_OP 288
+#define C_CONST 289
+#define S_CONST 290
+#define B_CONST 291
+#define I_CONST 292
+#define F_CONST 293
+#define IDENTIFIER 294
+#define LET 295
+#define PRINT 296
+#define PRINTS 297
+#define SCAN 298
+#define VAR 299
+#define NULL_ 300
+#define MALLOC 301
+#define ASM 302
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -166,7 +168,7 @@ union YYSTYPE
 		char* addr;
 	} var;
 
-#line 170 "y.tab.h"
+#line 172 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

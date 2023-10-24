@@ -1,10 +1,11 @@
 #include <iostream>
-#include<vector>
-#include<stack>
-#include<unordered_map>
-#include<cassert>
-#include<cstring>
-#include"helper.h"
+#include <vector>
+#include <stack>
+#include <unordered_map>
+#include <cassert>
+#include <cstring>
+#include <utility>
+#include "helper.h"
 using namespace std;
 
 string currentStruct;
@@ -23,6 +24,7 @@ stack<string> forNext;
 stack<string> forIncrement;
 stack<SymbolTableEntry> callStack;
 vector<string> declevels;
+vector<pair<string, string>> stdeclevels;
 string dtype;
 int starsCount;
 int dlevels;
@@ -44,7 +46,7 @@ SymbolTableEntry::SymbolTableEntry()
 {
 }
 
-FunctionTable::FunctionTable( string name, string rType )
+FunctionTable::FunctionTable(string name, string rType)
 {
 	this->functionName = name;
 	this->returnType = rType;
@@ -54,16 +56,16 @@ FunctionTable::FunctionTable()
 {
 }
 
-void FunctionTable :: appendCode(string code)
+void FunctionTable ::appendCode(string code)
 {
 	this->code.push_back(code);
 }
 
-int FunctionTable :: insertVariable(string name, string type, vector<SymbolTableEntry> table)
+int FunctionTable ::insertVariable(string name, string type, vector<SymbolTableEntry> table)
 {
-	for( int i = 0 ; i < localVariables.size() ; i++ )
+	for (int i = 0; i < localVariables.size(); i++)
 	{
-		if( localVariables[i].name == name and localVariables[i].scope == scopeStack.top() )
+		if (localVariables[i].name == name and localVariables[i].scope == scopeStack.top())
 		{
 			return -1;
 		}
@@ -73,11 +75,11 @@ int FunctionTable :: insertVariable(string name, string type, vector<SymbolTable
 	return 0;
 }
 
-int FunctionTable :: insertTempVariable(string name, string type )
+int FunctionTable ::insertTempVariable(string name, string type)
 {
-	for( int i = 0 ; i < tempVariables.size() ; i++ )
+	for (int i = 0; i < tempVariables.size(); i++)
 	{
-		if( tempVariables[i].name == name and tempVariables[i].dataType == type )
+		if (tempVariables[i].name == name and tempVariables[i].dataType == type)
 		{
 			cout << "FATAL ERROR: inserting duplicate temp variable" << endl;
 			return -1;
@@ -89,11 +91,11 @@ int FunctionTable :: insertTempVariable(string name, string type )
 	return 0;
 }
 
-int FunctionTable :: insertParam(string name,  string type, vector<SymbolTableEntry> table)
+int FunctionTable ::insertParam(string name, string type, vector<SymbolTableEntry> table)
 {
-	for( int i = 0 ; i < parameters.size() ; i++ )
+	for (int i = 0; i < parameters.size(); i++)
 	{
-		if( parameters[i].name == name and parameters[i].dataType == type )
+		if (parameters[i].name == name and parameters[i].dataType == type)
 		{
 			return -1;
 		}
@@ -110,9 +112,9 @@ StructTable::StructTable(string name)
 
 int StructTable::insertAttribute(string name, string type, vector<SymbolTableEntry> table)
 {
-	for( auto i :  attributes )
+	for (auto i : attributes)
 	{
-		if( i.name == name )
+		if (i.name == name)
 		{
 			return -1;
 		}
@@ -124,9 +126,10 @@ int StructTable::insertAttribute(string name, string type, vector<SymbolTableEnt
 
 int StructTable::insertFunction(string functionName, string returnType)
 {
-	for( auto i : functionTables )
+	for (auto i : functionTables)
 	{
-		if( i.functionName == functionName ) {
+		if (i.functionName == functionName)
+		{
 			return -1;
 		}
 	}
@@ -147,19 +150,19 @@ int StructTable::insertConstant(string name, string value)
 void init()
 {
 	actualSize = {{"int", 4},
-				  {"char", 1},
-				  {"string", 4},
-				  {"bool", 1},
-				  {"float", 4},
-				  {"*", 4}};
+								{"char", 1},
+								{"string", 4},
+								{"bool", 1},
+								{"float", 4},
+								{"*", 4}};
 
 	Size = {{"int", 4},
-			{"char", 4},
-			{"string", 4},
-			{"bool", 4},
-			{"float", 4},
-			{"void", 4},
-			{"*", 4}};
+					{"char", 4},
+					{"string", 4},
+					{"bool", 4},
+					{"float", 4},
+					{"void", 4},
+					{"*", 4}};
 
 	tempInt = 1;
 	labelInt = 1;
@@ -170,9 +173,9 @@ void init()
 
 int insertStruct(string structName)
 {
-	for( auto i : globalTable )
+	for (auto i : globalTable)
 	{
-		if( i.structName == structName )
+		if (i.structName == structName)
 		{
 			return -1;
 		}
@@ -184,11 +187,14 @@ int insertStruct(string structName)
 
 void printSymbolTable(vector<SymbolTableEntry> v)
 {
-	cout << "\t\tName\t" << "DataType\t" << "Scope\t" << "pointer\t"<< endl;
-	for( auto i : v )
+	cout << "\t\tName\t"
+			 << "DataType\t"
+			 << "Scope\t"
+			 << "pointer\t" << endl;
+	for (auto i : v)
 	{
 		cout << "\t\t\t\t" << i.name << "\t\t" << i.dataType << "\t\t\t" << i.scope << "\t\t";
-		for( auto j : i.levels )
+		for (auto j : i.levels)
 		{
 			cout << j.name << "*";
 		}
@@ -198,20 +204,23 @@ void printSymbolTable(vector<SymbolTableEntry> v)
 
 void printFunctions(vector<FunctionTable> v)
 {
-	for( auto f : v )
+	for (auto f : v)
 	{
 		cout << endl;
 		cout << "\t\tfunction Name = " << f.functionName << endl;
 		cout << "\t\t\tlabel = " << f.label << endl;
 		cout << "\t\t\treturn value : " << f.returnType << endl;
-		cout << "\t\t\tparameters : " << endl << "\t\t";
+		cout << "\t\t\tparameters : " << endl
+				 << "\t\t";
 		printSymbolTable(f.parameters);
-		cout << "\t\t\tlocalVariables : " << endl << "\t\t";
+		cout << "\t\t\tlocalVariables : " << endl
+				 << "\t\t";
 		printSymbolTable(f.localVariables);
-		cout << "\t\t\ttempVariables = " << endl << "\t\t";
+		cout << "\t\t\ttempVariables = " << endl
+				 << "\t\t";
 		printSymbolTable(f.tempVariables);
 		cout << "\t\t\tCode = " << endl;
-		for( auto c : f.code )
+		for (auto c : f.code)
 		{
 			cout << "\t\t\t\t" << c << endl;
 		}
@@ -220,12 +229,14 @@ void printFunctions(vector<FunctionTable> v)
 
 void printTable()
 {
-	for( auto st : globalTable )
+	for (auto st : globalTable)
 	{
 		cout << "Struct Name = " << st.structName << endl;
-		cout << "\tAttributes = " << endl << "\t\t";
+		cout << "\tAttributes = " << endl
+				 << "\t\t";
 		printSymbolTable(st.attributes);
-		cout << "\tConstants = " << endl << "\t\t";
+		cout << "\tConstants = " << endl
+				 << "\t\t";
 		printSymbolTable(st.constants);
 		cout << "\tFunctions = " << endl;
 		printFunctions(st.functionTables);
@@ -234,9 +245,9 @@ void printTable()
 
 int getStructIndex(string name)
 {
-	for( int i = 0 ; i < globalTable.size() ; i++ )
+	for (int i = 0; i < globalTable.size(); i++)
 	{
-		if( globalTable[i].structName == name )
+		if (globalTable[i].structName == name)
 		{
 			return i;
 		}
@@ -244,11 +255,11 @@ int getStructIndex(string name)
 	return -1;
 }
 
-int getFunctionIndex(int globalIndex,string name)
+int getFunctionIndex(int globalIndex, string name)
 {
-	for( int i = 0 ; i < globalTable[globalIndex].functionTables.size() ; i++ )
+	for (int i = 0; i < globalTable[globalIndex].functionTables.size(); i++)
 	{
-		if( globalTable[globalIndex].functionTables[i].functionName == name )
+		if (globalTable[globalIndex].functionTables[i].functionName == name)
 		{
 			return i;
 		}
@@ -256,11 +267,29 @@ int getFunctionIndex(int globalIndex,string name)
 	return -1;
 }
 
-int insertAttribute(string name, string type)
+int insertAttribute(string attributeName, string attributeType, vector<pair<string, string>> levels)
 {
 	int index = getStructIndex(currentStruct);
 	vector<SymbolTableEntry> table;
-	return globalTable[index].insertAttribute(name, type, table);
+
+	if (levels.size() == 0)
+	{
+		vector<SymbolTableEntry> v;
+		return globalTable[index].insertAttribute(attributeName, attributeType, v);
+	}
+
+	for (int i = 0; i < levels.size(); i++)
+	{
+		string name = attributeName + "." + levels[i].first;
+		vector<SymbolTableEntry> v;
+		if (globalTable[index].insertAttribute(name, levels[i].second, v) != 0)
+		{
+			return -1;
+		}
+
+		table.push_back(getVariable(name));
+	}
+	return globalTable[index].insertAttribute(attributeName, attributeType, table);
 }
 
 int insertFunction(string functionName, string returnType)
@@ -269,35 +298,34 @@ int insertFunction(string functionName, string returnType)
 	return globalTable[index].insertFunction(functionName, returnType);
 }
 
-int insertVariable( string variableName, string dataType, vector<string> levels )
+int insertVariable(string variableName, string dataType, vector<string> levels)
 {
 	int gindex = getStructIndex(currentStruct);
 	int findex = getFunctionIndex(gindex, currentFunction);
 
 	vector<SymbolTableEntry> table;
 
-	if( levels.size() == 0 )
+	if (levels.size() == 0)
 	{
 		vector<SymbolTableEntry> v;
-		return globalTable[gindex].functionTables[findex].insertVariable(variableName, dataType,v);
+		return globalTable[gindex].functionTables[findex].insertVariable(variableName, dataType, v);
 	}
 
-
-	for( int i = 0 ; i < levels.size() ; i++ )
+	for (int i = 0; i < levels.size(); i++)
 	{
 		string name = variableName + "_" + to_string(i);
 		vector<SymbolTableEntry> v;
-		if( globalTable[gindex].functionTables[findex].insertVariable(name, "int", v) != 0 )
+		if (globalTable[gindex].functionTables[findex].insertVariable(name, "int", v) != 0)
 		{
 			return -1;
 		}
-		globalTable[gindex].functionTables[findex].appendCode(name + "_" + to_string(scopeStack.top()) +  " = " + levels[i]);
+		globalTable[gindex].functionTables[findex].appendCode(name + "_" + to_string(scopeStack.top()) + " = " + levels[i]);
 		table.push_back(getVariable(name));
 	}
 	return globalTable[gindex].functionTables[findex].insertVariable(variableName, dataType, table);
 }
 
-int insertTempVariable( string name, string type)
+int insertTempVariable(string name, string type)
 {
 	int gindex = getStructIndex(currentStruct);
 	int findex = getFunctionIndex(gindex, currentFunction);
@@ -334,28 +362,27 @@ bool is_Variable(string str)
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
 	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
 
-	for( int i = 0 ; i < local.size() ; i++ )
+	for (int i = 0; i < local.size(); i++)
 	{
-		if( local[i].name == str )
+		if (local[i].name == str)
 		{
 			return true;
 		}
 	}
 
 	vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
-	for( int i = 0 ; i < parameters.size() ; i++ )
+	for (int i = 0; i < parameters.size(); i++)
 	{
-		if( parameters[i].name == str )
+		if (parameters[i].name == str)
 		{
 			return true;
 		}
 	}
 
-
 	vector<SymbolTableEntry> global = globalTable[gIndex].attributes;
-	for( int i = 0 ; i < global.size() ; i++ )
+	for (int i = 0; i < global.size(); i++)
 	{
-		if( global[i].name == str )
+		if (global[i].name == str)
 		{
 			return true;
 		}
@@ -369,27 +396,27 @@ SymbolTableEntry getVariable(string str)
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
 	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
 
-	for( int i = 0 ; i < local.size() ; i++ )
+	for (int i = 0; i < local.size(); i++)
 	{
-		if( local[i].name == str )
+		if (local[i].name == str)
 		{
 			return local[i];
 		}
 	}
 
 	vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
-	for( int i = 0 ; i < parameters.size() ; i++ )
+	for (int i = 0; i < parameters.size(); i++)
 	{
-		if( parameters[i].name == str )
+		if (parameters[i].name == str)
 		{
 			return parameters[i];
 		}
 	}
 
 	vector<SymbolTableEntry> global = globalTable[gIndex].attributes;
-	for( int i = 0 ; i < global.size() ; i++ )
+	for (int i = 0; i < global.size(); i++)
 	{
-		if( global[i].name == str )
+		if (global[i].name == str)
 		{
 			return global[i];
 		}
@@ -400,12 +427,12 @@ SymbolTableEntry getVariable(string str)
 	return ste;
 }
 
-string  getFunctionReturnType(string functionName)
+string getFunctionReturnType(string functionName)
 {
 	int gIndex = getStructIndex(currentStruct);
-	for( int i = 0 ; i < globalTable[gIndex].functionTables.size() ; i++ )
+	for (int i = 0; i < globalTable[gIndex].functionTables.size(); i++)
 	{
-		if( globalTable[gIndex].functionTables[i].functionName == functionName )
+		if (globalTable[gIndex].functionTables[i].functionName == functionName)
 		{
 			return globalTable[gIndex].functionTables[i].returnType;
 		}
@@ -416,9 +443,9 @@ string  getFunctionReturnType(string functionName)
 string getFunctionLabel(string functionName)
 {
 	int gIndex = getStructIndex(currentStruct);
-	for( int i = 0 ; i < globalTable[gIndex].functionTables.size() ; i++ )
+	for (int i = 0; i < globalTable[gIndex].functionTables.size(); i++)
 	{
-		if( globalTable[gIndex].functionTables[i].functionName == functionName )
+		if (globalTable[gIndex].functionTables[i].functionName == functionName)
 		{
 			return globalTable[gIndex].functionTables[i].label;
 		}
@@ -428,7 +455,7 @@ string getFunctionLabel(string functionName)
 
 void setCallStack(string functionName)
 {
-	while( !callStack.empty() )
+	while (!callStack.empty())
 	{
 		callStack.pop();
 	}
@@ -438,7 +465,7 @@ void setCallStack(string functionName)
 	vector<SymbolTableEntry> param = globalTable[gindex].functionTables[findex].parameters;
 
 	int s = param.size();
-	for( int i = s-1 ; i >= 0 ; i-- )
+	for (int i = s - 1; i >= 0; i--)
 	{
 		callStack.push(param[i]);
 	}
@@ -446,7 +473,7 @@ void setCallStack(string functionName)
 
 int getSize(string dataType)
 {
-	if( Size.find(dataType) == Size.end() )
+	if (Size.find(dataType) == Size.end())
 	{
 		return -1;
 	}
@@ -460,32 +487,32 @@ char *getCharArray(string str)
 	return t;
 }
 
-char* getTemp( string type )
+char *getTemp(string type)
 {
 	string temp = "_t" + to_string(tempInt);
 	vector<string> levels;
 	insertTempVariable(temp, type);
 	temp += "_" + to_string(scopeStack.top());
-	char* t = (char*) malloc((temp.length()-1)*sizeof(char));
+	char *t = (char *)malloc((temp.length() - 1) * sizeof(char));
 	strcpy(t, temp.c_str());
 	tempInt++;
 	return t;
 }
 
-char* getConst(string value)
+char *getConst(string value)
 {
 	string constant = "_C" + to_string(constInt);
 	insertConstant(constant, value);
 	insertTempVariable(constant, "char*");
 	constInt++;
-	char* t = (char*) malloc((constant.length()-1)*sizeof(char));
+	char *t = (char *)malloc((constant.length() - 1) * sizeof(char));
 	strcpy(t, constant.c_str());
 	return t;
 }
 
 void debug(int d)
 {
-	if( parseDebug == 1 )
+	if (parseDebug == 1)
 	{
 		cout << "debug called" << endl;
 	}
@@ -505,5 +532,3 @@ string getLabel()
 {
 	return "label_" + to_string(labelInt++);
 }
-
-

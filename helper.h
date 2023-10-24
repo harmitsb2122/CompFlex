@@ -1,55 +1,56 @@
 #include <string>
 #include <iostream>
-#include<vector>
-#include<stack>
-#include<unordered_map>
+#include <vector>
+#include <stack>
+#include <unordered_map>
+#include <utility>
 using namespace std;
 
 class SymbolTableEntry
 {
 public:
-    string name;
-    string dataType;
-    int scope;
+	string name;
+	string dataType;
+	int scope;
 	vector<SymbolTableEntry> levels;
 
-    SymbolTableEntry(string, string, int, vector<SymbolTableEntry>);
-    SymbolTableEntry();
+	SymbolTableEntry(string, string, int, vector<SymbolTableEntry>);
+	SymbolTableEntry();
 };
 
 class FunctionTable
 {
-	public:
-		string functionName;
-		string label;
-		string returnType;
-		vector<SymbolTableEntry> parameters;
-		vector<SymbolTableEntry> localVariables;
-		vector<SymbolTableEntry> tempVariables;
-		vector<string> code;
+public:
+	string functionName;
+	string label;
+	string returnType;
+	vector<SymbolTableEntry> parameters;
+	vector<SymbolTableEntry> localVariables;
+	vector<SymbolTableEntry> tempVariables;
+	vector<string> code;
 
-		FunctionTable(string name, string returnType);
-		FunctionTable();
-		void appendCode(string code);
-		int insertVariable( string name, string type, vector<SymbolTableEntry> table);
-		int insertTempVariable( string name, string type); 
-		int insertParam(string name, string type, vector<SymbolTableEntry> table);
+	FunctionTable(string name, string returnType);
+	FunctionTable();
+	void appendCode(string code);
+	int insertVariable(string name, string type, vector<SymbolTableEntry> table);
+	int insertTempVariable(string name, string type);
+	int insertParam(string name, string type, vector<SymbolTableEntry> table);
 
-		string getFunctionReturnType();
+	string getFunctionReturnType();
 };
 
 class StructTable
 {
 public:
-    string structName;
-    vector<SymbolTableEntry> attributes;
-    vector<FunctionTable> functionTables;
+	string structName;
+	vector<SymbolTableEntry> attributes;
+	vector<FunctionTable> functionTables;
 	vector<SymbolTableEntry> constants;
 
-    StructTable(string name);
+	StructTable(string name);
 
-    int insertAttribute(string name, string type, vector<SymbolTableEntry> table);
-    int insertFunction(string functionName, string returnType);
+	int insertAttribute(string name, string type, vector<SymbolTableEntry> table);
+	int insertFunction(string functionName, string returnType);
 	int insertConstant(string name, string value);
 };
 
@@ -69,6 +70,7 @@ extern stack<string> forNext;
 extern stack<string> forIncrement;
 extern stack<SymbolTableEntry> callStack;
 extern vector<string> declevels;
+extern vector<pair<string, string>> stdeclevels;
 extern string dtype;
 extern int starsCount;
 extern int dlevels;
@@ -83,16 +85,16 @@ SymbolTableEntry getVariable(string structName);
 void init();
 int insertStruct(string name);
 void printTable();
-int insertAttribute(string name, string type);
+int insertAttribute(string name, string type, vector<pair<string, string>> stdeclevels);
 int insertFunction(string name, string returnType);
-int insertVariable(string variableName, string dataType, vector<string> declevels );
+int insertVariable(string variableName, string dataType, vector<string> declevels);
 int insertParam(string, string);
-int insertConstant(string name , string value);
+int insertConstant(string name, string value);
 
 int getSize(string dataType);
-char* getCharArray( string str );
-char* getTemp( string type );
-char* getConst(string value);
+char *getCharArray(string str);
+char *getTemp(string type);
+char *getConst(string value);
 bool is_Variable(string str);
 void debug(int d);
 void appendCode(string str);

@@ -46,7 +46,7 @@ extern "C"
 	} var;
 };
 
-%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC ASM
+%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC ASM
 
 %start begin
 
@@ -1093,10 +1093,56 @@ extern "C"
 					{
 						type = "*" + type;
 					}
-					insertAttribute(addr, type);
+					insertAttribute(addr, type,stdeclevels);
 				}
+			| struct_declaration
 		;
+
+	struct_declaration
+		:	STRUCT struct_body 
+			IDENTIFIER 
+				{
+					string var = string($<str>3);
+					string type = "struct";
+					if( insertAttribute(var, type, stdeclevels) == -1 )
+					{	
+						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+					}
+				}
+			';'
+	;
+
+	struct_body
+		: '{' 
+				{
+					stdeclevels.clear();
+				}
+
+			struct_attributes '}'
+
+	;
 	
+	struct_attributes
+		: type_name stars 
+				IDENTIFIER  ';'
+				{
+					string var = string($<str>3);
+					string type = dtype;
+
+					for( int i = 0 ; i < starsCount ; i++ )
+					{
+						type = "*" + type;
+					}
+					starsCount = 0;
+					stdeclevels.push_back({var,type});
+				} 
+			struct_attributes
+		| 
+	;
+
 	functionPrefix:
 		type_name stars IDENTIFIER '('
 				{
