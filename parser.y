@@ -46,13 +46,13 @@ extern "C"
 	} var;
 };
 
-%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM
+%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM POINTER
 
 %start begin
 
 %% 
 	primary_expression
-			:	IDENTIFIER '.' IDENTIFIER {	
+			:	IDENTIFIER POINTER IDENTIFIER {	
 					string str($<str>1);
 					string attr($<str>3);
 					if( !is_Variable(str) ){
@@ -65,7 +65,60 @@ extern "C"
 					}
 					else{
 						SymbolTableEntry ste = getVariable(str);
-						string structName = ste.dataType;
+						
+						string sName = ste.dataType;
+
+						if(sName[0]!='*')
+						{
+							cout << "COMPILETIME ERROR: " << string($<str>3) << "invalid syntax" << endl;
+							cout << "At line : " << yylineno << endl;
+							error = -1;
+							return 1;
+							$<var.type>$ = getCharArray("UNKNOWN TYPE");
+							$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
+						}
+
+						string structName;
+						for(auto i : sName)
+						{
+							if(i!='*')
+								structName+=i;
+						}
+						if(!is_Valid_Attribute(structName,attr))
+						{
+							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
+							cout << "At line : " << yylineno << endl;
+							error = -1;
+							return 1;
+							$<var.type>$ = getCharArray("UNKNOWN TYPE");
+							$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
+						}
+
+						$<var.type>$ = getCharArray(ste.dataType);
+						$<var.addr>$ = getCharArray(ste.name +"."+attr+ "_" + to_string(ste.scope));
+					}
+					debug(1);
+				}	
+				| IDENTIFIER '.' IDENTIFIER {	
+					string str($<str>1);
+					string attr($<str>3);
+					if( !is_Variable(str) ){
+						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+						$<var.type>$ = getCharArray("UNKNOWN TYPE");
+						$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
+					}
+					else{
+						SymbolTableEntry ste = getVariable(str);
+						string sName = ste.dataType;
+						string structName;
+						for(auto i : sName)
+						{
+							if(i!='*')
+								structName+=i;
+						}
 						if(!is_Valid_Attribute(structName,attr))
 						{
 							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
@@ -792,6 +845,13 @@ extern "C"
 					if( insertVariable(var, type, declevels) == -1 )
 					{	
 						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+					}
+					if( insertVariable(var, type, declevels) == -2 )
+					{	
+						cout << "COMPILETIME ERROR: Struct not declared " << dtype << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;

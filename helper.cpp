@@ -73,6 +73,7 @@ int FunctionTable ::insertVariable(string name, string type, vector<SymbolTableE
 			return -1;
 		}
 	}
+
 	SymbolTableEntry ste(name, type, scopeStack.top(), table);
 	localVariables.push_back(ste);
 	return 0;
@@ -308,6 +309,27 @@ int insertVariable(string variableName, string dataType, vector<string> levels)
 	int findex = getFunctionIndex(gindex, currentFunction);
 
 	vector<SymbolTableEntry> table;
+
+	vector<SymbolTableEntry> attributes = globalTable[gindex].attributes;
+	string newDataType;
+	for (auto i : dataType)
+	{
+		if (i != '*')
+			newDataType += i;
+	}
+
+	bool st = 1;
+	for (int i = 0; i < attributes.size(); i++)
+	{
+		if (attributes[i].name == newDataType)
+		{
+			st = 0;
+		}
+	}
+	if (st)
+	{
+		return -2;
+	}
 
 	if (levels.size() == 0)
 	{

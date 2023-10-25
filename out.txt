@@ -31,30 +31,29 @@ Identifier : main
 line no is 10
 STRUCT : struct
 Identifier : LinkedList 
+* : *
 Identifier : k 
 ;: ;
 line no is 11
-STRUCT : struct
-Identifier : LinkedList 
-Identifier : k1 
-;: ;
-line no is 12
 Identifier : k 
-. : .
+-> : ->
 Identifier : data 
 = : =
 I CONST: (1)
 ;: ;
-COMPILETIME WARNING: assigning int to LinkedList
-At line : 13
-line no is 13
+COMPILETIME WARNING: assigning int to *LinkedList
+At line : 12
+line no is 12
 Identifier : k 
-. : .
+-> : ->
 Identifier : next 
 = : =
-Identifier : k1 
+I CONST: (1)
 ;: ;
-line no is 14
+COMPILETIME WARNING: assigning int to *LinkedList
+At line : 13
+line no is 13
+line no is 14
 line no is 15
 line no is 16
 line no is 17
@@ -79,11 +78,10 @@ line no is 35
 line no is 36
 line no is 37
 line no is 38
-line no is 39
 RETURN : return
 I CONST: (0)
 ;: ;
-line no is 40
+line no is 39
 } : }
 Struct Name = main
 	Attributes = 
@@ -103,16 +101,17 @@ Struct Name = main
 				Name	DataType	Scope	pointer	
 			localVariables : 
 				Name	DataType	Scope	pointer	
-				k		LinkedList			2		
-				k1		LinkedList			2		
+				k		*LinkedList			2		
 			tempVariables = 
 				Name	DataType	Scope	pointer	
 				_t1		int			2		
 				_t2		int			2		
+				_t3		int			2		
 			Code = 
 				label_1:
 				_t1_2 = #1
 				k.data_2 = _t1_2
-				k.next_2 = k1_2
-				_t2_2 = #0
-				Return _t2_2
+				_t2_2 = #1
+				k.next_2 = _t2_2
+				_t3_2 = #0
+				Return _t3_2

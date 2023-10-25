@@ -8,10 +8,9 @@ struct LinkedList
 int a;
 int main()
 {
-  struct LinkedList k;
-  struct LinkedList k1;
-  k.data = 1;
-  k.next = k1;
+  struct LinkedList *k;
+  k->data = 1;
+  k->next = 1;
   // k.a = 1;
   // int a, b;
   // int *k;

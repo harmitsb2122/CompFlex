@@ -352,6 +352,12 @@ identifier		{letter}({letter}|{digit})*
 						yylval.str = strdup(yytext);
 						return '^';
 					}
+"->"				{
+						if( DEBUG == 1) 
+							printf("-> : %s\n",yytext);
+						yylval.str = strdup(yytext);
+						return POINTER;
+					}
 {char}				{ 
 						if(DEBUG == 1) printf("Char Const : %s \n", yytext);
 						yylval.str = strdup(yytext);
