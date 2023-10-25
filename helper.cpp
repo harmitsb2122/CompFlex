@@ -291,6 +291,7 @@ int insertAttribute(string attributeName, string attributeType, vector<pair<stri
 		}
 
 		table.push_back(getVariable(name));
+		table.back().name = levels[i].first;
 	}
 	return globalTable[index].insertAttribute(attributeName, attributeType, table);
 }
@@ -445,22 +446,25 @@ SymbolTableEntry getVariable(string str)
 {
 	int gIndex = getStructIndex(currentStruct);
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
-	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
-
-	for (int i = 0; i < local.size(); i++)
+	if (fIndex != -1)
 	{
-		if (local[i].name == str)
+		vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
+
+		for (int i = 0; i < local.size(); i++)
 		{
-			return local[i];
+			if (local[i].name == str)
+			{
+				return local[i];
+			}
 		}
-	}
 
-	vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
-	for (int i = 0; i < parameters.size(); i++)
-	{
-		if (parameters[i].name == str)
+		vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
+		for (int i = 0; i < parameters.size(); i++)
 		{
-			return parameters[i];
+			if (parameters[i].name == str)
+			{
+				return parameters[i];
+			}
 		}
 	}
 
@@ -582,4 +586,29 @@ int getActualSize(string type)
 string getLabel()
 {
 	return "label_" + to_string(labelInt++);
+}
+
+void addStructLevels(string var, string type)
+{
+	stdeclevels.push_back(make_pair(var, type));
+}
+
+bool is_Valid_Attribute(string structName, string attr)
+{
+	int index = getStructIndex(currentStruct);
+	vector<SymbolTableEntry> attributes = globalTable[index].attributes;
+	for (auto attribute : attributes)
+	{
+		if (attribute.name == structName && attribute.dataType == "struct")
+		{
+			for (auto level : attribute.levels)
+			{
+				if (level.name == attr)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }

@@ -46,14 +46,15 @@ extern "C"
 	} var;
 };
 
-%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER STRUCT_IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM
+%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM
 
 %start begin
 
 %% 
 	primary_expression
-			:	IDENTIFIER	{	
+			:	IDENTIFIER '.' IDENTIFIER {	
 					string str($<str>1);
+					string attr($<str>3);
 					if( !is_Variable(str) ){
 						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
 						cout << "At line : " << yylineno << endl;
@@ -64,12 +65,23 @@ extern "C"
 					}
 					else{
 						SymbolTableEntry ste = getVariable(str);
+						string structName = ste.dataType;
+						if(!is_Valid_Attribute(structName,attr))
+						{
+							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
+							cout << "At line : " << yylineno << endl;
+							error = -1;
+							return 1;
+							$<var.type>$ = getCharArray("UNKNOWN TYPE");
+							$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
+						}
+
 						$<var.type>$ = getCharArray(ste.dataType);
-						$<var.addr>$ = getCharArray(ste.name + "_" + to_string(ste.scope));
+						$<var.addr>$ = getCharArray(ste.name +"."+attr+ "_" + to_string(ste.scope));
 					}
 					debug(1);
 				}	
-			| STRUCT_IDENTIFIER {	
+				| IDENTIFIER	{	
 					string str($<str>1);
 					if( !is_Variable(str) ){
 						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
@@ -370,7 +382,7 @@ extern "C"
 	type_name		
 		:	INT	{dtype = "int"; starsCount = 0; }
 			| CHAR {dtype = "char"; starsCount = 0; }
-			| STRUCT {dtype = "struct"; starsCount = 0; }						
+			| STRUCT IDENTIFIER {string str($<str>2); dtype = str;starsCount = 0; }						
 			;
 
 	stars
@@ -777,7 +789,6 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
-
 					if( insertVariable(var, type, declevels) == -1 )
 					{	
 						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
@@ -1199,7 +1210,8 @@ extern "C"
 		;
 	
 	attribute
-		:	type_name stars IDENTIFIER ';'
+		:	 
+			 type_name stars IDENTIFIER ';'
 				{
 					string addr($<str>3);
 					string type = dtype;
@@ -1207,9 +1219,10 @@ extern "C"
 					{
 						type = "*" + type;
 					}
+					stdeclevels.clear();
 					insertAttribute(addr, type,stdeclevels);
 				}
-			| struct_declaration
+				| struct_declaration ';'
 		;
 
 	struct_declaration
@@ -1225,8 +1238,7 @@ extern "C"
 						error = -1;
 						return 1;
 					}
-				}
-			';';
+				};
 
 	struct_body
 		: '{' 
@@ -1248,7 +1260,7 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
-					stdeclevels.push_back({var,type});
+					addStructLevels(var,type);
 				} 
 			struct_attributes
 		| ;

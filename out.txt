@@ -1,272 +1,51 @@
-INT : int
-Identifier : f 
-( : (
-INT : int
-Identifier : a 
-) : )
 line no is 1
-{ : {
+STRUCT : struct
 line no is 2
-INT : int
-Identifier : k 
-;: ;
+{ : {
 line no is 3
-RETURN : return
+CHAR : char
 Identifier : a 
 ;: ;
 line no is 4
-} : }
+INT : int
+Identifier : b 
+;: ;
 line no is 5
+} : }
+Identifier : my 
+;: ;
+line no is 6
+line no is 7
+INT : int
+Identifier : a 
+;: ;
+line no is 8
 INT : int
 Identifier : main 
 ( : (
 ) : )
-line no is 6
-{ : {
-line no is 7
-INT : int
-Identifier : k 
-, : ,
-Identifier : r 
-;: ;
-line no is 8
-Identifier : k 
-= : =
-I CONST: (1)
-;: ;
 line no is 9
-FOR : for
-( : (
-Identifier : k 
-= : =
-I CONST: (1)
-;: ;
-Identifier : k 
-< : <
-I CONST: (2)
-;: ;
-Identifier : k 
-INC_OP : ++
-) : )
+{ : {
 line no is 10
-{ : {
+STRUCT : struct
+Identifier : my 
+Identifier : k 
+;: ;
 line no is 11
-INT : int
-Identifier : lal 
+Identifier : k 
+. : .
+Identifier : b 
+= : =
+I CONST: (1)
 ;: ;
+COMPILETIME WARNING: assigning int to my
+At line : 12
 line no is 12
-Identifier : lal 
-= : =
-I CONST: (2)
-;: ;
-line no is 13
-Identifier : r 
-INC_OP : ++
-;: ;
-line no is 14
-} : }
-line no is 15
-INT : int
-Identifier : lal 
-;: ;
-line no is 16
-Identifier : lal 
-= : =
-I CONST: (3)
-;: ;
-line no is 17
-LMFUNCTION : function
-< : <
-INT : int
-( : (
-INT : int
-, : ,
-INT : int
-) : )
-> : >
-Identifier : fi 
-= : =
-[ : [
-& : &
-] : ]
-( : (
-INT : int
+Identifier : k 
+. : .
 Identifier : a 
-, : ,
-INT : int
-Identifier : b 
-) : )
-line no is 18
-{ : {
-line no is 19
-INT : int
-Identifier : c 
-[ : [
-I CONST: (10)
-] : ]
-;: ;
-line no is 20
-Identifier : c 
-[ : [
-I CONST: (7)
-] : ]
 = : =
-Identifier : a 
-+ : +
-Identifier : b 
-+ : +
-Identifier : lal 
-;: ;
-line no is 21
-line no is 22
-RETURN : return
-Identifier : c 
-[ : [
-I CONST: (7)
-] : ]
-;: ;
-line no is 23
-} : }
-;: ;
-line no is 24
-INT : int
-Identifier : j 
-;: ;
-line no is 25
-Identifier : j 
-= : =
-I CONST: (1)
-;: ;
-line no is 26
-line no is 27
-Identifier : fi 
-( : (
-I CONST: (0)
-, : ,
-I CONST: (1)
-) : )
-;: ;
-line no is 28
-RETURN : return
-I CONST: (0)
-;: ;
-line no is 29
-} : }
-Struct Name = main
-	Attributes = 
-				Name	DataType	Scope	pointer	
-	Constants = 
-				Name	DataType	Scope	pointer	
-	Functions = 
-
-		function Name = f
-			label = label_1
-			return value : int
-			parameters : 
-				Name	DataType	Scope	pointer	
-				a		int			2		
-			localVariables : 
-				Name	DataType	Scope	pointer	
-			tempVariables = 
-				Name	DataType	Scope	pointer	
-			Code = 
-				label_1:
-				Return a_2
-
-		function Name = main
-			label = label_2
-			return value : int
-			parameters : 
-				Name	DataType	Scope	pointer	
-			localVariables : 
-				Name	DataType	Scope	pointer	
-			tempVariables = 
-				Name	DataType	Scope	pointer	
-				_t1		int			2		
-				_t2		int			3		
-				_t3		int			3		
-				_t4		bool			3		
-				_t5		int			3		
-				_t6		int			3		
-				_t7		int			3		
-				_t8		int			2		
-				_t18		int			2		
-				_t19		int			2		
-				_t20		int			2		
-				_t21		int			2		
-				_t22		int			2		
-			Code = 
-				label_2:
-				_t1_2 = #1
-				k_2 = _t1_2
-				_t2_3 = #1
-				k_2 = _t2_3
-				label_3:
-				_t3_3 = #2
-				_t4_3 = k_2 < _t3_3
-				if ( _t4_3 == #0 ) goto label_6
-				goto label_4
-				label_5:
-				_t5_3 = k_2
-				k_2 = k_2 + #1
-				goto label_3
-				label_4:
-				_t6_3 = #2
-				lal_3 = _t6_3
-				_t7_3 = r_2
-				r_2 = r_2 + #1
-				goto label_5
-				label_6:
-				_t8_2 = #3
-				lal_2 = _t8_2
-				_t18_2 = #1
-				j_2 = _t18_2
-				FunctionCall fi
-				_t19_2 = #0
-				param _t19_2
-				_t20_2 = #1
-				param _t20_2
-				call label_7
-				label_8:
-				_t21_2 = ReturnVal
-				_t22_2 = #0
-				Return _t22_2
-
-		function Name = fi
-			label = label_7
-			return value : int
-			parameters : 
-				Name	DataType	Scope	pointer	
-				a		int			3		
-				b		int			3		
-			localVariables : 
-				Name	DataType	Scope	pointer	
-				k		int			2		
-				r		int			2		
-				lal		int			2		
-			tempVariables = 
-				Name	DataType	Scope	pointer	
-				_t9		int			3		
-				_t10		int			3		
-				_t11		int			3		
-				_t12		*int			3		
-				_t13		int			3		
-				_t14		int			3		
-				_t15		int			3		
-				_t16		int			3		
-				_t17		*int			3		
-			Code = 
-				label_7:
-				_t9_3 = #10
-				c_0_3 = _t9_3
-				memory c_3 _t9_3 #4
-				_t10_3 = #7
-				_t11_3 = _t10_3 * #4
-				_t12_3 = c_3 + _t11_3
-				_t13_3 = a_3 + b_3
-				_t14_3 = _t13_3 + lal_2
-				*_t12_3 = _t14_3
-				_t15_3 = #7
-				_t16_3 = _t15_3 * #4
-				_t17_3 = c_3 + _t16_3
-				Return *_t17_3
+'I CONST: (1)
+';: ;
+COMPILETIME WARNING: assigning int to my
+At line : 13
