@@ -349,6 +349,7 @@ int insertParam(string name, string type)
 
 void removeVariables()
 {
+	return;
 	int gIndex = getStructIndex(currentStruct);
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
 	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;

@@ -1,18 +1,20 @@
 line no is 1
 STRUCT : struct
+Identifier : LinkedList 
 line no is 2
 { : {
 line no is 3
-CHAR : char
-Identifier : a 
+INT : int
+Identifier : data 
 ;: ;
 line no is 4
-INT : int
-Identifier : b 
+STRUCT : struct
+Identifier : LinkedList 
+* : *
+Identifier : next 
 ;: ;
 line no is 5
 } : }
-Identifier : my 
 ;: ;
 line no is 6
 line no is 7
@@ -28,24 +30,89 @@ Identifier : main
 { : {
 line no is 10
 STRUCT : struct
-Identifier : my 
+Identifier : LinkedList 
 Identifier : k 
 ;: ;
 line no is 11
-Identifier : k 
-. : .
-Identifier : b 
-= : =
-I CONST: (1)
+STRUCT : struct
+Identifier : LinkedList 
+Identifier : k1 
 ;: ;
-COMPILETIME WARNING: assigning int to my
-At line : 12
 line no is 12
 Identifier : k 
 . : .
-Identifier : a 
+Identifier : data 
 = : =
-'I CONST: (1)
-';: ;
-COMPILETIME WARNING: assigning int to my
+I CONST: (1)
+;: ;
+COMPILETIME WARNING: assigning int to LinkedList
 At line : 13
+line no is 13
+Identifier : k 
+. : .
+Identifier : next 
+= : =
+Identifier : k1 
+;: ;
+line no is 14
+line no is 15
+line no is 16
+line no is 17
+line no is 18
+line no is 19
+line no is 20
+line no is 21
+line no is 22
+line no is 23
+line no is 24
+line no is 25
+line no is 26
+line no is 27
+line no is 28
+line no is 29
+line no is 30
+line no is 31
+line no is 32
+line no is 33
+line no is 34
+line no is 35
+line no is 36
+line no is 37
+line no is 38
+line no is 39
+RETURN : return
+I CONST: (0)
+;: ;
+line no is 40
+} : }
+Struct Name = main
+	Attributes = 
+				Name	DataType	Scope	pointer	
+				LinkedList.data		int			0		
+				LinkedList.next		*LinkedList			0		
+				LinkedList		struct			0		data*next*
+				a		int			0		
+	Constants = 
+				Name	DataType	Scope	pointer	
+	Functions = 
+
+		function Name = main
+			label = label_1
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				k		LinkedList			2		
+				k1		LinkedList			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t1		int			2		
+				_t2		int			2		
+			Code = 
+				label_1:
+				_t1_2 = #1
+				k.data_2 = _t1_2
+				k.next_2 = k1_2
+				_t2_2 = #0
+				Return _t2_2

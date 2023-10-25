@@ -1,16 +1,17 @@
 
-struct
+struct LinkedList
 {
-  char a;
-  int b;
-} my;
+  int data;
+  struct LinkedList *next;
+};
 
 int a;
 int main()
 {
-  struct my k;
-  k.b = 1;
-  k.a = '1';
+  struct LinkedList k;
+  struct LinkedList k1;
+  k.data = 1;
+  k.next = k1;
   // k.a = 1;
   // int a, b;
   // int *k;

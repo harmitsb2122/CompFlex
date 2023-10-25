@@ -1219,6 +1219,7 @@ extern "C"
 					{
 						type = "*" + type;
 					}
+					starsCount = 0;
 					stdeclevels.clear();
 					insertAttribute(addr, type,stdeclevels);
 				}
@@ -1226,11 +1227,15 @@ extern "C"
 		;
 
 	struct_declaration
-		:	STRUCT struct_body 
-			IDENTIFIER 
+		:	STRUCT IDENTIFIER struct_body  			 
 				{
-					string var = string($<str>3);
+					string var = string($<str>2);
 					string type = "struct";
+					for( int i = 0 ; i < starsCount ; i++ )
+					{
+						type = "*" + type;
+					}
+					starsCount = 0;
 					if( insertAttribute(var, type, stdeclevels) == -1 )
 					{	
 						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
