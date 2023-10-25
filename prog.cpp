@@ -5,12 +5,20 @@ int f(int a)
 }
 int main()
 {
-  int a;
-  a = 1;
+  int k, r;
+  k = 1;
+  for (k = 1; k < 2; k++)
+  {
+    int lal;
+    lal = 2;
+    r++;
+  }
+  int lal;
+  lal = 3;
   function<int(int, int)> fi = [&](int a, int b)
   {
     int c[10];
-    c[7] = a + b;
+    c[7] = a + b + lal;
 
     return c[7];
   };

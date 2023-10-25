@@ -838,7 +838,9 @@ extern "C"
 			}
 		'}'
 			{
+				currentScope--;
 				scopeStack.pop();
+				removeVariables();
 			}
 
 		else_statement
@@ -867,7 +869,9 @@ extern "C"
 			}
 		'}'
 			{
+				currentScope--;
 				scopeStack.pop();
+				removeVariables();
 			}
 		else_statement
 			{
@@ -885,7 +889,9 @@ extern "C"
 			}
 		'}'
 			{
+				currentScope--;
 				scopeStack.pop();
+				removeVariables();
 			}
 		| 
 			{
@@ -942,7 +948,9 @@ extern "C"
 
 			'}'								
 				{
+					currentScope--;
 					scopeStack.pop();
+					removeVariables();
 					forIncrement.pop();
 					forNext.pop();
 				}
@@ -1041,12 +1049,9 @@ extern "C"
 				{
 					currentScope++;
 					scopeStack.push(currentScope);
+					setLambdaLocal();
 				}
 			lambda_params
-				{
-					currentScope--;
-					scopeStack.pop();
-				}
 			')'
 				{
 					if(!verifyParams(lambdaParamStack))
@@ -1056,8 +1061,7 @@ extern "C"
 						error = -1;
 						return 1;
 					}
-					currentScope++;
-					scopeStack.push(currentScope);
+
 				}
 			'{'
 			lambda_body
@@ -1065,11 +1069,15 @@ extern "C"
 				{
 					currentScope--;
 					scopeStack.pop();
+					removeVariables();
 					currentFunction = "main";
 				}
 			;
 
-	lamda_return_type : type_name {lambdaReturnType = dtype;};
+	
+	lamda_return_type 
+		: 
+				type_name {lambdaReturnType = dtype;};
 	
 	lambda_param_types :
 			type_name
@@ -1320,7 +1328,9 @@ extern "C"
 
 			statement_list	'}'			
 				{
+					currentScope--;
 					scopeStack.pop();
+					removeVariables();
 					
 					if( parseDebug == 1 )
 					{

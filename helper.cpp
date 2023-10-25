@@ -346,6 +346,33 @@ int insertParam(string name, string type)
 	return globalTable[gindex].functionTables[findex].insertParam(name, type, table);
 }
 
+void removeVariables()
+{
+	int gIndex = getStructIndex(currentStruct);
+	int fIndex = getFunctionIndex(gIndex, currentFunction);
+	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
+
+	while (!local.empty() && local.back().scope > currentScope)
+	{
+		local.pop_back();
+	}
+	globalTable[gIndex].functionTables[fIndex].localVariables = local;
+}
+
+void setLambdaLocal()
+{
+	int gindex = getStructIndex(currentStruct);
+	int findex = getFunctionIndex(gindex, currentFunction);
+	int mindex = getFunctionIndex(gindex, "main");
+
+	vector<SymbolTableEntry> local = globalTable[gindex].functionTables[mindex].localVariables;
+
+	for (auto entry : local)
+	{
+		globalTable[gindex].functionTables[findex].localVariables.push_back(entry);
+	}
+}
+
 bool verifyParams(vector<string> types)
 {
 	int gindex = getStructIndex(currentStruct);
@@ -388,7 +415,7 @@ bool is_Variable(string str)
 
 	for (int i = 0; i < local.size(); i++)
 	{
-		if (local[i].name == str)
+		if (local[i].name == str && local[i].scope <= currentScope)
 		{
 			return true;
 		}
@@ -397,7 +424,7 @@ bool is_Variable(string str)
 	vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
 	for (int i = 0; i < parameters.size(); i++)
 	{
-		if (parameters[i].name == str)
+		if (parameters[i].name == str && parameters[i].scope <= currentScope)
 		{
 			return true;
 		}
@@ -406,7 +433,7 @@ bool is_Variable(string str)
 	vector<SymbolTableEntry> global = globalTable[gIndex].attributes;
 	for (int i = 0; i < global.size(); i++)
 	{
-		if (global[i].name == str)
+		if (global[i].name == str && global[i].scope <= currentScope)
 		{
 			return true;
 		}

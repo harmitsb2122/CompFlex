@@ -108,4 +108,6 @@ string getFunctionLabel(string functionName);
 string getFunctionReturnType(string functionName);
 void setCallStack(string functionName);
 bool verifyParams(vector<string> types);
+void removeVariables();
+void setLambdaLocal();
 void translate();
