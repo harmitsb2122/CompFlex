@@ -162,7 +162,7 @@ extern "C"
 					debug(3);
 				}
 			| NULL_	{
-					$<var.type>$ = getCharArray("int");
+					$<var.type>$ = getCharArray("all");
 					$<var.addr>$ = getTemp("int");
 					appendCode(string($<var.addr>$) + " = #0");
 					debug(4);
@@ -228,7 +228,7 @@ extern "C"
 				}
 
 			| postfix_expression INC_OP	{
-					if( strcmp($<var.type>$, "int") != 0 ){
+					if( strcmp($<var.type>$, "int") != 0){
 						cout << "COMPILETIME ERROR: cannot apply increment operator to non int types" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
@@ -678,7 +678,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if(( type1 != "int" or type2 != "int" ) && type2!= "all" && type1!="all")
 					{
 						cout << "COMPILETIME ERROR: cannot apply '==' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -699,7 +699,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" or type2 != "int") && type2!= "all" && type1!="all")
 					{
 						cout << "COMPILETIME ERROR: cannot apply '!=' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -1148,15 +1148,41 @@ extern "C"
 	
 	lamda_return_type 
 		: 
-				type_name {lambdaReturnType = dtype;};
+				type_name
+				stars 
+				{
+					string newType;
+					for(int i=0;i<starsCount;i++)
+					{
+						newType+='*';
+					}
+					starsCount = 0;
+					dtype = newType + dtype;
+					lambdaReturnType = dtype;
+				};
 	
 	lambda_param_types :
-			type_name
+			type_name stars
 				{
+					string newType;
+					for(int i=0;i<starsCount;i++)
+					{
+						newType+='*';
+					}
+					starsCount = 0;
+					dtype = newType + dtype;
 					lambdaParamStack.push_back(dtype);
 				} 
 			',' lambda_param_types
-			| type_name 				{
+			| type_name 	stars			
+				{
+					string newType;
+					for(int i=0;i<starsCount;i++)
+					{
+						newType+='*';
+					}
+					starsCount = 0;
+					dtype = newType + dtype;
 					lambdaParamStack.push_back(dtype);
 				} 
 			|
