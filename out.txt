@@ -97,12 +97,11 @@ VAR : NULL
 { : {
 line no is 19
 RETURN : return
-VAR : NULL
+I CONST: (0)
 ;: ;
 line no is 20
 } : }
 line no is 21
-RETURN : return
 Identifier : recurse 
 ( : (
 Identifier : z 
@@ -114,10 +113,16 @@ Identifier : next
 } : }
 ;: ;
 line no is 23
+Identifier : recurse 
+( : (
+Identifier : k 
+) : )
+;: ;
+line no is 24
 RETURN : return
 I CONST: (0)
 ;: ;
-line no is 24
+line no is 25
 } : }
 Struct Name = main
 	Attributes = 
@@ -144,14 +149,20 @@ Struct Name = main
 				_t1		int			2		
 				_t2		int			2		
 				_t7		int			2		
+				_t8		int			2		
 			Code = 
 				label_1:
 				_t1_2 = #40
 				memory _t2_2 _t1_2 #1
 				k.data_2 = _t2_2
 				k.next_2 = k1_2
-				_t7_2 = #0
-				Return _t7_2
+				FunctionCall recurse
+				param k_2
+				call label_2
+				label_6:
+				_t7_2 = ReturnVal
+				_t8_2 = #0
+				Return _t8_2
 
 		function Name = recurse
 			label = label_2
@@ -184,4 +195,3 @@ Struct Name = main
 				call label_2
 				label_5:
 				_t6_3 = ReturnVal
-				Return _t6_3

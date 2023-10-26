@@ -842,14 +842,15 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
-					if( insertVariable(var, type, declevels) == -1 )
+					int resp = insertVariable(var, type, declevels);
+					if( resp == -1 )
 					{	
 						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
 					}
-					if( insertVariable(var, type, declevels) == -2 )
+					if( resp == -2 )
 					{	
 						cout << "COMPILETIME ERROR: Struct not declared " << dtype << endl;
 						cout << "At line : " << yylineno << endl;

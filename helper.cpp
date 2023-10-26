@@ -321,7 +321,7 @@ int insertVariable(string variableName, string dataType, vector<string> levels)
 	bool st = 1;
 	for (int i = 0; i < attributes.size(); i++)
 	{
-		if (attributes[i].name == newDataType)
+		if (newDataType == "char" || newDataType == "int" || attributes[i].name == newDataType)
 		{
 			st = 0;
 		}

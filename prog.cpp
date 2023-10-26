@@ -17,9 +17,10 @@ int main()
   {
     if (z->next == NULL)
     {
-      return NULL;
+      return 0;
     }
-    return recurse(z->next);
+    recurse(z->next);
   };
+  recurse(k);
   return 0;
 }
