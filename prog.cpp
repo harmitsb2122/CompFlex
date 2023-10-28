@@ -1,3 +1,5 @@
+// #include <bits/stdc++.h>
+// using namespace std;
 
 struct Map
 {
@@ -8,7 +10,6 @@ struct Map
 int _INTERNAL_MAP_SIZE;
 int main()
 {
-  int a[1][2];
   _INTERNAL_MAP_SIZE = 40;
 
   function<int(struct Map *)> map_init = [&](struct Map *map)
@@ -27,7 +28,12 @@ int main()
   };
 
   struct Map *map;
-
+  int sizeofint;
+  sizeofint = 4;
+  int *sz;
+  sz = malloc(40 * sizeofint);
+  map->_map = sz;
   map_init(map);
+
   return 0;
 }
