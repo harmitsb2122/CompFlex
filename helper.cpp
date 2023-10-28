@@ -616,7 +616,7 @@ void addStructLevels(string var, string type)
 	stdeclevels.push_back(make_pair(var, type));
 }
 
-bool is_Valid_Attribute(string structName, string attr)
+bool is_Valid_Attribute(string structName, string attr, string &type)
 {
 	int index = getStructIndex(currentStruct);
 	vector<SymbolTableEntry> attributes = globalTable[index].attributes;
@@ -628,6 +628,7 @@ bool is_Valid_Attribute(string structName, string attr)
 			{
 				if (level.name == attr)
 				{
+					type = level.dataType;
 					return true;
 				}
 			}

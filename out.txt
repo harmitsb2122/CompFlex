@@ -1,130 +1,4 @@
-line no is 1
-STRUCT : struct
-Identifier : LinkedList 
-line no is 2
-{ : {
-line no is 3
-INT : int
-* : *
-Identifier : data 
-;: ;
-line no is 4
-STRUCT : struct
-Identifier : LinkedList 
-* : *
-Identifier : next 
-;: ;
-line no is 5
-} : }
-;: ;
-line no is 6
-line no is 7
-INT : int
-Identifier : a 
-;: ;
-line no is 8
-INT : int
-Identifier : main 
-( : (
-) : )
-line no is 9
-{ : {
-line no is 10
-STRUCT : struct
-Identifier : LinkedList 
-* : *
-Identifier : k 
-;: ;
-line no is 11
-STRUCT : struct
-Identifier : LinkedList 
-* : *
-Identifier : k1 
-;: ;
-line no is 12
-Identifier : k 
--> : ->
-Identifier : data 
-= : =
-MALLOC : malloc
-( : (
-I CONST: (40)
-) : )
-;: ;
-COMPILETIME WARNING: assigning int to *LinkedList
-At line : 13
-line no is 13
-Identifier : k 
--> : ->
-Identifier : next 
-= : =
-Identifier : k1 
-;: ;
-line no is 14
-line no is 15
-LMFUNCTION : function
-< : <
-INT : int
-( : (
-STRUCT : struct
-Identifier : LinkedList 
-* : *
-) : )
-> : >
-Identifier : recurse 
-= : =
-[ : [
-& : &
-] : ]
-( : (
-STRUCT : struct
-Identifier : LinkedList 
-* : *
-Identifier : z 
-) : )
-line no is 16
-{ : {
-line no is 17
-IF : if
-( : (
-Identifier : z 
--> : ->
-Identifier : next 
-EQ_OP : ==
-VAR : NULL
-) : )
-line no is 18
-{ : {
-line no is 19
-RETURN : return
-I CONST: (0)
-;: ;
-line no is 20
-} : }
-line no is 21
-Identifier : recurse 
-( : (
-Identifier : z 
--> : ->
-Identifier : next 
-) : )
-;: ;
-line no is 22
-} : }
-;: ;
-line no is 23
-Identifier : recurse 
-( : (
-Identifier : k 
-) : )
-;: ;
-line no is 24
-RETURN : return
-I CONST: (0)
-;: ;
-line no is 25
-} : }
-Struct Name = main
+Struct Name = main
 	Attributes = 
 				Name	DataType	Scope	pointer	
 				LinkedList.data		*int			0		
@@ -144,16 +18,18 @@ Struct Name = main
 				Name	DataType	Scope	pointer	
 				k		*LinkedList			2		
 				k1		*LinkedList			2		
+				p		int			2		
 			tempVariables = 
 				Name	DataType	Scope	pointer	
 				_t1		int			2		
-				_t2		int			2		
+				_t2		*int			2		
 				_t7		int			2		
 				_t8		int			2		
 			Code = 
 				label_1:
-				_t1_2 = #40
-				memory _t2_2 _t1_2 #1
+				_t1_2 = #10
+				p_2 = _t1_2
+				memory _t2_2 p_2 #1
 				k.data_2 = _t2_2
 				k.next_2 = k1_2
 				FunctionCall recurse
@@ -174,6 +50,7 @@ Struct Name = main
 				Name	DataType	Scope	pointer	
 				k		*LinkedList			2		
 				k1		*LinkedList			2		
+				p		int			2		
 			tempVariables = 
 				Name	DataType	Scope	pointer	
 				_t3		int			3		
@@ -195,3 +72,4 @@ Struct Name = main
 				call label_2
 				label_5:
 				_t6_3 = ReturnVal
+				Return _t6_3

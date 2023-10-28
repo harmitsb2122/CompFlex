@@ -10,7 +10,9 @@ int main()
 {
   struct LinkedList *k;
   struct LinkedList *k1;
-  k->data = malloc(40); // represents a 1-d array
+  int p;
+  p = 10;
+  k->data = malloc(p); // represents a 1-d array
   k->next = k1;
 
   function<int(struct LinkedList *)> recurse = [&](struct LinkedList *z)
@@ -19,7 +21,7 @@ int main()
     {
       return 0;
     }
-    recurse(z->next);
+    return recurse(z->next);
   };
   recurse(k);
   return 0;

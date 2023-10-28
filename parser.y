@@ -84,7 +84,8 @@ extern "C"
 							if(i!='*')
 								structName+=i;
 						}
-						if(!is_Valid_Attribute(structName,attr))
+						string dtType;
+						if(!is_Valid_Attribute(structName,attr,dtType))
 						{
 							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
 							cout << "At line : " << yylineno << endl;
@@ -94,7 +95,7 @@ extern "C"
 							$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
 						}
 
-						$<var.type>$ = getCharArray(ste.dataType);
+						$<var.type>$ = getCharArray(dtType);
 						$<var.addr>$ = getCharArray(ste.name +"."+attr+ "_" + to_string(ste.scope));
 					}
 					debug(1);
@@ -119,7 +120,9 @@ extern "C"
 							if(i!='*')
 								structName+=i;
 						}
-						if(!is_Valid_Attribute(structName,attr))
+						
+						string dtType;
+						if(!is_Valid_Attribute(structName,attr,dtType))
 						{
 							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
 							cout << "At line : " << yylineno << endl;
@@ -129,7 +132,7 @@ extern "C"
 							$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
 						}
 
-						$<var.type>$ = getCharArray(ste.dataType);
+						$<var.type>$ = getCharArray(dtType);
 						$<var.addr>$ = getCharArray(ste.name +"."+attr+ "_" + to_string(ste.scope));
 					}
 					debug(1);
@@ -425,8 +428,8 @@ extern "C"
 					}
 					else
 					{
-						$<var.type>$ = getCharArray("int");
-						$<var.addr>$ = getTemp("int");
+						$<var.type>$ = getCharArray("*int");
+						$<var.addr>$ = getTemp("*int");
 						appendCode("memory " + string($<var.addr>$) + " " + string($<var.addr>3) + " #1" );
 					}
 				}
