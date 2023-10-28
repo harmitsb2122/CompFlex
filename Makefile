@@ -5,8 +5,8 @@ all: tokenizer.l parser.y helper.cpp helper.h
 	cc -c lex.yy.c -o lex.yy.o
 	g++ lex.yy.o gm.cc helper.cpp -o genTemp
 
-run: genTemp prog.cpp
-	./genTemp < prog.cpp > out.txt
+run: genTemp map.cpp
+	./genTemp map.cpp
 
 clean:
 	rm -f genTemp

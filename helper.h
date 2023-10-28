@@ -112,4 +112,5 @@ void removeVariables();
 void setLambdaLocal();
 void addStructLevels(string var, string type);
 bool is_Valid_Attribute(string structName, string attr, string &type);
+void printCode();
 void translate();

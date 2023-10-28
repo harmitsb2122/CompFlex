@@ -3,6 +3,7 @@
     "random": "cpp",
     "cstring": "cpp",
     "ostream": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "type_traits": "cpp"
   }
 }

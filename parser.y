@@ -1015,7 +1015,7 @@ extern "C"
 					appendCode(string($<str>4) + ":");
 				}
 
-			')' '{' statement_list 			
+			')' '{' for_statement_list 			
 				{
 					appendCode("goto " + string($<var.addr>6));
 					appendCode(string($<var.type>6) + ":");
@@ -1031,6 +1031,8 @@ extern "C"
 				}
 			;
 
+	for_statement_list :
+		statement_list | ;
 
 	loop_initialization_list										
 		:	assignment_expression ',' loop_initialization_list	{}
@@ -1192,7 +1194,7 @@ extern "C"
 			|
 			;
 
-	lambda_params : functionArguments
+	lambda_params : functionArguments |
 			;
 	
 	lambda_body :
@@ -1481,7 +1483,24 @@ int main( int argcount, char* arguements[] )
 		cout << "Error = " << error << endl;
 		return 0;
 	}
+    std::ofstream outputFile("output.txt");
+    std::streambuf *coutbuf = std::cout.rdbuf();
+    std::cout.rdbuf(outputFile.rdbuf());
 
-	printTable();
+    printTable();
+
+    std::cout.rdbuf(coutbuf);
+
+    outputFile.close();
+
+		std::ofstream outputFile1("code.txt");
+    std::streambuf *coutbuf1 = std::cout.rdbuf();
+    std::cout.rdbuf(outputFile1.rdbuf());
+
+    printCode();
+
+    std::cout.rdbuf(coutbuf1);
+
+    outputFile1.close();
 	// translate();
 }

@@ -247,6 +247,21 @@ void printTable()
 	}
 }
 
+void printCode()
+{
+	for (auto st : globalTable)
+	{
+		for (auto f : st.functionTables)
+		{
+			for (auto c : f.code)
+			{
+				cout << c << endl;
+			}
+			cout << endl;
+		}
+	}
+}
+
 int getStructIndex(string name)
 {
 	for (int i = 0; i < globalTable.size(); i++)
@@ -319,6 +334,8 @@ int insertVariable(string variableName, string dataType, vector<string> levels)
 	}
 
 	bool st = 1;
+	if (attributes.size() == 0)
+		st = 0;
 	for (int i = 0; i < attributes.size(); i++)
 	{
 		if (newDataType == "char" || newDataType == "int" || attributes[i].name == newDataType)

@@ -1,0 +1,350 @@
+Struct Name = main
+	Attributes = 
+				Name	DataType	Scope	pointer	
+				Map._map		*int			0		
+				Map._size		int			0		
+				Map		struct			0		_map*_size*
+	Constants = 
+				Name	DataType	Scope	pointer	
+	Functions = 
+
+		function Name = map_init
+			label = label_1
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+				map		*Map			2		
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				_INTERNAL_MAP_SIZE		int			2		
+				i		int			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t1		int			2		
+				_t2		int			2		
+				_t3		bool			2		
+				_t4		int			3		
+				_t5		int			3		
+				_t6		bool			3		
+				_t7		int			3		
+				_t8		int			3		
+				_t9		*int			3		
+				_t10		int			3		
+				_t11		int			3		
+				_t12		int			2		
+				_t13		int			2		
+			Code = 
+				label_1:
+				_t1_2 = #40
+				_INTERNAL_MAP_SIZE_2 = _t1_2
+				_t2_2 = #0
+				_t3_2 = map_2 == _t2_2
+				if ( _t3_2 == #0 ) goto label_2
+				_t4_3 = #0
+				Return _t4_3
+				goto label_3
+				label_2:
+				label_3:
+				_t5_3 = #0
+				i_2 = _t5_3
+				label_4:
+				_t6_3 = i_2 < _INTERNAL_MAP_SIZE_2
+				if ( _t6_3 == #0 ) goto label_7
+				goto label_5
+				label_6:
+				_t7_3 = i_2
+				i_2 = i_2 + #1
+				goto label_4
+				label_5:
+				_t8_3 = i_2 * #4
+				_t9_3 = map._map_2 + _t8_3
+				_t10_3 = #1
+				_t11_3 = minus _t10_3
+				*_t9_3 = _t11_3
+				goto label_6
+				label_7:
+				_t12_2 = #0
+				map._size_2 = _t12_2
+				_t13_2 = #1
+				Return _t13_2
+
+		function Name = map_insert_at
+			label = label_8
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+				map		*Map			2		
+				index		int			2		
+				value		int			2		
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				_INTERNAL_MAP_SIZE		int			2		
+				prev		int			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t14		int			2		
+				_t15		int			2		
+				_t16		bool			2		
+				_t17		int			3		
+				_t18		int			2		
+				_t19		bool			2		
+				_t20		bool			2		
+				_t21		bool			2		
+				_t22		int			3		
+				_t23		int			2		
+				_t24		*int			2		
+				_t25		int			2		
+				_t26		*int			2		
+				_t27		int			2		
+				_t28		int			2		
+				_t29		bool			2		
+				_t30		int			3		
+				_t31		int			2		
+			Code = 
+				label_8:
+				_t14_2 = #40
+				_INTERNAL_MAP_SIZE_2 = _t14_2
+				_t15_2 = #0
+				_t16_2 = map_2 == _t15_2
+				if ( _t16_2 == #0 ) goto label_9
+				_t17_3 = #1
+				Return _t17_3
+				goto label_10
+				label_9:
+				label_10:
+				_t18_2 = #0
+				_t19_2 = index_2 < _t18_2
+				_t20_2 = index_2 >= _INTERNAL_MAP_SIZE_2
+				_t21_2 = _t19_2 || _t20_2
+				if ( _t21_2 == #0 ) goto label_11
+				_t22_3 = #1
+				Return _t22_3
+				goto label_12
+				label_11:
+				label_12:
+				_t23_2 = index_2 * #4
+				_t24_2 = map._map_2 + _t23_2
+				prev_2 = *_t24_2
+				_t25_2 = index_2 * #4
+				_t26_2 = map._map_2 + _t25_2
+				*_t26_2 = value_2
+				_t27_2 = #1
+				_t28_2 = minus _t27_2
+				_t29_2 = prev_2 == _t28_2
+				if ( _t29_2 == #0 ) goto label_13
+				_t30_3 = map._size_2
+				map._size_2 = map._size_2 + #1
+				goto label_14
+				label_13:
+				label_14:
+				_t31_2 = #0
+				Return _t31_2
+
+		function Name = map_find_at
+			label = label_15
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+				map		*Map			2		
+				index		int			2		
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				_INTERNAL_MAP_SIZE		int			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t32		int			2		
+				_t33		int			2		
+				_t34		bool			2		
+				_t35		int			3		
+				_t36		int			3		
+				_t37		int			2		
+				_t38		bool			2		
+				_t39		bool			2		
+				_t40		bool			2		
+				_t41		int			3		
+				_t42		int			3		
+				_t43		int			2		
+				_t44		*int			2		
+			Code = 
+				label_15:
+				_t32_2 = #40
+				_INTERNAL_MAP_SIZE_2 = _t32_2
+				_t33_2 = #0
+				_t34_2 = map_2 == _t33_2
+				if ( _t34_2 == #0 ) goto label_16
+				_t35_3 = #1
+				_t36_3 = minus _t35_3
+				Return _t36_3
+				goto label_17
+				label_16:
+				label_17:
+				_t37_2 = #0
+				_t38_2 = index_2 < _t37_2
+				_t39_2 = index_2 >= _INTERNAL_MAP_SIZE_2
+				_t40_2 = _t38_2 || _t39_2
+				if ( _t40_2 == #0 ) goto label_18
+				_t41_3 = #1
+				_t42_3 = minus _t41_3
+				Return _t42_3
+				goto label_19
+				label_18:
+				label_19:
+				_t43_2 = index_2 * #4
+				_t44_2 = map._map_2 + _t43_2
+				Return *_t44_2
+
+		function Name = map_delete_at
+			label = label_20
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+				map		*Map			2		
+				index		int			2		
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				_INTERNAL_MAP_SIZE		int			2		
+				prev		int			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t45		int			2		
+				_t46		int			2		
+				_t47		bool			2		
+				_t48		int			3		
+				_t49		int			3		
+				_t50		int			2		
+				_t51		bool			2		
+				_t52		bool			2		
+				_t53		bool			2		
+				_t54		int			3		
+				_t55		int			2		
+				_t56		*int			2		
+				_t57		int			2		
+				_t58		*int			2		
+				_t59		int			2		
+				_t60		int			2		
+				_t61		int			2		
+				_t62		int			2		
+				_t63		bool			2		
+				_t64		int			3		
+				_t65		int			2		
+			Code = 
+				label_20:
+				_t45_2 = #40
+				_INTERNAL_MAP_SIZE_2 = _t45_2
+				_t46_2 = #0
+				_t47_2 = map_2 == _t46_2
+				if ( _t47_2 == #0 ) goto label_21
+				_t48_3 = #1
+				_t49_3 = minus _t48_3
+				Return _t49_3
+				goto label_22
+				label_21:
+				label_22:
+				_t50_2 = #0
+				_t51_2 = index_2 < _t50_2
+				_t52_2 = index_2 >= _INTERNAL_MAP_SIZE_2
+				_t53_2 = _t51_2 || _t52_2
+				if ( _t53_2 == #0 ) goto label_23
+				_t54_3 = #1
+				Return _t54_3
+				goto label_24
+				label_23:
+				label_24:
+				_t55_2 = index_2 * #4
+				_t56_2 = map._map_2 + _t55_2
+				prev_2 = *_t56_2
+				_t57_2 = index_2 * #4
+				_t58_2 = map._map_2 + _t57_2
+				_t59_2 = #1
+				_t60_2 = minus _t59_2
+				*_t58_2 = _t60_2
+				_t61_2 = #1
+				_t62_2 = minus _t61_2
+				_t63_2 = prev_2 != _t62_2
+				if ( _t63_2 == #0 ) goto label_25
+				_t64_3 = map._size_2
+				map._size_2 = map._size_2 - #1
+				goto label_26
+				label_25:
+				label_26:
+				_t65_2 = #0
+				Return _t65_2
+
+		function Name = map_size
+			label = label_27
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+				map		*Map			2		
+			localVariables : 
+				Name	DataType	Scope	pointer	
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t66		int			2		
+				_t67		bool			2		
+				_t68		int			3		
+			Code = 
+				label_27:
+				_t66_2 = #0
+				_t67_2 = map_2 == _t66_2
+				if ( _t67_2 == #0 ) goto label_28
+				_t68_3 = #1
+				Return _t68_3
+				goto label_29
+				label_28:
+				label_29:
+				Return map._size_2
+
+		function Name = map_capacity
+			label = label_30
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				_INTERNAL_MAP_SIZE		int			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t69		int			2		
+			Code = 
+				label_30:
+				_t69_2 = #40
+				_INTERNAL_MAP_SIZE_2 = _t69_2
+				Return _INTERNAL_MAP_SIZE_2
+
+		function Name = print_map
+			label = label_31
+			return value : int
+			parameters : 
+				Name	DataType	Scope	pointer	
+				map		*Map			2		
+			localVariables : 
+				Name	DataType	Scope	pointer	
+				_INTERNAL_MAP_SIZE		int			2		
+				index		int			2		
+			tempVariables = 
+				Name	DataType	Scope	pointer	
+				_t70		int			2		
+				_t71		int			3		
+				_t72		bool			3		
+				_t73		int			3		
+				_t74		int			2		
+			Code = 
+				label_31:
+				_t70_2 = #40
+				_INTERNAL_MAP_SIZE_2 = _t70_2
+				_t71_3 = #0
+				index_2 = _t71_3
+				label_32:
+				_t72_3 = index_2 < _INTERNAL_MAP_SIZE_2
+				if ( _t72_3 == #0 ) goto label_35
+				goto label_33
+				label_34:
+				_t73_3 = index_2
+				index_2 = index_2 + #1
+				goto label_32
+				label_33:
+				goto label_34
+				label_35:
+				_t74_2 = #1
+				Return _t74_2
