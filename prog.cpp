@@ -1,28 +1,33 @@
 
-struct LinkedList
+struct Map
 {
-  int *data;
-  struct LinkedList *next;
+  int _map[40];
+  int _size;
 };
 
-int a;
+int _INTERNAL_MAP_SIZE;
 int main()
 {
-  struct LinkedList *k;
-  struct LinkedList *k1;
-  int p;
-  p = 10;
-  k->data = malloc(p); // represents a 1-d array
-  k->next = k1;
+  int a[1][2];
+  _INTERNAL_MAP_SIZE = 40;
 
-  function<int(struct LinkedList *)> recurse = [&](struct LinkedList *z)
+  function<int(struct Map *)> map_init = [&](struct Map *map)
   {
-    if (z->next == NULL)
+    if (map == NULL)
     {
       return 0;
     }
-    return recurse(z->next);
+    int i;
+    for (i = 0; i < _INTERNAL_MAP_SIZE; i++)
+    {
+      map->_map[i] = -1;
+    }
+    map->_size = 0;
+    return 1;
   };
-  recurse(k);
+
+  struct Map *map;
+
+  map_init(map);
   return 0;
 }

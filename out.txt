@@ -1,10 +1,10 @@
-Struct Name = main
+Struct Name = main
 	Attributes = 
 				Name	DataType	Scope	pointer	
-				LinkedList.data		*int			0		
-				LinkedList.next		*LinkedList			0		
-				LinkedList		struct			0		data*next*
-				a		int			0		
+				Map._map		*int			0		
+				Map._size		int			0		
+				Map		struct			0		_map*_size*
+				_INTERNAL_MAP_SIZE		int			0		
 	Constants = 
 				Name	DataType	Scope	pointer	
 	Functions = 
@@ -16,60 +16,89 @@
 				Name	DataType	Scope	pointer	
 			localVariables : 
 				Name	DataType	Scope	pointer	
-				k		*LinkedList			2		
-				k1		*LinkedList			2		
-				p		int			2		
+				a_0		**int			2		
+				a_1		**int			2		
+				a		**int			2		a_0*a_1*
+				map		*Map			2		
 			tempVariables = 
 				Name	DataType	Scope	pointer	
 				_t1		int			2		
-				_t2		*int			2		
-				_t7		int			2		
-				_t8		int			2		
+				_t2		int			2		
+				_t3		int			2		
+				_t16		int			2		
+				_t17		int			2		
 			Code = 
 				label_1:
-				_t1_2 = #10
-				p_2 = _t1_2
-				memory _t2_2 p_2 #1
-				k.data_2 = _t2_2
-				k.next_2 = k1_2
-				FunctionCall recurse
-				param k_2
+				_t1_2 = #1
+				_t2_2 = #2
+				a_0_2 = _t1_2
+				a_1_2 = _t2_2
+				memory a_2 _t1_2 #4
+				_t3_2 = #40
+				_INTERNAL_MAP_SIZE_0 = _t3_2
+				FunctionCall map_init
+				param map_2
 				call label_2
-				label_6:
-				_t7_2 = ReturnVal
-				_t8_2 = #0
-				Return _t8_2
+				label_9:
+				_t16_2 = ReturnVal
+				_t17_2 = #0
+				Return _t17_2
 
-		function Name = recurse
+		function Name = map_init
 			label = label_2
 			return value : int
 			parameters : 
 				Name	DataType	Scope	pointer	
-				z		*LinkedList			3		
+				map		*Map			3		
 			localVariables : 
 				Name	DataType	Scope	pointer	
-				k		*LinkedList			2		
-				k1		*LinkedList			2		
-				p		int			2		
+				a_0		**int			2		
+				a_1		**int			2		
+				a		**int			2		a_0*a_1*
+				i		int			3		
 			tempVariables = 
 				Name	DataType	Scope	pointer	
-				_t3		int			3		
-				_t4		bool			3		
-				_t5		int			4		
-				_t6		int			3		
+				_t4		int			3		
+				_t5		bool			3		
+				_t6		int			4		
+				_t7		int			4		
+				_t8		bool			4		
+				_t9		int			4		
+				_t10		int			4		
+				_t11		*int			4		
+				_t12		int			4		
+				_t13		int			4		
+				_t14		int			3		
+				_t15		int			3		
 			Code = 
 				label_2:
-				_t3_3 = #0
-				_t4_3 = z.next_3 == _t3_3
-				if ( _t4_3 == #0 ) goto label_3
-				_t5_4 = #0
-				Return _t5_4
+				_t4_3 = #0
+				_t5_3 = map_3 == _t4_3
+				if ( _t5_3 == #0 ) goto label_3
+				_t6_4 = #0
+				Return _t6_4
 				goto label_4
 				label_3:
 				label_4:
-				FunctionCall recurse
-				param z.next_3
-				call label_2
+				_t7_4 = #0
+				i_3 = _t7_4
 				label_5:
-				_t6_3 = ReturnVal
-				Return _t6_3
+				_t8_4 = i_3 < _INTERNAL_MAP_SIZE_0
+				if ( _t8_4 == #0 ) goto label_8
+				goto label_6
+				label_7:
+				_t9_4 = i_3
+				i_3 = i_3 + #1
+				goto label_5
+				label_6:
+				_t10_4 = i_3 * #4
+				_t11_4 = map._map_3 + _t10_4
+				_t12_4 = #1
+				_t13_4 = minus _t12_4
+				*_t11_4 = _t13_4
+				goto label_7
+				label_8:
+				_t14_3 = #0
+				map._size_3 = _t14_3
+				_t15_3 = #1
+				Return _t15_3

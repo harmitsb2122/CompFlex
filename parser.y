@@ -1345,7 +1345,7 @@ extern "C"
 	
 	struct_attributes
 		: type_name stars 
-				IDENTIFIER  ';'
+				IDENTIFIER st_brackets';'
 				{
 					string var = string($<str>3);
 					string type = dtype;
@@ -1355,11 +1355,24 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
+					for( int i = 0 ; i < declevels.size() ; i++ )
+					{
+						type = "*" + type;
+					}
+
 					addStructLevels(var,type);
+					declevels.clear();
 				} 
 			struct_attributes
 		| ;
 
+	st_brackets : st_brackets '[' I_CONST ']'
+				{
+					string expr($<str>3);
+					declevels.push_back(expr);
+				}
+		|
+		;
 	functionPrefix:
 		type_name stars IDENTIFIER '('
 				{
