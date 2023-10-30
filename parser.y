@@ -1368,13 +1368,47 @@ extern "C"
 			struct_attributes
 		| ;
 
-	st_brackets : st_brackets '[' I_CONST ']'
+	st_brackets : st_brackets '[' st_const ']'
 				{
 					string expr($<str>3);
 					declevels.push_back(expr);
 				}
 		|
 		;
+
+	st_const : I_CONST 
+							{
+								string var($<str>1);
+								$<str>$ = getCharArray(var);
+
+							}
+					 | IDENTIFIER
+					 	{
+							string var($<str>1);
+ 
+							if(is_Variable(var))
+							{
+								SymbolTableEntry ste = getVariable(var);
+								if(ste.dataType != "int")
+								{
+									cout << "COMPILETIME ERROR: " << var << " does not have int type "<<endl;
+									cout << "At line : " << yylineno << endl;
+									error = -1;
+									return 1;				
+								}
+	
+								$<str>$ = getCharArray(var);
+							}
+							else
+							{
+									cout << "COMPILETIME ERROR: " << var << " not declared "<<endl;
+									cout << "At line : " << yylineno << endl;
+									error = -1;
+									return 1;
+							}
+						} 
+					 ;
+
 	functionPrefix:
 		type_name stars IDENTIFIER '('
 				{
@@ -1477,23 +1511,35 @@ int main( int argcount, char* arguements[] )
 	init();
 	int i = yyparse();
 
-	if( i != 0 or error != 0 )
-	{
-		printTable();
-		cout << "Error = " << error << endl;
-		return 0;
-	}
-    std::ofstream outputFile("output.txt");
+    std::ofstream outputFile("output.txt",std::ios::trunc);
     std::streambuf *coutbuf = std::cout.rdbuf();
     std::cout.rdbuf(outputFile.rdbuf());
+		if( i != 0 or error != 0 )
+		{
+			cout << "Error = " << error << endl<<endl;
+			printTable();
+			std::cout.rdbuf(coutbuf);
+			outputFile.close();
+
+			std::ofstream outputFile1("code.txt",std::ios::trunc);
+    
+			std::streambuf *coutbuf1 = std::cout.rdbuf();
+    	std::cout.rdbuf(outputFile1.rdbuf());
+
+    	std::cout.rdbuf(coutbuf1);
+
+    	outputFile1.close();
+			return 0;
+		}
+		cout<<"Successfully Compiled"<<endl<<endl;
 
     printTable();
 
-    std::cout.rdbuf(coutbuf);
+		std::cout.rdbuf(coutbuf);
 
     outputFile.close();
 
-		std::ofstream outputFile1("code.txt");
+		std::ofstream outputFile1("code.txt",std::ios::trunc);
     std::streambuf *coutbuf1 = std::cout.rdbuf();
     std::cout.rdbuf(outputFile1.rdbuf());
 
@@ -1502,5 +1548,7 @@ int main( int argcount, char* arguements[] )
     std::cout.rdbuf(coutbuf1);
 
     outputFile1.close();
+
+		
 	// translate();
 }

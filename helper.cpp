@@ -452,22 +452,26 @@ bool is_Variable(string str)
 {
 	int gIndex = getStructIndex(currentStruct);
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
-	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
 
-	for (int i = 0; i < local.size(); i++)
+	if (fIndex != -1)
 	{
-		if (local[i].name == str && local[i].scope <= currentScope)
+		vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
+
+		for (int i = 0; i < local.size(); i++)
 		{
-			return true;
+			if (local[i].name == str && local[i].scope <= currentScope)
+			{
+				return true;
+			}
 		}
-	}
 
-	vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
-	for (int i = 0; i < parameters.size(); i++)
-	{
-		if (parameters[i].name == str && parameters[i].scope <= currentScope)
+		vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
+		for (int i = 0; i < parameters.size(); i++)
 		{
-			return true;
+			if (parameters[i].name == str && parameters[i].scope <= currentScope)
+			{
+				return true;
+			}
 		}
 	}
 

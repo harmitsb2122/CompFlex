@@ -1,44 +1,31 @@
-// #include <bits/stdc++.h>
-// using namespace std;
-
-struct Node
+struct Map
 {
-  int data;
-  struct Node *next;
+  int _map[40];
+  int _size;
 };
 
-int insert(struct Node *head1, struct Node *head2, int k)
-{
-  int count;
-
-  // traverse the first linked list until k-th point is reached int count = 1;
-  struct Node *curr;
-  curr = head1;
-  for (count = 1; count < k; count++)
-  {
-    curr = curr->next;
-  }
-
-  // backup next node of the k-th point
-  struct Node *temp;
-  temp = curr->next;
-
-  // join second linked list at the kth point
-  curr->next = head2;
-
-  // traverse the second linked list till end
-  for (; head2->next != NULL;)
-  {
-    head2 = head2->next;
-  }
-
-  // join the second part of the linked list
-  // to the end
-  head2->next = temp;
-}
-
+int _INTERNAL_MAP_SIZE;
 int main()
 {
+  _INTERNAL_MAP_SIZE = 40;
+
+  function<int(struct Map *)> map_init = [&](struct Map *map)
+  {
+    if (map == NULL)
+    {
+      return 0;
+    }
+    int i;
+    for (i = 0; i < _INTERNAL_MAP_SIZE; i++)
+    {
+      map->_map[i] = -1;
+    }
+    map->_size = 0;
+    return 1;
+  };
+
+  struct Map *map;
+  map_init(map);
 
   return 0;
 }

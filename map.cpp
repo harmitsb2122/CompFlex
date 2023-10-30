@@ -1,15 +1,13 @@
+int _INTERNAL_MAP_SIZE;
 
 struct Map
 {
-  int _map[40];
+  int _map[_INTERNAL_MAP_SIZE];
   int _size;
 };
 
 int map_init(struct Map *map)
 {
-  int _INTERNAL_MAP_SIZE;
-  _INTERNAL_MAP_SIZE = 40;
-
   if (map == NULL)
   {
     return 0;
@@ -26,9 +24,6 @@ int map_init(struct Map *map)
 
 int map_insert_at(struct Map *map, int index, int value)
 {
-  int _INTERNAL_MAP_SIZE;
-  _INTERNAL_MAP_SIZE = 40;
-
   if (map == NULL)
   {
     return 1;
@@ -52,9 +47,6 @@ int map_insert_at(struct Map *map, int index, int value)
 
 int map_find_at(struct Map *map, int index)
 {
-  int _INTERNAL_MAP_SIZE;
-  _INTERNAL_MAP_SIZE = 40;
-
   if (map == NULL)
   {
     return -1;
@@ -70,9 +62,6 @@ int map_find_at(struct Map *map, int index)
 
 int map_delete_at(struct Map *map, int index)
 {
-  int _INTERNAL_MAP_SIZE;
-  _INTERNAL_MAP_SIZE = 40;
-
   if (map == NULL)
   {
     return -1;
@@ -106,15 +95,11 @@ int map_size(struct Map *map)
 
 int map_capacity()
 {
-  int _INTERNAL_MAP_SIZE;
-  _INTERNAL_MAP_SIZE = 40;
   return _INTERNAL_MAP_SIZE;
 }
 
 int print_map(struct Map *map)
 {
-  int _INTERNAL_MAP_SIZE;
-  _INTERNAL_MAP_SIZE = 40;
   int index;
   for (index = 0; index < _INTERNAL_MAP_SIZE; index++)
   {
