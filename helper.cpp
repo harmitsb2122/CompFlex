@@ -26,6 +26,8 @@ stack<string> forIncrement;
 stack<SymbolTableEntry> callStack;
 vector<string> declevels;
 vector<pair<string, string>> stdeclevels;
+vector<int> defaultStValues;
+vector<int> tempStValues;
 string dtype;
 string lambdaReturnType;
 vector<string> lambdaParamStack;
@@ -43,6 +45,15 @@ SymbolTableEntry::SymbolTableEntry(string name, string type, int scope, vector<S
 	this->dataType = type;
 	this->scope = scope;
 	this->levels = v;
+}
+
+SymbolTableEntry::SymbolTableEntry(string name, string type, int scope, vector<SymbolTableEntry> v, int defaultValue)
+{
+	this->name = name;
+	this->dataType = type;
+	this->scope = scope;
+	this->levels = v;
+	this->defaultValue = defaultValue;
 }
 
 SymbolTableEntry::SymbolTableEntry()
@@ -114,7 +125,7 @@ StructTable::StructTable(string name)
 	structName = name;
 }
 
-int StructTable::insertAttribute(string name, string type, vector<SymbolTableEntry> table)
+int StructTable::insertAttribute(string name, string type, vector<SymbolTableEntry> table, int defaultVal)
 {
 	for (auto i : attributes)
 	{
@@ -123,7 +134,7 @@ int StructTable::insertAttribute(string name, string type, vector<SymbolTableEnt
 			return -1;
 		}
 	}
-	SymbolTableEntry ste(name, type, scopeStack.top(), table);
+	SymbolTableEntry ste(name, type, scopeStack.top(), table, defaultVal);
 	attributes.push_back(ste);
 	return 0;
 }
@@ -194,10 +205,11 @@ void printSymbolTable(vector<SymbolTableEntry> v)
 	cout << "\t\tName\t"
 			 << "DataType\t"
 			 << "Scope\t"
+			 << "Default\t"
 			 << "pointer\t" << endl;
 	for (auto i : v)
 	{
-		cout << "\t\t\t\t" << i.name << "\t\t" << i.dataType << "\t\t\t" << i.scope << "\t\t";
+		cout << "\t\t\t\t" << i.name << "\t\t" << i.dataType << "\t\t\t" << i.scope << "\t\t" << i.defaultValue << "\t\t\t";
 		for (auto j : i.levels)
 		{
 			cout << j.name << "*";
@@ -286,22 +298,25 @@ int getFunctionIndex(int globalIndex, string name)
 	return -1;
 }
 
-int insertAttribute(string attributeName, string attributeType, vector<pair<string, string>> levels)
+int insertAttribute(string attributeName, string attributeType, vector<pair<string, string>> levels, vector<int> defaultVal)
 {
 	int index = getStructIndex(currentStruct);
 	vector<SymbolTableEntry> table;
 
 	if (levels.size() == 0)
 	{
+		int to_insert = 0;
+		if (defaultVal.size() > 0)
+			to_insert = defaultVal[0];
 		vector<SymbolTableEntry> v;
-		return globalTable[index].insertAttribute(attributeName, attributeType, v);
+		return globalTable[index].insertAttribute(attributeName, attributeType, v, to_insert);
 	}
 
 	for (int i = 0; i < levels.size(); i++)
 	{
 		string name = attributeName + "." + levels[i].first;
 		vector<SymbolTableEntry> v;
-		if (globalTable[index].insertAttribute(name, levels[i].second, v) != 0)
+		if (globalTable[index].insertAttribute(name, levels[i].second, v, defaultVal[i]) != 0)
 		{
 			return -1;
 		}
@@ -309,7 +324,7 @@ int insertAttribute(string attributeName, string attributeType, vector<pair<stri
 		table.push_back(getVariable(name));
 		table.back().name = levels[i].first;
 	}
-	return globalTable[index].insertAttribute(attributeName, attributeType, table);
+	return globalTable[index].insertAttribute(attributeName, attributeType, table, 0);
 }
 
 int insertFunction(string functionName, string returnType)
@@ -354,17 +369,18 @@ int insertVariable(string variableName, string dataType, vector<string> levels)
 		return globalTable[gindex].functionTables[findex].insertVariable(variableName, dataType, v);
 	}
 
-	for (int i = 0; i < levels.size(); i++)
+	for (int i = levels.size() - 1; i >= 0; i--)
 	{
 		string name = variableName + "_" + to_string(i);
 		vector<SymbolTableEntry> v;
 		// if (globalTable[gindex].functionTables[findex].insertVariable(name, "int", v) != 0)
-		if (globalTable[gindex].functionTables[findex].insertVariable(name, dataType, v) != 0)
+		if (globalTable[gindex].functionTables[findex].insertVariable(name, newDataType, v) != 0)
 		{
 			return -1;
 		}
 		globalTable[gindex].functionTables[findex].appendCode(name + "_" + to_string(scopeStack.top()) + " = " + levels[i]);
 		table.push_back(getVariable(name));
+		newDataType = "*" + newDataType;
 	}
 	return globalTable[gindex].functionTables[findex].insertVariable(variableName, dataType, table);
 }

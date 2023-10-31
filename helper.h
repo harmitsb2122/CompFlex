@@ -12,9 +12,11 @@ public:
 	string name;
 	string dataType;
 	int scope;
+	int defaultValue;
 	vector<SymbolTableEntry> levels;
 
 	SymbolTableEntry(string, string, int, vector<SymbolTableEntry>);
+	SymbolTableEntry(string, string, int, vector<SymbolTableEntry>, int);
 	SymbolTableEntry();
 };
 
@@ -49,7 +51,7 @@ public:
 
 	StructTable(string name);
 
-	int insertAttribute(string name, string type, vector<SymbolTableEntry> table);
+	int insertAttribute(string name, string type, vector<SymbolTableEntry> table, int defaultVal);
 	int insertFunction(string functionName, string returnType);
 	int insertConstant(string name, string value);
 };
@@ -71,6 +73,8 @@ extern stack<string> forIncrement;
 extern stack<SymbolTableEntry> callStack;
 extern vector<string> declevels;
 extern vector<pair<string, string>> stdeclevels;
+extern vector<int> defaultStValues;
+extern vector<int> tempStValues;
 extern string dtype;
 extern string lambdaReturnType;
 extern vector<string> lambdaParamStack;
@@ -87,7 +91,7 @@ SymbolTableEntry getVariable(string structName);
 void init();
 int insertStruct(string name);
 void printTable();
-int insertAttribute(string name, string type, vector<pair<string, string>> stdeclevels);
+int insertAttribute(string name, string type, vector<pair<string, string>> stdeclevels, vector<int> defaultVal);
 int insertFunction(string name, string returnType);
 int insertVariable(string variableName, string dataType, vector<string> declevels);
 int insertParam(string, string);

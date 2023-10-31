@@ -9,7 +9,7 @@ digits			{digit}+
 letter			[a-zA-Z_]
 integer			{digits}|[+-]?({digits}(E|e)[+-]?{digits}) 
 drown			[-]?({digits}\.{digits})((E|e)[+-]?{digits})?
-char			'[a-zA-Z\\n]'
+char			'[a-zA-Z0-9\\n]'
 string			(\"([^"\\\n]|(\\['"\?\\abfnrtv]))*\")+
 bool			true|false
 identifier		{letter}({letter}|{digit})*

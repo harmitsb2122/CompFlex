@@ -1,0 +1,19 @@
+Successfully Compiled
+
+Struct Name = main
+	Attributes = 
+				Name	DataType	Scope	Default	pointer	
+				_INTERNAL_MAP_SIZE		int			0		8			
+				Map._map_2		int			0		20			
+				Map._map_1		*int			0		50			
+				Map._map_0		**int			0		8			
+				Map._map		***int			0		8000			
+				Map._map1_2		int			0		20			
+				Map._map1_1		*int			0		50			
+				Map._map1_0		**int			0		3			
+				Map._map1		***int			0		3000			
+				Map._size		int			0		1			
+				Map		struct			0		0			_map_2*_map_1*_map_0*_map*_map1_2*_map1_1*_map1_0*_map1*_size*
+	Constants = 
+				Name	DataType	Scope	Default	pointer	
+	Functions = 

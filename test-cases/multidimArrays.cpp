@@ -1,19 +1,16 @@
-// #include <bits/stdc++.h>
-// using namespace std;
-
 int main()
 {
-  int n;
+  int n, m;
   n = 20;
-  int A[n];
-  int i;
+  m = 30;
+  int A[n][m];
+  int i, j;
   for (i = 0; i < n; i++)
   {
-    int k, l, m;
-    k = 1;
-    l = 2;
-    m = 3;
-    A[i] = 2 * k + l - m;
+    for (j = 0; j < m; j++)
+    {
+      A[i][j] = 1;
+    }
   }
 
   return 0;

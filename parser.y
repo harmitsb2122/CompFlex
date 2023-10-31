@@ -219,10 +219,17 @@ extern "C"
 							string arrayType = type.substr(1, type.length());
 
 							string temp1 = string(getTemp("int"));
-							appendCode( temp1 + " = " + index + " * #" + to_string(getActualSize(arrayType)) );
-
+							if(arrayType[0] == '*')
+							{
+								appendCode( temp1 + " = " + index + " * #" + to_string(getActualSize("*")) );
+							}
+							else
+							{
+								appendCode( temp1 + " = " + index + " * #" + to_string(getActualSize(arrayType)) );
+							}
 							string temp = string(getTemp(type));
 							appendCode( temp + " = " + addr + " + " + temp1 );
+
 
 							$<var.type>$ = getCharArray(arrayType);
 							$<var.addr>$ = getCharArray("*"+temp);
@@ -1313,10 +1320,58 @@ extern "C"
 					}
 					starsCount = 0;
 					stdeclevels.clear();
-					insertAttribute(addr, type,stdeclevels);
+					defaultStValues.clear();
+					insertAttribute(addr, type,stdeclevels,defaultStValues);
 				}
+			 | type_name stars IDENTIFIER 
+			 '=' 
+			 attribute_constant
+				{
+					string addr($<str>3);
+					string type = dtype;
+					for( int i = 0 ; i < starsCount ; i++ )
+					{
+						type = "*" + type;
+					}
+
+					string rAddr($<str>5);
+					string rType($<str>5);
+
+					if(rType != "char" && rType != "*char")
+						rType ="int";
+
+					if(type != rType)
+					{
+						cout << "COMPILETIME ERROR: Types don't match" << addr << " and "<<rAddr<<endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+					}
+					stdeclevels.clear();
+					defaultStValues.clear();
+					starsCount = 0;
+
+					if(rType == "int")
+						defaultStValues.push_back(stoi(rAddr)); 
+					
+					insertAttribute(addr, type,stdeclevels,defaultStValues);
+					defaultStValues.clear();
+				}
+			 ';'
 				| struct_declaration ';'
 		;
+
+	attribute_constant
+		:	I_CONST	{
+					$<var.addr>$ = getCharArray($<str>1);
+				}
+			| C_CONST	{
+					$<var.type>$ = getCharArray("char");
+				}
+			| S_CONST	{
+					$<var.type>$ = getCharArray("*char");
+				}
+			;
 
 	struct_declaration
 		:	STRUCT IDENTIFIER struct_body  			 
@@ -1328,7 +1383,7 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
-					if( insertAttribute(var, type, stdeclevels) == -1 )
+					if( insertAttribute(var, type, stdeclevels,defaultStValues) == -1 )
 					{	
 						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
 						cout << "At line : " << yylineno << endl;
@@ -1340,6 +1395,7 @@ extern "C"
 	struct_body
 		: '{' 
 				{
+					defaultStValues.clear();
 					stdeclevels.clear();
 				}
 
@@ -1347,7 +1403,11 @@ extern "C"
 	
 	struct_attributes
 		: type_name stars 
-				IDENTIFIER st_brackets';'
+				IDENTIFIER
+				{
+					tempStValues.clear();
+				} 
+				st_brackets';'
 				{
 					string var = string($<str>3);
 					string type = dtype;
@@ -1357,12 +1417,18 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
-					for( int i = 0 ; i < declevels.size() ; i++ )
+					int tot_size = 1;
+					for( int i = declevels.size()-1 ; i >=0 ; i-- )
 					{
+						addStructLevels(var+"_"+to_string(i),type);
+						defaultStValues.push_back(tempStValues[i]);
 						type = "*" + type;
+						tot_size*=tempStValues[i];
 					}
 
 					addStructLevels(var,type);
+					defaultStValues.push_back(tot_size);
+
 					declevels.clear();
 				} 
 			struct_attributes
@@ -1380,6 +1446,7 @@ extern "C"
 							{
 								string var($<str>1);
 								$<str>$ = getCharArray(var);
+								tempStValues.push_back(stoi(var));
 
 							}
 					 | IDENTIFIER
@@ -1398,6 +1465,7 @@ extern "C"
 								}
 	
 								$<str>$ = getCharArray(var);
+								tempStValues.push_back(ste.defaultValue);
 							}
 							else
 							{
