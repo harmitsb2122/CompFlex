@@ -3,17 +3,76 @@ Successfully Compiled
 Struct Name = main
 	Attributes = 
 				Name	DataType	Scope	Default	pointer	
-				_INTERNAL_MAP_SIZE		int			0		8			
-				Map._map_2		int			0		20			
-				Map._map_1		*int			0		50			
-				Map._map_0		**int			0		8			
-				Map._map		***int			0		8000			
-				Map._map1_2		int			0		20			
-				Map._map1_1		*int			0		50			
-				Map._map1_0		**int			0		3			
-				Map._map1		***int			0		3000			
-				Map._size		int			0		1			
-				Map		struct			0		0			_map_2*_map_1*_map_0*_map*_map1_2*_map1_1*_map1_0*_map1*_size*
+				Node.data		int			0		1			
+				Node.next		*Node			0		1			
+				Node		struct			0		0			data*next*
 	Constants = 
 				Name	DataType	Scope	Default	pointer	
 	Functions = 
+
+		function Name = insert
+			label = label_1
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				head1		*Node			2		32765			
+				head2		*Node			2		32765			
+				k		int			2		32765			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+				count		int			2		32765			
+				curr		*Node			2		32765			
+				temp		*Node			2		32765			
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t1		int			3		32765			
+				_t2		bool			3		32765			
+				_t3		int			3		32765			
+				_t4		int			3		32765			
+				_t5		bool			3		32765			
+			Code = 
+				label_1:
+				curr_2 = head1_2
+				_t1_3 = #1
+				count_2 = _t1_3
+				label_2:
+				_t2_3 = count_2 < k_2
+				if ( _t2_3 == #0 ) goto label_5
+				goto label_3
+				label_4:
+				_t3_3 = count_2
+				count_2 = count_2 + #1
+				goto label_2
+				label_3:
+				curr_2 = *curr.next_2
+				goto label_4
+				label_5:
+				temp_2 = *curr.next_2
+				*curr.next_2 = head2_2
+				label_6:
+				_t4_3 = #0
+				_t5_3 = *head2.next_2 != _t4_3
+				if ( _t5_3 == #0 ) goto label_9
+				goto label_7
+				label_8:
+				goto label_6
+				label_7:
+				head2_2 = *head2.next_2
+				goto label_8
+				label_9:
+				*head2.next_2 = temp_2
+
+		function Name = main
+			label = label_10
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t6		int			2		32765			
+			Code = 
+				label_10:
+				_t6_2 = #0
+				Return _t6_2

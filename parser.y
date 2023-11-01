@@ -96,7 +96,7 @@ extern "C"
 						}
 
 						$<var.type>$ = getCharArray(dtType);
-						$<var.addr>$ = getCharArray(ste.name +"."+attr+ "_" + to_string(ste.scope));
+						$<var.addr>$ = getCharArray("*"+ste.name +"."+attr+ "_" + to_string(ste.scope));
 					}
 					debug(1);
 				}	

@@ -1,0 +1,35 @@
+label_1:
+curr_2 = head1_2
+_t1_3 = #1
+count_2 = _t1_3
+label_2:
+_t2_3 = count_2 < k_2
+if ( _t2_3 == #0 ) goto label_5
+goto label_3
+label_4:
+_t3_3 = count_2
+count_2 = count_2 + #1
+goto label_2
+label_3:
+curr_2 = *curr.next_2
+goto label_4
+label_5:
+temp_2 = *curr.next_2
+*curr.next_2 = head2_2
+label_6:
+_t4_3 = #0
+_t5_3 = *head2.next_2 != _t4_3
+if ( _t5_3 == #0 ) goto label_9
+goto label_7
+label_8:
+goto label_6
+label_7:
+head2_2 = *head2.next_2
+goto label_8
+label_9:
+*head2.next_2 = temp_2
+
+label_10:
+_t6_2 = #0
+Return _t6_2
+
