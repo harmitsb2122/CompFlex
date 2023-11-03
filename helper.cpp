@@ -265,6 +265,22 @@ void printCode()
 	{
 		for (auto f : st.functionTables)
 		{
+			if (f.functionName != "main")
+				continue;
+			for (auto c : f.code)
+			{
+				cout << c << endl;
+			}
+			cout << endl;
+		}
+	}
+
+	for (auto st : globalTable)
+	{
+		for (auto f : st.functionTables)
+		{
+			if (f.functionName == "main")
+				continue;
 			for (auto c : f.code)
 			{
 				cout << c << endl;
