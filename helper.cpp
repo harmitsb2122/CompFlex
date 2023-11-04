@@ -36,7 +36,7 @@ int dlevels;
 int parseDebug;
 string forExpr;
 int constInt;
-
+int curStructSize;
 vector<StructTable> globalTable;
 
 SymbolTableEntry::SymbolTableEntry(string name, string type, int scope, vector<SymbolTableEntry> v)
@@ -340,7 +340,7 @@ int insertAttribute(string attributeName, string attributeType, vector<pair<stri
 		table.push_back(getVariable(name));
 		table.back().name = levels[i].first;
 	}
-	return globalTable[index].insertAttribute(attributeName, attributeType, table, 0);
+	return globalTable[index].insertAttribute(attributeName, attributeType, table, defaultVal.back());
 }
 
 int insertFunction(string functionName, string returnType)

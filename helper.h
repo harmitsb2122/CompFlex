@@ -83,7 +83,7 @@ extern int dlevels;
 extern int parseDebug;
 extern string forExpr;
 extern int constInt;
-
+extern int curStructSize;
 extern vector<StructTable> globalTable;
 
 SymbolTableEntry getVariable(string structName);

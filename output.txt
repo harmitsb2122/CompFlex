@@ -3,160 +3,79 @@ Successfully Compiled
 Struct Name = main
 	Attributes = 
 				Name	DataType	Scope	Default	pointer	
-				MEMORY_SIZE		int			0		262144			
-				OS_SIZE		int			0		1024			
-				OS_START		int			0		0			
-				OS_END		int			0		1024			
-				STACK_SIZE		int			0		10240			
-				STACK_START		int			0		1024			
-				STACK_END		int			0		11264			
-				HEAP_SIZE		int			0		51200			
-				HEAP_START		int			0		11264			
-				HEAP_END		int			0		576716800			
-				IO_DISPLAY_SIZE		int			0		65536			
-				IO_DISPLAY_START		int			0		576716800			
-				IO_DISPLAY_END		int			0		576782336			
-				IO_KEYBOARD_SIZE		int			0		1			
-				IO_KEYBOARD_START		int			0		576782336			
-				IO_KEYBOARD_END		int			0		576782337			
-				FONTMAP_SIZE		int			0		2048			
-				FONTMAP_START		int			0		576782337			
-				FONTMAP_END		int			0		576784385			
-				TEMP_SIZE		int			0		38912			
-				TEMP_START		int			0		576784385			
-				TEMP_END		int			0		576823297			
-				KEYBOARD_WAIT_TIME		int			0		5			
-				CTRL_CODE_BACKSPACE		int			0		8			
-				CTRL_CODE_ENTER		int			0		10			
-				CTRL_CODE_CTRL		int			0		17			
-				CTRL_CODE_ALT		int			0		18			
-				CTRL_CODE_SHIFT		int			0		16			
-				CTRL_CODE_CAPSLOCK		int			0		20			
-				ROW_CHAR_SIZE		int			0		128			
-				COLUMN_CHAR_SIZE		int			0		64			
-				SCREEN_LOCK		int			0		0			
-				MUL_CONS		int			0		9			
+				ALPHABET_SIZE		int			0		26			
+				TrieNode.children_0		*TrieNode			0		26			
+				TrieNode.children		**TrieNode			0		26			
+				TrieNode.isEndOfWord		int			0		1			
+				TrieNode		struct			0		27			children_0*children*isEndOfWord*
 	Constants = 
 				Name	DataType	Scope	Default	pointer	
 	Functions = 
 
-		function Name = f
+		function Name = getNode
 			label = label_1
-			return value : int
+			return value : *TrieNode
 			parameters : 
 				Name	DataType	Scope	Default	pointer	
-				a		int			2		32766			
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
-				k		int			2		32766			
+				pNode		*TrieNode			2		32767			
+				i		int			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
+				_t1		int			2		32767			
+				_t2		*int			2		32767			
+				_t3		int			2		32767			
+				_t4		int			3		32767			
+				_t5		bool			3		32767			
+				_t6		int			3		32767			
+				_t7		int			3		32767			
+				_t8		**TrieNode			3		32767			
+				_t9		int			3		32767			
 			Code = 
 				label_1:
-				Return a_2
-
-		function Name = main
-			label = label_2
-			return value : int
-			parameters : 
-				Name	DataType	Scope	Default	pointer	
-			localVariables : 
-				Name	DataType	Scope	Default	pointer	
-				k		int			2		32766			
-				r		int			2		32766			
-				lal		int			3		32766			
-				lal		int			2		32766			
-				j		int			2		32766			
-			tempVariables = 
-				Name	DataType	Scope	Default	pointer	
-				_t1		int			2		32766			
-				_t2		int			3		32766			
-				_t3		int			3		32766			
-				_t4		bool			3		32766			
-				_t5		int			3		32766			
-				_t6		int			3		32766			
-				_t7		int			3		32766			
-				_t8		int			2		32766			
-				_t18		int			2		32766			
-				_t19		int			2		32766			
-				_t20		int			2		32766			
-				_t21		int			2		32766			
-				_t22		int			2		32766			
-			Code = 
+				_t1_2 = 27
+				memory _t2_2 _t1_2 #1
+				pNode_2 = _t2_2
+				_t3_2 = #0
+				*pNode.isEndOfWord_2 = _t3_2
+				_t4_3 = #0
+				i_2 = _t4_3
 				label_2:
-				_t1_2 = #1
-				k_2 = _t1_2
-				_t2_3 = #1
-				k_2 = _t2_3
-				label_3:
-				_t3_3 = #2
-				_t4_3 = k_2 < _t3_3
-				if ( _t4_3 == #0 ) goto label_6
-				goto label_4
-				label_5:
-				_t5_3 = k_2
-				k_2 = k_2 + #1
+				_t5_3 = i_2 < ALPHABET_SIZE_0
+				if ( _t5_3 == #0 ) goto label_5
 				goto label_3
 				label_4:
-				_t6_3 = #2
-				lal_3 = _t6_3
-				_t7_3 = r_2
-				r_2 = r_2 + #1
-				goto label_5
-				label_6:
-				_t8_2 = #3
-				lal_3 = _t8_2
-				_t18_2 = #1
-				j_2 = _t18_2
-				FunctionCall fi
-				_t19_2 = #0
-				param _t19_2
-				_t20_2 = #1
-				param _t20_2
-				call label_7
-				label_8:
-				_t21_2 = ReturnVal
-				_t22_2 = #0
-				Return _t22_2
+				_t6_3 = i_2
+				i_2 = i_2 + #1
+				goto label_2
+				label_3:
+				_t7_3 = i_2 * #4
+				_t8_3 = *pNode.children_2 + _t7_3
+				_t9_3 = #0
+				*_t8_3 = _t9_3
+				goto label_4
+				label_5:
+				Return pNode_2
 
-		function Name = fi
-			label = label_7
+		function Name = main
+			label = label_6
 			return value : int
 			parameters : 
 				Name	DataType	Scope	Default	pointer	
-				a		int			3		32766			
-				b		int			3		32766			
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
-				k		int			2		32766			
-				r		int			2		32766			
-				lal		int			3		32766			
-				lal		int			2		32766			
-				c_0		int			3		32766			
-				c		*int			3		32766			c_0*
+				root		*TrieNode			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t9		int			3		32766			
-				_t10		int			3		32766			
-				_t11		int			3		32766			
-				_t12		*int			3		32766			
-				_t13		int			3		32766			
-				_t14		int			3		32766			
-				_t15		int			3		32766			
-				_t16		int			3		32766			
-				_t17		*int			3		32766			
+				_t10		*TrieNode			2		32767			
+				_t11		int			2		32767			
 			Code = 
+				label_6:
+				FunctionCall getNode
+				call label_1
 				label_7:
-				_t9_3 = #10
-				c_0_3 = _t9_3
-				memory c_3 _t9_3 #4
-				_t10_3 = #7
-				_t11_3 = _t10_3 * #4
-				_t12_3 = c_3 + _t11_3
-				_t13_3 = a_3 + b_3
-				_t14_3 = _t13_3 + lal_3
-				*_t12_3 = _t14_3
-				_t15_3 = #7
-				_t16_3 = _t15_3 * #4
-				_t17_3 = c_3 + _t16_3
-				Return *_t17_3
+				_t10_2 = ReturnVal
+				root_2 = _t10_2
+				_t11_2 = #0
+				Return _t11_2

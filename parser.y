@@ -170,6 +170,47 @@ extern "C"
 					appendCode(string($<var.addr>$) + " = #0");
 					debug(4);
 				}
+			| SIZEOF '(' IDENTIFIER ')'
+				{
+					string str($<str>3);
+					if(str == "int")
+					{
+						$<var.type>$ = getCharArray("int");
+						$<var.addr>$ = getTemp("int");
+						appendCode(string($<var.addr>$) + " = "+to_string(getActualSize("int")));
+					}
+					else if(str == "char")
+					{
+						$<var.type>$ = getCharArray("int");
+						$<var.addr>$ = getTemp("int");
+						appendCode(string($<var.addr>$) + " = "+to_string(getActualSize("char")));						
+					}
+					else if(str == "*")
+					{
+						$<var.type>$ = getCharArray("int");
+						$<var.addr>$ = getTemp("int");
+						appendCode(string($<var.addr>$) + " = "+to_string(getActualSize("*")));						
+					}
+					else if(!is_Variable(str))
+					{
+						cout << "COMPILETIME ERROR: " << str << " not declared" << endl;	
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+						$<var.type>$ = getCharArray("UNKNOWN TYPE");
+						$<var.addr>$ = getCharArray("UNKNOWN VARIABLE");
+					}
+					else
+					{
+						// Lazy Allocation
+						SymbolTableEntry ste = getVariable(str);
+						int cur_struct_size = ste.defaultValue;
+						$<var.type>$ = getCharArray("int");
+						$<var.addr>$ = getTemp("int");
+						appendCode(string($<var.addr>$) + " = "+to_string(cur_struct_size));	
+						
+					}
+				}
 			; 
 
 	constant
@@ -309,6 +350,7 @@ extern "C"
 
 					}
 				}
+
 			;
 	
 	functionParameters
@@ -440,7 +482,7 @@ extern "C"
 						appendCode("memory " + string($<var.addr>$) + " " + string($<var.addr>3) + " #1" );
 					}
 				}
-			;
+		;
 
 	type_name		
 		:	INT	{dtype = "int"; starsCount = 0; }
@@ -814,7 +856,7 @@ extern "C"
 					string type2($<var.type>3);
 
 					appendCode(var + " = " + val);
-					if( type1 != type2 )
+					if( type2!="all" && type1 != type2 )
 					{
 						cout << "COMPILETIME WARNING: assigning " << type2 << " to " << type1 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -1383,6 +1425,7 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
+					defaultStValues.push_back(curStructSize);
 					if( insertAttribute(var, type, stdeclevels,defaultStValues) == -1 )
 					{	
 						cout << "COMPILETIME ERROR: Redeclaration of an already existing variable " << var << endl;
@@ -1397,6 +1440,7 @@ extern "C"
 				{
 					defaultStValues.clear();
 					stdeclevels.clear();
+					curStructSize = 0;
 				}
 
 			struct_attributes '}';
@@ -1428,7 +1472,7 @@ extern "C"
 
 					addStructLevels(var,type);
 					defaultStValues.push_back(tot_size);
-
+					curStructSize+=tot_size;
 					declevels.clear();
 				} 
 			struct_attributes
