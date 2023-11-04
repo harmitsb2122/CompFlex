@@ -1,4 +1,4 @@
-Error = -1
+Successfully Compiled
 
 Struct Name = main
 	Attributes = 
@@ -271,6 +271,9 @@ Struct Name = main
 				first		*char			2		32767			
 				keys_0		char			2		32767			
 				keys		**char			2		32767			keys_0*
+				n		int			2		32767			
+				i		int			2		32767			
+				is_present		int			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
 				_t51		int			2		32767			
@@ -310,6 +313,18 @@ Struct Name = main
 				_t85		int			2		32767			
 				_t86		int			2		32767			
 				_t87		**char			2		32767			
+				_t88		int			2		32767			
+				_t89		int			2		32767			
+				_t90		int			2		32767			
+				_t91		int			3		32767			
+				_t92		bool			3		32767			
+				_t93		int			3		32767			
+				_t94		int			3		32767			
+				_t95		**char			3		32767			
+				_t96		int			3		32767			
+				_t97		*char			2		32767			
+				_t98		int			2		32767			
+				_t99		int			2		32767			
 			Code = 
 				label_30:
 				_t51_2 = #8
@@ -364,3 +379,38 @@ Struct Name = main
 				_t86_2 = _t85_2 * #4
 				_t87_2 = keys_2 + _t86_2
 				first_2 = *_t87_2
+				_t88_2 = #32767
+				_t89_2 = #32767
+				_t90_2 = _t88_2 / _t89_2
+				n_2 = _t90_2
+				_t91_3 = #0
+				i_2 = _t91_3
+				label_32:
+				_t92_3 = i_2 < n_2
+				if ( _t92_3 == #0 ) goto label_35
+				goto label_33
+				label_34:
+				_t93_3 = i_2
+				i_2 = i_2 + #1
+				goto label_32
+				label_33:
+				FunctionCall insert
+				param root_2
+				_t94_3 = i_2 * #4
+				_t95_3 = keys_2 + _t94_3
+				param *_t95_3
+				call label_13
+				label_36:
+				_t96_3 = ReturnVal
+				goto label_34
+				label_35:
+				FunctionCall search
+				param root_2
+				string _t97_2 "the"
+				param _t97_2
+				call label_22
+				label_37:
+				_t98_2 = ReturnVal
+				is_present_2 = _t98_2
+				_t99_2 = #0
+				Return _t99_2
