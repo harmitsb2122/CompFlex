@@ -930,7 +930,14 @@ extern "C"
 					}
 					if( declevels.size() != 0 ){
 						SymbolTableEntry ste = getVariable(var);
-						appendCode("memory " + var+"_"+ to_string(ste.scope) + " " + declevels[0] + " #" + to_string(getActualSize(dtype)));
+						if(type[0] == '*')
+						{
+							appendCode("memory " + var+"_"+ to_string(ste.scope) + " " + declevels[0] + " #" + to_string(getActualSize("*")));
+						}
+						else
+						{
+							appendCode("memory " + var+"_"+ to_string(ste.scope) + " " + declevels[0] + " #" + to_string(getActualSize(dtype)));
+						}
 					}
 				}
 			;
@@ -1480,7 +1487,12 @@ extern "C"
 						type = "*" + type;
 					}
 					starsCount = 0;
-					int tot_size = 1;
+					int typeSize = getActualSize(type);
+					if(type[0] == '*')
+					{
+						typeSize = 4;
+					}
+					int tot_size = 1*typeSize;
 					for( int i = declevels.size()-1 ; i >=0 ; i-- )
 					{
 						addStructLevels(var+"_"+to_string(i),type);

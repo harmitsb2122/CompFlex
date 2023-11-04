@@ -101,7 +101,6 @@ int main()
   struct TrieNode *root;
   char *first;
   char *keys[8];
-  int n, i, is_present;
 
   root = getNode();
 

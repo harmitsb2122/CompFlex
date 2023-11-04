@@ -1,7 +1,7 @@
 label_30:
 _t51_2 = #8
 keys_0_2 = _t51_2
-memory keys_2 _t51_2 #1
+memory keys_2 _t51_2 #4
 FunctionCall getNode
 call label_1
 label_31:
@@ -51,8 +51,8 @@ _t85_2 = #0
 _t86_2 = _t85_2 * #4
 _t87_2 = keys_2 + _t86_2
 first_2 = *_t87_2
-_t88_2 = #32764
-_t89_2 = #32764
+_t88_2 = #32766
+_t89_2 = #32766
 _t90_2 = _t88_2 / _t89_2
 n_2 = _t90_2
 _t91_3 = #0
@@ -88,7 +88,7 @@ _t99_2 = #0
 Return _t99_2
 
 label_1:
-_t1_2 = #27
+_t1_2 = #108
 memory _t2_2 _t1_2 #1
 pNode_2 = _t2_2
 _t3_2 = #0
