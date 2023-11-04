@@ -170,26 +170,26 @@ extern "C"
 					appendCode(string($<var.addr>$) + " = #0");
 					debug(4);
 				}
-			| SIZEOF '(' IDENTIFIER ')'
+			| SIZEOF '(' sizeof_arg ')'
 				{
 					string str($<str>3);
 					if(str == "int")
 					{
 						$<var.type>$ = getCharArray("int");
 						$<var.addr>$ = getTemp("int");
-						appendCode(string($<var.addr>$) + " = "+to_string(getActualSize("int")));
+						appendCode(string($<var.addr>$) + " = #"+to_string(getActualSize("int")));
 					}
 					else if(str == "char")
 					{
 						$<var.type>$ = getCharArray("int");
 						$<var.addr>$ = getTemp("int");
-						appendCode(string($<var.addr>$) + " = "+to_string(getActualSize("char")));						
+						appendCode(string($<var.addr>$) + " = #"+to_string(getActualSize("char")));						
 					}
 					else if(str == "*")
 					{
 						$<var.type>$ = getCharArray("int");
 						$<var.addr>$ = getTemp("int");
-						appendCode(string($<var.addr>$) + " = "+to_string(getActualSize("*")));						
+						appendCode(string($<var.addr>$) + " = #"+to_string(getActualSize("*")));						
 					}
 					else if(!is_Variable(str))
 					{
@@ -207,9 +207,28 @@ extern "C"
 						int cur_struct_size = ste.defaultValue;
 						$<var.type>$ = getCharArray("int");
 						$<var.addr>$ = getTemp("int");
-						appendCode(string($<var.addr>$) + " = "+to_string(cur_struct_size));	
+						appendCode(string($<var.addr>$) + " = #"+to_string(cur_struct_size));	
 						
 					}
+				}
+			; 
+	sizeof_arg 
+		:
+			INT
+				{
+					$<str>$  = getCharArray("int");
+				} 
+			| CHAR
+				{
+					$<str>$  = getCharArray("char");
+				} 
+			| '*'
+				{
+					$<str>$  = getCharArray("*");
+				} 
+			| IDENTIFIER
+				{
+					$<str>$  = $<str>1;
 				}
 			; 
 
@@ -586,7 +605,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '+' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -608,7 +627,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '+' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
