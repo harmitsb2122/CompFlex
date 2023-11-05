@@ -1459,6 +1459,7 @@ extern "C"
 						error = -1;
 						return 1;
 					}
+					actualSize[var] = curStructSize;
 				};
 
 	struct_body
