@@ -46,7 +46,7 @@ extern "C"
 	} var;
 };
 
-%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM POINTER
+%token BREAK CHAR CONST CONTINUE ELSE ELIF FLOAT FOR IN IF INT STRUCT RETURN SIZEOF VOID BOOL STRING ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN POW_ASSIGN INC_OP DEC_OP OR_OP AND_OP LE_OP GE_OP EQ_OP NE_OP C_CONST S_CONST B_CONST I_CONST F_CONST IDENTIFIER LET PRINT PRINTS SCAN VAR NULL_ MALLOC LMFUNCTION ASM POINTER MAC
 
 %start begin
 
@@ -468,7 +468,7 @@ extern "C"
 					$<var.type>$ = $<var.type>2;
 					if( op == "+" or op == "-" ){
 						if( type != "int" ){
-							cout << "COMPILETIME ERROR: cannot apply + to non number types" << endl;
+							cout << "COMPILETIME ERROR: cannot apply " << op << " to non number types" << endl;
 							cout << "At line : " << yylineno << endl;
 							error = -1;
 							return 1;
@@ -526,6 +526,26 @@ extern "C"
 		:	unary_expression	{
 					$<var.addr>$ = $<var.addr>1;
 					$<var.type>$ = $<var.type>1;
+				}
+			| multiplicative_expression MAC unary_expression {
+					string type1($<var.type>1);
+					string type2($<var.type>3);
+
+					if( type1 != "int" or type2 != "int" )
+					{
+						cout << "COMPILETIME ERROR: cannot apply MAC to arguements of types: " << type1 << ", " << type2 << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+						$<var.addr>$ = $<var.type>1;
+						$<var.type>$ = $<var.type>1;
+					}
+					else
+					{
+						$<var.addr>$ = getTemp("int");
+						$<var.type>$ = $<var.type>1;
+						appendCode(string($<var.addr>$) + " = " + string($<var.addr>1) + " MAC " +  string($<var.addr>3));
+					}
 				}
 			| multiplicative_expression '*' unary_expression {
 					string type1($<var.type>1);
