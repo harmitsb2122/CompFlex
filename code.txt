@@ -1,10 +1,10 @@
-label_133:
-_t320_2 = #1
-_t321_2 = _t320_2 * MEMORY_SIZE_0
-memory _t322_2 _t321_2 #1
-memory_0 = _t322_2
-_t323_2 = #0
-Return _t323_2
+label_546:
+_t1330_2 = #1
+_t1331_2 = _t1330_2 * MEMORY_SIZE_0
+memory _t1332_2 _t1331_2 #1
+memory_0 = _t1332_2
+_t1333_2 = #0
+Return _t1333_2
 
 label_1:
 g_2 = c_2
@@ -600,160 +600,2539 @@ label_94:
 label_95:
 
 label_103:
-_t256_3 = #0
-i_2 = _t256_3
+_t256_2 = #0
+g_2 = _t256_2
+_t257_3 = #0
+i_2 = _t257_3
 label_104:
-_t257_3 = i_2 < len_2
-if ( _t257_3 == #0 ) goto label_107
+_t258_3 = i_2 < len_2
+if ( _t258_3 == #0 ) goto label_107
 goto label_105
 label_106:
-_t258_3 = i_2
+_t259_3 = i_2
 i_2 = i_2 + #1
 goto label_104
 label_105:
 FunctionCall write_char_at
-_t259_3 = i_2 * #1
-_t260_3 = msg_2 + _t259_3
-param *_t260_3
+_t260_3 = i_2 * #1
+_t261_3 = msg_2 + _t260_3
+param *_t261_3
 param line_2
 param col_2
 call label_77
 label_108:
-_t261_3 = ReturnVal
-g_2 = _t261_3
-_t262_3 = #0
-_t263_3 = g_2 != _t262_3
-if ( _t263_3 == #0 ) goto label_109
+_t262_3 = ReturnVal
+g_2 = _t262_3
+_t263_3 = #0
+_t264_3 = g_2 != _t263_3
+if ( _t264_3 == #0 ) goto label_109
 Return g_2
 goto label_110
 label_109:
 label_110:
-_t264_3 = col_2
+_t265_3 = col_2
 col_2 = col_2 + #1
-_t265_3 = col_2 == ROW_CHAR_SIZE_0
-if ( _t265_3 == #0 ) goto label_111
-_t266_4 = #0
-col_2 = _t266_4
-_t267_4 = #8
-_t268_4 = line_2 + _t267_4
-line_2 = _t268_4
+_t266_3 = col_2 == ROW_CHAR_SIZE_0
+if ( _t266_3 == #0 ) goto label_111
+_t267_4 = #0
+col_2 = _t267_4
+_t268_4 = #8
+_t269_4 = line_2 + _t268_4
+line_2 = _t269_4
 goto label_112
 label_111:
 label_112:
-_t269_3 = #8
-_t270_3 = _t269_3 * COLUMN_CHAR_SIZE_0
-_t271_3 = line_2 == _t270_3
-if ( _t271_3 == #0 ) goto label_113
-_t272_4 = #0
-line_2 = _t272_4
+_t270_3 = #8
+_t271_3 = _t270_3 * COLUMN_CHAR_SIZE_0
+_t272_3 = line_2 == _t271_3
+if ( _t272_3 == #0 ) goto label_113
 _t273_4 = #0
-col_2 = _t273_4
-_t274_4 = #1
-Return _t274_4
+line_2 = _t273_4
+_t274_4 = #0
+col_2 = _t274_4
+_t275_4 = #1
+Return _t275_4
 goto label_114
 label_113:
 label_114:
 goto label_106
 label_107:
-_t275_2 = #0
-Return _t275_2
+_t276_2 = #0
+Return _t276_2
 
 label_115:
-_t276_2 = #0
-_t277_2 = SCREEN_LOCK_0 == _t276_2
-if ( _t277_2 == #0 ) goto label_116
-_t278_3 = #10
-temp_0_3 = _t278_3
-memory temp_3 _t278_3 #4
-_t279_3 = #0
-count_3 = _t279_3
+_t277_2 = #0
+_t278_2 = SCREEN_LOCK_0 == _t277_2
+if ( _t278_2 == #0 ) goto label_116
+_t279_3 = #10
+temp_0_3 = _t279_3
+memory temp_3 _t279_3 #4
+_t280_3 = #0
+count_3 = _t280_3
 label_118:
-_t280_4 = #0
-_t281_4 = a_2 > _t280_4
-if ( _t281_4 == #0 ) goto label_121
+_t281_4 = #0
+_t282_4 = a_2 > _t281_4
+if ( _t282_4 == #0 ) goto label_121
 goto label_119
 label_120:
 goto label_118
 label_119:
-_t282_4 = count_3
+_t283_4 = count_3
 count_3 = count_3 + #1
-_t283_4 = _t282_4 * #1
-_t284_4 = temp_3 + _t283_4
-_t285_4 = #10
-_t286_4 = a_2 % _t285_4
-_t287_4 = #'0'
-_t288_4 = _t286_4 + _t287_4
-*_t284_4 = _t288_4
-_t289_4 = #10
-_t290_4 = a_2 / _t289_4
-a_2 = _t290_4
+_t284_4 = _t283_4 * #1
+_t285_4 = temp_3 + _t284_4
+_t286_4 = #10
+_t287_4 = a_2 % _t286_4
+_t288_4 = #'0'
+_t289_4 = _t287_4 + _t288_4
+*_t285_4 = _t289_4
+_t290_4 = #10
+_t291_4 = a_2 / _t290_4
+a_2 = _t291_4
 goto label_120
 label_121:
-_t291_4 = #1
-_t292_4 = count_3 - _t291_4
-i_3 = _t292_4
+_t292_4 = #1
+_t293_4 = count_3 - _t292_4
+i_3 = _t293_4
 label_122:
-_t293_4 = #0
-_t294_4 = i_3 >= _t293_4
-if ( _t294_4 == #0 ) goto label_125
+_t294_4 = #0
+_t295_4 = i_3 >= _t294_4
+if ( _t295_4 == #0 ) goto label_125
 goto label_123
 label_124:
-_t295_4 = i_3
+_t296_4 = i_3
 i_3 = i_3 - #1
 goto label_122
 label_123:
 FunctionCall write_char
-_t296_4 = i_3 * #1
-_t297_4 = temp_3 + _t296_4
-param *_t297_4
+_t297_4 = i_3 * #1
+_t298_4 = temp_3 + _t297_4
+param *_t298_4
 call label_38
 label_126:
-_t298_4 = ReturnVal
+_t299_4 = ReturnVal
 goto label_124
 label_125:
-_t299_3 = #0
-Return _t299_3
+_t300_3 = #0
+Return _t300_3
 goto label_117
 label_116:
 label_117:
-_t300_2 = #1
-Return _t300_2
+_t301_2 = #1
+Return _t301_2
 
 label_127:
-_t301_2 = #0
-_t302_2 = line_2 < _t301_2
-_t303_2 = #8
-_t304_2 = _t303_2 * COLUMN_CHAR_SIZE_0
-_t305_2 = line_2 >= _t304_2
-_t306_2 = _t302_2 || _t305_2
-if ( _t306_2 == #0 ) goto label_128
-_t307_3 = #1
-Return _t307_3
+_t302_2 = #0
+_t303_2 = line_2 < _t302_2
+_t304_2 = #8
+_t305_2 = _t304_2 * COLUMN_CHAR_SIZE_0
+_t306_2 = line_2 >= _t305_2
+_t307_2 = _t303_2 || _t306_2
+if ( _t307_2 == #0 ) goto label_128
+_t308_3 = #1
+Return _t308_3
 goto label_129
 label_128:
 label_129:
-_t308_2 = #0
-_t309_2 = col_2 < _t308_2
-_t310_2 = col_2 >= ROW_CHAR_SIZE_0
-_t311_2 = _t309_2 || _t310_2
-if ( _t311_2 == #0 ) goto label_130
-_t312_3 = #1
-Return _t312_3
+_t309_2 = #0
+_t310_2 = col_2 < _t309_2
+_t311_2 = col_2 >= ROW_CHAR_SIZE_0
+_t312_2 = _t310_2 || _t311_2
+if ( _t312_2 == #0 ) goto label_130
+_t313_3 = #1
+Return _t313_3
 goto label_131
 label_130:
 label_131:
 LINE_0 = line_2
 COLUMN_0 = col_2
-_t313_2 = #0
-Return _t313_2
+_t314_2 = #0
+Return _t314_2
 
 label_132:
-_t314_2 = #0
-_t315_2 = _t314_2 * #4
-_t316_2 = vals_2 + _t315_2
-*_t316_2 = LINE_0
-_t317_2 = #1
-_t318_2 = _t317_2 * #4
-_t319_2 = vals_2 + _t318_2
-*_t319_2 = COLUMN_0
+_t315_2 = #0
+_t316_2 = _t315_2 * #4
+_t317_2 = vals_2 + _t316_2
+*_t317_2 = LINE_0
+_t318_2 = #1
+_t319_2 = _t318_2 * #4
+_t320_2 = vals_2 + _t319_2
+*_t320_2 = COLUMN_0
+
+label_133:
+_t321_2 = #0
+_t322_2 = SCREEN_LOCK_0 == _t321_2
+if ( _t322_2 == #0 ) goto label_134
+_t323_3 = #8
+_t324_3 = _t323_3 * COLUMN_CHAR_SIZE_0
+_t325_3 = line_2 >= _t324_3
+if ( _t325_3 == #0 ) goto label_136
+_t326_4 = #1
+Return _t326_4
+goto label_137
+label_136:
+label_137:
+_t327_3 = col_2 >= ROW_CHAR_SIZE_0
+_t328_3 = #0
+_t329_3 = col_2 < _t328_3
+_t330_3 = _t327_3 || _t329_3
+if ( _t330_3 == #0 ) goto label_138
+_t331_4 = #1
+Return _t331_4
+goto label_139
+label_138:
+label_139:
+_t332_3 = #0
+g_3 = _t332_3
+_t333_4 = #0
+i_3 = _t333_4
+label_140:
+_t334_4 = i_3 < len_2
+if ( _t334_4 == #0 ) goto label_143
+goto label_141
+label_142:
+_t335_4 = i_3
+i_3 = i_3 + #1
+goto label_140
+label_141:
+FunctionCall write_char_at
+_t336_4 = i_3 * #1
+_t337_4 = msg_2 + _t336_4
+param *_t337_4
+param line_2
+param col_2
+call label_77
+label_144:
+_t338_4 = ReturnVal
+g_3 = _t338_4
+_t339_4 = #0
+_t340_4 = g_3 != _t339_4
+if ( _t340_4 == #0 ) goto label_145
+Return g_3
+goto label_146
+label_145:
+label_146:
+_t341_4 = #8
+_t342_4 = line_2 + _t341_4
+line_2 = _t342_4
+_t343_4 = #8
+_t344_4 = _t343_4 * COLUMN_CHAR_SIZE_0
+_t345_4 = line_2 == _t344_4
+if ( _t345_4 == #0 ) goto label_147
+_t346_5 = #0
+line_2 = _t346_5
+_t347_5 = #0
+col_2 = _t347_5
+_t348_5 = #1
+Return _t348_5
+goto label_148
+label_147:
+label_148:
+_t349_4 = col_2 == ROW_CHAR_SIZE_0
+if ( _t349_4 == #0 ) goto label_149
+_t350_5 = #0
+col_2 = _t350_5
+_t351_5 = #8
+_t352_5 = line_2 + _t351_5
+line_2 = _t352_5
+goto label_150
+label_149:
+label_150:
+goto label_142
+label_143:
+goto label_135
+label_134:
+label_135:
+_t353_2 = #1
+Return _t353_2
+
+label_151:
+_t354_2 = #0
+_t355_2 = SCREEN_LOCK_0 == _t354_2
+if ( _t355_2 == #0 ) goto label_152
+_t356_3 = #0
+_t357_3 = line_2 < _t356_3
+_t358_3 = #8
+_t359_3 = _t358_3 * COLUMN_CHAR_SIZE_0
+_t360_3 = line_2 >= _t359_3
+_t361_3 = _t357_3 || _t360_3
+if ( _t361_3 == #0 ) goto label_154
+_t362_4 = #1
+Return _t362_4
+goto label_155
+label_154:
+label_155:
+_t363_3 = ROW_CHAR_SIZE_0 * line_2
+_t364_3 = IO_DISPLAY_START_0 + _t363_3
+A_3 = _t364_3
+_t365_3 = #0
+c_3 = _t365_3
+_t366_4 = #0
+i_3 = _t366_4
+label_156:
+_t367_4 = #8
+_t368_4 = ROW_CHAR_SIZE_0 * _t367_4
+_t369_4 = i_3 < _t368_4
+if ( _t369_4 == #0 ) goto label_159
+goto label_157
+label_158:
+_t370_4 = i_3
+i_3 = i_3 + #1
+goto label_156
+label_157:
+FunctionCall mwrite
+param c_3
+_t371_4 = A_3 + i_3
+param _t371_4
+call label_7
+label_160:
+_t372_4 = ReturnVal
+goto label_158
+label_159:
+_t373_3 = #0
+Return _t373_3
+goto label_153
+label_152:
+label_153:
+_t374_2 = #1
+Return _t374_2
+
+label_161:
+_t375_2 = #0
+_t376_2 = SCREEN_LOCK_0 == _t375_2
+if ( _t376_2 == #0 ) goto label_162
+_t377_3 = ROW_CHAR_SIZE_0 * LINE_0
+_t378_3 = IO_DISPLAY_START_0 + _t377_3
+A_3 = _t378_3
+_t379_3 = #0
+c_3 = _t379_3
+_t380_4 = #0
+i_3 = _t380_4
+label_164:
+_t381_4 = #8
+_t382_4 = ROW_CHAR_SIZE_0 * _t381_4
+_t383_4 = i_3 < _t382_4
+if ( _t383_4 == #0 ) goto label_167
+goto label_165
+label_166:
+_t384_4 = i_3
+i_3 = i_3 + #1
+goto label_164
+label_165:
+FunctionCall mwrite
+param c_3
+_t385_4 = A_3 + i_3
+param _t385_4
+call label_7
+label_168:
+_t386_4 = ReturnVal
+goto label_166
+label_167:
+_t387_3 = #0
+Return _t387_3
+goto label_163
+label_162:
+label_163:
+_t388_2 = #1
+Return _t388_2
+
+label_169:
+_t389_2 = #0
+_t390_2 = SCREEN_LOCK_0 == _t389_2
+if ( _t390_2 == #0 ) goto label_170
+_t391_3 = #8
+_t392_3 = LINE_0 + _t391_3
+LINE_0 = _t392_3
+_t393_3 = #0
+COLUMN_0 = _t393_3
+_t394_3 = LINE_0 * ROW_CHAR_SIZE_0
+_t395_3 = IO_DISPLAY_START_0 + _t394_3
+_t396_3 = _t395_3 + COLUMN_0
+A_3 = _t396_3
+_t397_4 = #0
+i_3 = _t397_4
+label_172:
+_t398_4 = #128
+_t399_4 = i_3 < _t398_4
+if ( _t399_4 == #0 ) goto label_175
+goto label_173
+label_174:
+_t400_4 = i_3
+i_3 = i_3 + #1
+goto label_172
+label_173:
+_t401_5 = #0
+j_3 = _t401_5
+label_176:
+_t402_5 = #16
+_t403_5 = j_3 < _t402_5
+if ( _t403_5 == #0 ) goto label_179
+goto label_177
+label_178:
+_t404_5 = j_3
+j_3 = j_3 + #1
+goto label_176
+label_177:
+FunctionCall mwrite
+_t405_5 = i_3 * #4
+_t406_5 = font_2 + _t405_5
+_t407_5 = j_3 * #1
+_t408_5 = *_t406_5 + _t407_5
+param *_t408_5
+_t409_5 = i_3 * ROW_CHAR_SIZE_0
+_t410_5 = A_3 + _t409_5
+_t411_5 = _t410_5 + j_3
+param _t411_5
+call label_7
+label_180:
+_t412_5 = ReturnVal
+goto label_178
+label_179:
+goto label_174
+label_175:
+_t413_3 = #128
+_t414_3 = LINE_0 + _t413_3
+LINE_0 = _t414_3
+_t415_3 = #0
+COLUMN_0 = _t415_3
+_t416_3 = #8
+_t417_3 = _t416_3 * COLUMN_CHAR_SIZE_0
+_t418_3 = LINE_0 >= _t417_3
+if ( _t418_3 == #0 ) goto label_181
+_t419_4 = #0
+LINE_0 = _t419_4
+_t420_4 = #0
+COLUMN_0 = _t420_4
+goto label_182
+label_181:
+label_182:
+goto label_171
+label_170:
+label_171:
+_t421_2 = #1
+Return _t421_2
+
+label_183:
+_t422_2 = #0
+_t423_2 = SCREEN_LOCK_0 == _t422_2
+if ( _t423_2 == #0 ) goto label_184
+A_3 = IO_DISPLAY_START_0
+_t424_3 = #0
+c_3 = _t424_3
+_t425_4 = #0
+j_3 = _t425_4
+label_186:
+_t426_4 = #8
+_t427_4 = j_3 < _t426_4
+if ( _t427_4 == #0 ) goto label_189
+goto label_187
+label_188:
+_t428_4 = j_3
+j_3 = j_3 + #1
+goto label_186
+label_187:
+_t429_5 = #0
+addr_3 = _t429_5
+label_190:
+_t430_5 = IO_DISPLAY_SIZE_0 - ROW_CHAR_SIZE_0
+_t431_5 = addr_3 < _t430_5
+if ( _t431_5 == #0 ) goto label_193
+goto label_191
+label_192:
+_t432_5 = addr_3
+addr_3 = addr_3 + #1
+goto label_190
+label_191:
+FunctionCall mread_char
+_t433_5 = A_3 + addr_3
+_t434_5 = _t433_5 + ROW_CHAR_SIZE_0
+param _t434_5
+call label_6
+label_194:
+_t435_5 = ReturnVal
+temp_5 = _t435_5
+_t436_5 = #0
+temp2_5 = _t436_5
+_t437_6 = #0
+i_3 = _t437_6
+label_195:
+_t438_6 = #8
+_t439_6 = i_3 < _t438_6
+if ( _t439_6 == #0 ) goto label_198
+goto label_196
+label_197:
+_t440_6 = i_3
+i_3 = i_3 + #1
+goto label_195
+label_196:
+_t441_6 = temp_5 >> i_3
+_t442_6 = #1
+_t443_6 = _t441_6 & _t442_6
+if ( _t443_6 == #0 ) goto label_199
+_t444_7 = #1
+_t445_7 = #7
+_t446_7 = _t445_7 - i_3
+_t447_7 = _t444_7 << _t446_7
+_t448_7 = temp2_5 | _t447_7
+temp2_5 = _t448_7
+goto label_200
+label_199:
+label_200:
+goto label_197
+label_198:
+temp3_5 = temp2_5
+FunctionCall mwrite
+param temp3_5
+_t449_5 = A_3 + addr_3
+param _t449_5
+call label_7
+label_201:
+_t450_5 = ReturnVal
+goto label_192
+label_193:
+goto label_188
+label_189:
+_t451_4 = #0
+i_3 = _t451_4
+label_202:
+_t452_4 = #8
+_t453_4 = ROW_CHAR_SIZE_0 * _t452_4
+_t454_4 = i_3 < _t453_4
+if ( _t454_4 == #0 ) goto label_205
+goto label_203
+label_204:
+_t455_4 = i_3
+i_3 = i_3 + #1
+goto label_202
+label_203:
+FunctionCall mwrite
+param c_3
+_t456_4 = A_3 + i_3
+param _t456_4
+call label_7
+label_206:
+_t457_4 = ReturnVal
+goto label_204
+label_205:
+_t458_3 = #8
+_t459_3 = LINE_0 - _t458_3
+LINE_0 = _t459_3
+_t460_3 = #0
+_t461_3 = LINE_0 < _t460_3
+if ( _t461_3 == #0 ) goto label_207
+_t462_4 = #0
+LINE_0 = _t462_4
+goto label_208
+label_207:
+label_208:
+_t463_3 = #0
+Return _t463_3
+goto label_185
+label_184:
+label_185:
+_t464_2 = #1
+Return _t464_2
+
+label_209:
+_t465_2 = #0
+_t466_2 = SCREEN_LOCK_0 == _t465_2
+if ( _t466_2 == #0 ) goto label_210
+A_3 = IO_DISPLAY_START_0
+_t467_3 = #0
+c_3 = _t467_3
+_t468_4 = #0
+j_3 = _t468_4
+label_212:
+_t469_4 = #8
+_t470_4 = j_3 < _t469_4
+if ( _t470_4 == #0 ) goto label_215
+goto label_213
+label_214:
+_t471_4 = j_3
+j_3 = j_3 + #1
+goto label_212
+label_213:
+_t472_5 = IO_DISPLAY_SIZE_0 - ROW_CHAR_SIZE_0
+addr_3 = _t472_5
+label_216:
+_t473_5 = #0
+_t474_5 = addr_3 >= _t473_5
+if ( _t474_5 == #0 ) goto label_219
+goto label_217
+label_218:
+_t475_5 = addr_3
+addr_3 = addr_3 - #1
+goto label_216
+label_217:
+FunctionCall mread_char
+_t476_5 = A_3 + addr_3
+param _t476_5
+call label_6
+label_220:
+_t477_5 = ReturnVal
+temp_5 = _t477_5
+_t478_5 = #0
+temp2_5 = _t478_5
+_t479_6 = #0
+i_3 = _t479_6
+label_221:
+_t480_6 = #8
+_t481_6 = i_3 < _t480_6
+if ( _t481_6 == #0 ) goto label_224
+goto label_222
+label_223:
+_t482_6 = i_3
+i_3 = i_3 + #1
+goto label_221
+label_222:
+_t483_6 = temp_5 >> i_3
+_t484_6 = #1
+_t485_6 = _t483_6 & _t484_6
+if ( _t485_6 == #0 ) goto label_225
+_t486_7 = #1
+_t487_7 = #7
+_t488_7 = _t487_7 - i_3
+_t489_7 = _t486_7 << _t488_7
+_t490_7 = temp2_5 | _t489_7
+temp2_5 = _t490_7
+goto label_226
+label_225:
+label_226:
+goto label_223
+label_224:
+temp3_5 = temp2_5
+FunctionCall mwrite
+param temp3_5
+_t491_5 = A_3 + addr_3
+_t492_5 = _t491_5 + ROW_CHAR_SIZE_0
+param _t492_5
+call label_7
+label_227:
+_t493_5 = ReturnVal
+goto label_218
+label_219:
+goto label_214
+label_215:
+_t494_4 = #0
+i_3 = _t494_4
+label_228:
+_t495_4 = #8
+_t496_4 = ROW_CHAR_SIZE_0 * _t495_4
+_t497_4 = i_3 < _t496_4
+if ( _t497_4 == #0 ) goto label_231
+goto label_229
+label_230:
+_t498_4 = i_3
+i_3 = i_3 + #1
+goto label_228
+label_229:
+FunctionCall mwrite
+param c_3
+_t499_4 = A_3 + i_3
+param _t499_4
+call label_7
+label_232:
+_t500_4 = ReturnVal
+goto label_230
+label_231:
+_t501_3 = #8
+_t502_3 = LINE_0 + _t501_3
+LINE_0 = _t502_3
+_t503_3 = #8
+_t504_3 = _t503_3 * COLUMN_CHAR_SIZE_0
+_t505_3 = LINE_0 >= _t504_3
+if ( _t505_3 == #0 ) goto label_233
+_t506_4 = #8
+_t507_4 = _t506_4 * COLUMN_CHAR_SIZE_0
+_t508_4 = #1
+_t509_4 = _t507_4 - _t508_4
+LINE_0 = _t509_4
+goto label_234
+label_233:
+label_234:
+_t510_3 = #0
+Return _t510_3
+goto label_211
+label_210:
+label_211:
+_t511_2 = #1
+Return _t511_2
+
+label_235:
+_t512_2 = #0
+_t513_2 = SCREEN_LOCK_0 == _t512_2
+if ( _t513_2 == #0 ) goto label_236
+_t514_3 = IO_DISPLAY_START_0 + IO_DISPLAY_SIZE_0
+_t515_3 = #1
+_t516_3 = _t514_3 - _t515_3
+A_3 = _t516_3
+_t517_3 = #0
+c_3 = _t517_3
+i_3 = A_3
+label_238:
+_t518_4 = i_3 >= IO_DISPLAY_START_0
+if ( _t518_4 == #0 ) goto label_241
+goto label_239
+label_240:
+_t519_4 = i_3
+i_3 = i_3 - #1
+goto label_238
+label_239:
+FunctionCall mwrite
+param c_3
+param i_3
+call label_7
+label_242:
+_t520_4 = ReturnVal
+goto label_240
+label_241:
+_t521_3 = #0
+LINE_0 = _t521_3
+_t522_3 = #0
+COLUMN_0 = _t522_3
+goto label_237
+label_236:
+label_237:
+_t523_2 = #0
+Return _t523_2
+label_257:
+_t540_2 = #0
+_t541_2 = SCREEN_LOCK_0 == _t540_2
+if ( _t541_2 == #0 ) goto label_258
+_t542_3 = IO_DISPLAY_START_0 + IO_DISPLAY_SIZE_0
+_t543_3 = #1
+_t544_3 = _t542_3 - _t543_3
+A_3 = _t544_3
+_t545_3 = #0
+c_3 = _t545_3
+i_3 = A_3
+label_260:
+_t546_4 = i_3 >= IO_DISPLAY_START_0
+if ( _t546_4 == #0 ) goto label_263
+goto label_261
+label_262:
+_t547_4 = i_3
+i_3 = i_3 - #1
+goto label_260
+label_261:
+FunctionCall mwrite
+param c_3
+param i_3
+call label_7
+label_264:
+_t548_4 = ReturnVal
+goto label_262
+label_263:
+_t549_3 = #0
+LINE_0 = _t549_3
+_t550_3 = #0
+COLUMN_0 = _t550_3
+goto label_259
+label_258:
+label_259:
+_t551_2 = #1
+Return _t551_2
+
+label_243:
+A_2 = IO_DISPLAY_START_0
+D_2 = TEMP_START_0
+_t524_3 = #0
+i_2 = _t524_3
+label_244:
+_t525_3 = i_2 < IO_DISPLAY_SIZE_0
+if ( _t525_3 == #0 ) goto label_247
+goto label_245
+label_246:
+_t526_3 = i_2
+i_2 = i_2 + #1
+goto label_244
+label_245:
+FunctionCall mread_char
+_t527_3 = A_2 + i_2
+param _t527_3
+call label_6
+label_248:
+_t528_3 = ReturnVal
+temp_3 = _t528_3
+_t529_3 = D_2 + i_2
+temp1_3 = _t529_3
+temp3_3 = temp_3
+FunctionCall mwrite
+param temp1_3
+param temp3_3
+call label_7
+label_249:
+_t530_3 = ReturnVal
+goto label_246
+label_247:
+_t531_2 = #1
+Return _t531_2
+
+label_250:
+A_2 = IO_DISPLAY_START_0
+D_2 = TEMP_START_0
+_t532_3 = #0
+i_2 = _t532_3
+label_251:
+_t533_3 = i_2 < IO_DISPLAY_SIZE_0
+if ( _t533_3 == #0 ) goto label_254
+goto label_252
+label_253:
+_t534_3 = i_2
+i_2 = i_2 + #1
+goto label_251
+label_252:
+FunctionCall mread_char
+_t535_3 = D_2 + i_2
+param _t535_3
+call label_6
+label_255:
+_t536_3 = ReturnVal
+temp_3 = _t536_3
+_t537_3 = A_2 + i_2
+temp1_3 = _t537_3
+temp3_3 = temp_3
+FunctionCall mwrite
+param temp1_3
+param temp3_3
+call label_7
+label_256:
+_t538_3 = ReturnVal
+goto label_253
+label_254:
+_t539_2 = #1
+Return _t539_2
+
+label_265:
+_t552_2 = #0
+_t553_2 = SCREEN_LOCK_0 == _t552_2
+if ( _t553_2 == #0 ) goto label_266
+FunctionCall save_screen
+call label_243
+label_268:
+_t554_3 = ReturnVal
+FunctionCall clear_screen
+call label_257
+label_269:
+_t555_3 = ReturnVal
+_t556_3 = #1
+focus_mode_0 = _t556_3
+_t557_3 = #0
+focus_mode_col_0 = _t557_3
+_t558_3 = #0
+command_mode_3 = _t558_3
+_t559_3 = #1
+visual_mode_3 = _t559_3
+_t560_3 = #0
+edit_mode_3 = _t560_3
+label_270:
+if ( true == #0 ) goto label_273
+goto label_271
+label_272:
+goto label_270
+label_271:
+FunctionCall keyboard_get_input
+call label_19
+label_274:
+_t561_4 = ReturnVal
+input_4 = _t561_4
+FunctionCall manipulate_input
+param input_4
+call label_36
+label_275:
+_t562_4 = ReturnVal
+input_4 = _t562_4
+_t563_4 = #0
+_t564_4 = command_mode_3 == _t563_4
+if ( _t564_4 == #0 ) goto label_276
+FunctionCall isEscape
+param input_4
+call label_37
+label_278:
+_t565_5 = ReturnVal
+if ( _t565_5 == #0 ) goto label_279
+_t566_6 = #1
+command_mode_3 = _t566_6
+goto label_280
+label_279:
+label_280:
+_t567_5 = #1
+_t568_5 = visual_mode_3 == _t567_5
+if ( _t568_5 == #0 ) goto label_281
+_t569_6 = #'i'
+_t570_6 = input_4 == _t569_6
+if ( _t570_6 == #0 ) goto label_283
+_t571_7 = #0
+visual_mode_3 = _t571_7
+_t572_7 = #1
+edit_mode_3 = _t572_7
+goto label_284
+label_283:
+label_284:
+goto label_282
+label_281:
+_t573_5 = #1
+_t574_5 = edit_mode_3 == _t573_5
+if ( _t574_5 == #0 ) goto label_285
+_t575_6 = #4
+content_to_write_0_6 = _t575_6
+memory content_to_write_6 _t575_6 #4
+FunctionCall convert_keyinput_to_string
+param input_4
+param content_to_write_6
+call label_31
+label_286:
+_t576_6 = ReturnVal
+_t577_7 = #0
+i_6 = _t577_7
+label_287:
+_t578_7 = #4
+_t579_7 = i_6 < _t578_7
+if ( _t579_7 == #0 ) goto label_290
+goto label_288
+label_289:
+_t580_7 = i_6
+i_6 = i_6 + #1
+goto label_287
+label_288:
+_t581_7 = i_6 * #1
+_t582_7 = content_to_write_6 + _t581_7
+_t583_7 = #0
+_t584_7 = *_t582_7 != _t583_7
+if ( _t584_7 == #0 ) goto label_291
+FunctionCall write_char
+_t585_8 = i_6 * #1
+_t586_8 = content_to_write_6 + _t585_8
+param *_t586_8
+call label_38
+label_293:
+_t587_8 = ReturnVal
+goto label_292
+label_291:
+label_292:
+goto label_289
+label_290:
+goto label_282
+label_285:
+label_282:
+goto label_277
+label_276:
+label_277:
+goto label_272
+label_273:
+goto label_267
+label_266:
+label_267:
+_t588_2 = #1
+Return _t588_2
+
+label_294:
+_t589_2 = seed_2 | rand_engine_0
+_t590_2 = #7621
+_t591_2 = _t589_2 * _t590_2
+_t592_2 = #1
+_t593_2 = _t591_2 + _t592_2
+_t594_2 = #32768
+_t595_2 = _t593_2 % _t594_2
+rand_engine_0 = _t595_2
+rand_lfsr_0 = rand_engine_0
+_t596_2 = #1
+Return _t596_2
+
+label_295:
+_t597_2 = #0
+_t598_2 = rand_lfsr_0 >> _t597_2
+_t599_2 = #2
+_t600_2 = rand_lfsr_0 >> _t599_2
+_t601_2 = _t598_2 ^ _t600_2
+_t602_2 = #3
+_t603_2 = rand_lfsr_0 >> _t602_2
+_t604_2 = _t601_2 ^ _t603_2
+_t605_2 = #5
+_t606_2 = rand_lfsr_0 >> _t605_2
+_t607_2 = _t604_2 ^ _t606_2
+_t608_2 = #1
+_t609_2 = _t607_2 & _t608_2
+rand_bit_0 = _t609_2
+_t610_2 = #1
+_t611_2 = rand_lfsr_0 >> _t610_2
+_t612_2 = #15
+_t613_2 = rand_bit_0 << _t612_2
+_t614_2 = _t611_2 | _t613_2
+rand_lfsr_0 = _t614_2
+_t615_2 = #100
+_t616_2 = rand_lfsr_0 % _t615_2
+Return _t616_2
+
+label_296:
+_t617_3 = #0
+i_2 = _t617_3
+label_297:
+_t618_3 = #3
+_t619_3 = i_2 < _t618_3
+if ( _t619_3 == #0 ) goto label_300
+goto label_298
+label_299:
+_t620_3 = i_2
+i_2 = i_2 + #1
+goto label_297
+label_298:
+_t621_4 = #0
+j_2 = _t621_4
+label_301:
+_t622_4 = #3
+_t623_4 = j_2 < _t622_4
+if ( _t623_4 == #0 ) goto label_304
+goto label_302
+label_303:
+_t624_4 = j_2
+j_2 = j_2 + #1
+goto label_301
+label_302:
+_t625_4 = i_2 * #4
+_t626_4 = board_0 + _t625_4
+_t627_4 = j_2 * #1
+_t628_4 = *_t626_4 + _t627_4
+_t629_4 = #32
+*_t628_4 = _t629_4
+goto label_303
+label_304:
+goto label_299
+label_300:
+_t630_2 = #0
+Return _t630_2
+
+label_305:
+_t631_2 = #32
+c1_2 = _t631_2
+_t632_2 = #124
+c4_2 = _t632_2
+_t633_2 = #10
+c5_2 = _t633_2
+FunctionCall write_string
+string _t634_2 "     1 2 3\n"
+param _t634_2
+_t635_2 = #11
+param _t635_2
+call label_93
+label_306:
+_t636_2 = ReturnVal
+_t637_3 = #0
+i_2 = _t637_3
+label_307:
+_t638_3 = #3
+_t639_3 = i_2 < _t638_3
+if ( _t639_3 == #0 ) goto label_310
+goto label_308
+label_309:
+_t640_3 = i_2
+i_2 = i_2 + #1
+goto label_307
+label_308:
+_t641_3 = #49
+_t642_3 = _t641_3 + i_2
+c3_2 = _t642_3
+FunctionCall write_char
+param c1_2
+call label_38
+label_311:
+_t643_3 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_312:
+_t644_3 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_313:
+_t645_3 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_314:
+_t646_3 = ReturnVal
+FunctionCall write_char
+param c3_2
+call label_38
+label_315:
+_t647_3 = ReturnVal
+_t648_4 = #0
+j_2 = _t648_4
+label_316:
+_t649_4 = #3
+_t650_4 = j_2 < _t649_4
+if ( _t650_4 == #0 ) goto label_319
+goto label_317
+label_318:
+_t651_4 = j_2
+j_2 = j_2 + #1
+goto label_316
+label_317:
+FunctionCall write_char
+_t652_4 = i_2 * #4
+_t653_4 = board_0 + _t652_4
+_t654_4 = j_2 * #1
+_t655_4 = *_t653_4 + _t654_4
+param *_t655_4
+call label_38
+label_320:
+_t656_4 = ReturnVal
+_t657_4 = #2
+_t658_4 = j_2 < _t657_4
+if ( _t658_4 == #0 ) goto label_321
+FunctionCall write_char
+param c4_2
+call label_38
+label_323:
+_t659_5 = ReturnVal
+goto label_322
+label_321:
+label_322:
+goto label_318
+label_319:
+FunctionCall write_char
+param c5_2
+call label_38
+label_324:
+_t660_3 = ReturnVal
+_t661_3 = #2
+_t662_3 = i_2 < _t661_3
+if ( _t662_3 == #0 ) goto label_325
+FunctionCall write_string
+string _t663_4 "     -----\n"
+param _t663_4
+_t664_4 = #11
+param _t664_4
+call label_93
+label_327:
+_t665_4 = ReturnVal
+goto label_326
+label_325:
+label_326:
+goto label_309
+label_310:
+FunctionCall write_char
+param c5_2
+call label_38
+label_328:
+_t666_2 = ReturnVal
+_t667_2 = #1
+Return _t667_2
+
+label_329:
+_t668_3 = #0
+i_2 = _t668_3
+label_330:
+_t669_3 = #3
+_t670_3 = i_2 < _t669_3
+if ( _t670_3 == #0 ) goto label_333
+goto label_331
+label_332:
+_t671_3 = i_2
+i_2 = i_2 + #1
+goto label_330
+label_331:
+_t672_4 = #0
+j_2 = _t672_4
+label_334:
+_t673_4 = #3
+_t674_4 = j_2 < _t673_4
+if ( _t674_4 == #0 ) goto label_337
+goto label_335
+label_336:
+_t675_4 = j_2
+j_2 = j_2 + #1
+goto label_334
+label_335:
+_t676_4 = i_2 * #4
+_t677_4 = board_0 + _t676_4
+_t678_4 = j_2 * #1
+_t679_4 = *_t677_4 + _t678_4
+_t680_4 = #32
+_t681_4 = *_t679_4 == _t680_4
+if ( _t681_4 == #0 ) goto label_338
+_t682_5 = #0
+Return _t682_5
+goto label_339
+label_338:
+label_339:
+goto label_336
+label_337:
+goto label_332
+label_333:
+_t683_2 = #1
+Return _t683_2
+
+label_340:
+_t684_3 = #0
+i_2 = _t684_3
+label_341:
+_t685_3 = #3
+_t686_3 = i_2 < _t685_3
+if ( _t686_3 == #0 ) goto label_344
+goto label_342
+label_343:
+_t687_3 = i_2
+i_2 = i_2 + #1
+goto label_341
+label_342:
+_t688_3 = i_2 * #4
+_t689_3 = board_0 + _t688_3
+_t690_3 = #0
+_t691_3 = _t690_3 * #1
+_t692_3 = *_t689_3 + _t691_3
+_t693_3 = *_t692_3 == player_2
+_t694_3 = i_2 * #4
+_t695_3 = board_0 + _t694_3
+_t696_3 = #1
+_t697_3 = _t696_3 * #1
+_t698_3 = *_t695_3 + _t697_3
+_t699_3 = *_t698_3 == player_2
+_t700_3 = _t693_3 && _t699_3
+_t701_3 = i_2 * #4
+_t702_3 = board_0 + _t701_3
+_t703_3 = #2
+_t704_3 = _t703_3 * #1
+_t705_3 = *_t702_3 + _t704_3
+_t706_3 = *_t705_3 == player_2
+_t707_3 = _t700_3 && _t706_3
+if ( _t707_3 == #0 ) goto label_345
+_t708_4 = #1
+Return _t708_4
+goto label_346
+label_345:
+label_346:
+_t709_3 = #0
+_t710_3 = _t709_3 * #4
+_t711_3 = board_0 + _t710_3
+_t712_3 = i_2 * #1
+_t713_3 = *_t711_3 + _t712_3
+_t714_3 = *_t713_3 == player_2
+_t715_3 = #1
+_t716_3 = _t715_3 * #4
+_t717_3 = board_0 + _t716_3
+_t718_3 = i_2 * #1
+_t719_3 = *_t717_3 + _t718_3
+_t720_3 = *_t719_3 == player_2
+_t721_3 = _t714_3 && _t720_3
+_t722_3 = #2
+_t723_3 = _t722_3 * #4
+_t724_3 = board_0 + _t723_3
+_t725_3 = i_2 * #1
+_t726_3 = *_t724_3 + _t725_3
+_t727_3 = *_t726_3 == player_2
+_t728_3 = _t721_3 && _t727_3
+if ( _t728_3 == #0 ) goto label_347
+_t729_4 = #1
+Return _t729_4
+goto label_348
+label_347:
+label_348:
+goto label_343
+label_344:
+_t730_2 = #0
+_t731_2 = _t730_2 * #4
+_t732_2 = board_0 + _t731_2
+_t733_2 = #0
+_t734_2 = _t733_2 * #1
+_t735_2 = *_t732_2 + _t734_2
+_t736_2 = *_t735_2 == player_2
+_t737_2 = #1
+_t738_2 = _t737_2 * #4
+_t739_2 = board_0 + _t738_2
+_t740_2 = #1
+_t741_2 = _t740_2 * #1
+_t742_2 = *_t739_2 + _t741_2
+_t743_2 = *_t742_2 == player_2
+_t744_2 = _t736_2 && _t743_2
+_t745_2 = #2
+_t746_2 = _t745_2 * #4
+_t747_2 = board_0 + _t746_2
+_t748_2 = #2
+_t749_2 = _t748_2 * #1
+_t750_2 = *_t747_2 + _t749_2
+_t751_2 = *_t750_2 == player_2
+_t752_2 = _t744_2 && _t751_2
+if ( _t752_2 == #0 ) goto label_349
+_t753_3 = #1
+Return _t753_3
+goto label_350
+label_349:
+label_350:
+_t754_2 = #0
+_t755_2 = _t754_2 * #4
+_t756_2 = board_0 + _t755_2
+_t757_2 = #2
+_t758_2 = _t757_2 * #1
+_t759_2 = *_t756_2 + _t758_2
+_t760_2 = *_t759_2 == player_2
+_t761_2 = #1
+_t762_2 = _t761_2 * #4
+_t763_2 = board_0 + _t762_2
+_t764_2 = #1
+_t765_2 = _t764_2 * #1
+_t766_2 = *_t763_2 + _t765_2
+_t767_2 = *_t766_2 == player_2
+_t768_2 = _t760_2 && _t767_2
+_t769_2 = #2
+_t770_2 = _t769_2 * #4
+_t771_2 = board_0 + _t770_2
+_t772_2 = #0
+_t773_2 = _t772_2 * #1
+_t774_2 = *_t771_2 + _t773_2
+_t775_2 = *_t774_2 == player_2
+_t776_2 = _t768_2 && _t775_2
+if ( _t776_2 == #0 ) goto label_351
+_t777_3 = #1
+Return _t777_3
+goto label_352
+label_351:
+label_352:
+_t778_2 = #0
+Return _t778_2
+
+label_353:
+_t779_2 = #0
+_t780_2 = row_2 < _t779_2
+_t781_2 = #3
+_t782_2 = row_2 >= _t781_2
+_t783_2 = _t780_2 || _t782_2
+_t784_2 = #0
+_t785_2 = col_2 < _t784_2
+_t786_2 = _t783_2 || _t785_2
+_t787_2 = #3
+_t788_2 = col_2 >= _t787_2
+_t789_2 = _t786_2 || _t788_2
+_t790_2 = row_2 * #4
+_t791_2 = board_0 + _t790_2
+_t792_2 = col_2 * #1
+_t793_2 = *_t791_2 + _t792_2
+_t794_2 = #32
+_t795_2 = *_t793_2 != _t794_2
+_t796_2 = _t789_2 || _t795_2
+if ( _t796_2 == #0 ) goto label_354
+_t797_3 = #0
+Return _t797_3
+goto label_355
+label_354:
+label_355:
+_t798_2 = row_2 * #4
+_t799_2 = board_0 + _t798_2
+_t800_2 = col_2 * #1
+_t801_2 = *_t799_2 + _t800_2
+*_t801_2 = player_2
+_t802_2 = #1
+Return _t802_2
+
+label_356:
+FunctionCall rand
+call label_295
+label_357:
+_t803_2 = ReturnVal
+_t804_2 = #3
+_t805_2 = _t803_2 % _t804_2
+row_2 = _t805_2
+FunctionCall rand
+call label_295
+label_358:
+_t806_2 = ReturnVal
+_t807_2 = #3
+_t808_2 = _t806_2 % _t807_2
+col_2 = _t808_2
+label_359:
+FunctionCall makeMove
+param row_2
+param col_2
+param computer_0
+call label_353
+label_360:
+_t809_3 = ReturnVal
+_t810_3 = #0
+_t811_3 = _t809_3 == _t810_3
+if ( _t811_3 == #0 ) goto label_363
+goto label_361
+label_362:
+goto label_359
+label_361:
+FunctionCall rand
+call label_295
+label_364:
+_t812_3 = ReturnVal
+_t813_3 = #3
+_t814_3 = _t812_3 % _t813_3
+row_2 = _t814_3
+FunctionCall rand
+call label_295
+label_365:
+_t815_3 = ReturnVal
+_t816_3 = #3
+_t817_3 = _t815_3 % _t816_3
+col_2 = _t817_3
+goto label_362
+label_363:
+_t818_2 = #1
+Return _t818_2
+
+label_366:
+FunctionCall isGameOver
+param computer_0
+call label_340
+label_367:
+_t819_2 = ReturnVal
+_t820_2 = #1
+_t821_2 = _t819_2 == _t820_2
+if ( _t821_2 == #0 ) goto label_368
+_t822_3 = #1
+result_2 = _t822_3
+goto label_369
+label_368:
+FunctionCall isGameOver
+param player_0
+call label_340
+label_370:
+_t823_2 = ReturnVal
+_t824_2 = #1
+_t825_2 = _t823_2 == _t824_2
+if ( _t825_2 == #0 ) goto label_371
+_t826_3 = #1
+_t827_3 = minus _t826_3
+result_2 = _t827_3
+goto label_369
+label_371:
+FunctionCall isBoardFull
+call label_329
+label_372:
+_t828_2 = ReturnVal
+_t829_2 = #1
+_t830_2 = _t828_2 == _t829_2
+if ( _t830_2 == #0 ) goto label_373
+_t831_3 = #0
+result_2 = _t831_3
+goto label_369
+label_373:
+_t832_3 = #2
+result_2 = _t832_3
+label_369:
+_t833_2 = #2
+_t834_2 = result_2 != _t833_2
+if ( _t834_2 == #0 ) goto label_374
+Return result_2
+goto label_375
+label_374:
+label_375:
+if ( isMaximizing_2 == #0 ) goto label_376
+_t835_3 = #1000
+_t836_3 = minus _t835_3
+bestScore_2 = _t836_3
+currentPlayer_2 = computer_0
+goto label_377
+label_376:
+_t837_3 = #1000
+bestScore_2 = _t837_3
+currentPlayer_2 = player_0
+label_377:
+_t838_3 = #0
+i_2 = _t838_3
+label_378:
+_t839_3 = #3
+_t840_3 = i_2 < _t839_3
+if ( _t840_3 == #0 ) goto label_381
+goto label_379
+label_380:
+_t841_3 = i_2
+i_2 = i_2 + #1
+goto label_378
+label_379:
+_t842_4 = #0
+j_2 = _t842_4
+label_382:
+_t843_4 = #3
+_t844_4 = j_2 < _t843_4
+if ( _t844_4 == #0 ) goto label_385
+goto label_383
+label_384:
+_t845_4 = j_2
+j_2 = j_2 + #1
+goto label_382
+label_383:
+_t846_4 = i_2 * #4
+_t847_4 = board_2 + _t846_4
+_t848_4 = j_2 * #1
+_t849_4 = *_t847_4 + _t848_4
+_t850_4 = #32
+_t851_4 = *_t849_4 == _t850_4
+if ( _t851_4 == #0 ) goto label_386
+_t852_5 = i_2 * #4
+_t853_5 = board_2 + _t852_5
+_t854_5 = j_2 * #1
+_t855_5 = *_t853_5 + _t854_5
+*_t855_5 = currentPlayer_2
+FunctionCall minimax
+param board_2
+_t856_5 = #1
+_t857_5 = depth_2 + _t856_5
+param _t857_5
+_t858_5 = #1
+_t859_5 = _t858_5 - isMaximizing_2
+param _t859_5
+call label_366
+label_388:
+_t860_5 = ReturnVal
+score_5 = _t860_5
+_t861_5 = i_2 * #4
+_t862_5 = board_2 + _t861_5
+_t863_5 = j_2 * #1
+_t864_5 = *_t862_5 + _t863_5
+_t865_5 = #32
+*_t864_5 = _t865_5
+_t866_5 = #1
+_t867_5 = isMaximizing_2 == _t866_5
+if ( _t867_5 == #0 ) goto label_389
+_t868_6 = score_5 > bestScore_2
+if ( _t868_6 == #0 ) goto label_391
+bestScore_2 = score_5
+goto label_392
+label_391:
+label_392:
+goto label_390
+label_389:
+_t869_6 = score_5 < bestScore_2
+if ( _t869_6 == #0 ) goto label_393
+bestScore_2 = score_5
+goto label_394
+label_393:
+label_394:
+label_390:
+goto label_387
+label_386:
+label_387:
+goto label_384
+label_385:
+goto label_380
+label_381:
+Return bestScore_2
+
+label_395:
+_t870_2 = #2
+bestMove_0_2 = _t870_2
+memory bestMove_2 _t870_2 #4
+_t871_2 = #1000
+_t872_2 = minus _t871_2
+bestScore_2 = _t872_2
+_t873_2 = #0
+_t874_2 = _t873_2 * #4
+_t875_2 = bestMove_2 + _t874_2
+_t876_2 = #1
+_t877_2 = minus _t876_2
+*_t875_2 = _t877_2
+_t878_2 = #1
+_t879_2 = _t878_2 * #4
+_t880_2 = bestMove_2 + _t879_2
+_t881_2 = #1
+_t882_2 = minus _t881_2
+*_t880_2 = _t882_2
+_t883_3 = #0
+i_2 = _t883_3
+label_396:
+_t884_3 = #3
+_t885_3 = i_2 < _t884_3
+if ( _t885_3 == #0 ) goto label_399
+goto label_397
+label_398:
+_t886_3 = i_2
+i_2 = i_2 + #1
+goto label_396
+label_397:
+_t887_4 = #0
+j_2 = _t887_4
+label_400:
+_t888_4 = #3
+_t889_4 = j_2 < _t888_4
+if ( _t889_4 == #0 ) goto label_403
+goto label_401
+label_402:
+_t890_4 = j_2
+j_2 = j_2 + #1
+goto label_400
+label_401:
+_t891_4 = i_2 * #4
+_t892_4 = board_0 + _t891_4
+_t893_4 = j_2 * #1
+_t894_4 = *_t892_4 + _t893_4
+_t895_4 = #32
+_t896_4 = *_t894_4 == _t895_4
+if ( _t896_4 == #0 ) goto label_404
+_t897_5 = i_2 * #4
+_t898_5 = board_0 + _t897_5
+_t899_5 = j_2 * #1
+_t900_5 = *_t898_5 + _t899_5
+*_t900_5 = computer_0
+FunctionCall minimax
+param board_0
+_t901_5 = #0
+param _t901_5
+_t902_5 = #0
+param _t902_5
+call label_366
+label_406:
+_t903_5 = ReturnVal
+score_5 = _t903_5
+_t904_5 = i_2 * #4
+_t905_5 = board_0 + _t904_5
+_t906_5 = j_2 * #1
+_t907_5 = *_t905_5 + _t906_5
+_t908_5 = #32
+*_t907_5 = _t908_5
+_t909_5 = score_5 > bestScore_2
+if ( _t909_5 == #0 ) goto label_407
+bestScore_2 = score_5
+_t910_6 = #0
+_t911_6 = _t910_6 * #4
+_t912_6 = bestMove_2 + _t911_6
+*_t912_6 = i_2
+_t913_6 = #1
+_t914_6 = _t913_6 * #4
+_t915_6 = bestMove_2 + _t914_6
+*_t915_6 = j_2
+goto label_408
+label_407:
+label_408:
+goto label_405
+label_404:
+label_405:
+goto label_402
+label_403:
+goto label_398
+label_399:
+FunctionCall makeMove
+_t916_2 = #0
+_t917_2 = _t916_2 * #4
+_t918_2 = bestMove_2 + _t917_2
+param *_t918_2
+_t919_2 = #1
+_t920_2 = _t919_2 * #4
+_t921_2 = bestMove_2 + _t920_2
+param *_t921_2
+param computer_0
+call label_353
+label_409:
+_t922_2 = ReturnVal
+_t923_2 = #1
+Return _t923_2
+
+label_410:
+_t924_3 = #0
+i_2 = _t924_3
+label_411:
+_t925_3 = #3
+_t926_3 = i_2 < _t925_3
+if ( _t926_3 == #0 ) goto label_414
+goto label_412
+label_413:
+_t927_3 = i_2
+i_2 = i_2 + #1
+goto label_411
+label_412:
+_t928_4 = #0
+j_2 = _t928_4
+label_415:
+_t929_4 = #3
+_t930_4 = j_2 < _t929_4
+if ( _t930_4 == #0 ) goto label_418
+goto label_416
+label_417:
+_t931_4 = j_2
+j_2 = j_2 + #1
+goto label_415
+label_416:
+_t932_4 = i_2 * #4
+_t933_4 = board_0 + _t932_4
+_t934_4 = j_2 * #1
+_t935_4 = *_t933_4 + _t934_4
+_t936_4 = #32
+_t937_4 = *_t935_4 == _t936_4
+if ( _t937_4 == #0 ) goto label_419
+_t938_5 = i_2 * #4
+_t939_5 = board_0 + _t938_5
+_t940_5 = j_2 * #1
+_t941_5 = *_t939_5 + _t940_5
+*_t941_5 = computer_0
+FunctionCall isGameOver
+param computer_0
+call label_340
+label_421:
+_t942_5 = ReturnVal
+_t943_5 = #1
+_t944_5 = _t942_5 == _t943_5
+if ( _t944_5 == #0 ) goto label_422
+_t945_6 = #1
+Return _t945_6
+goto label_423
+label_422:
+label_423:
+_t946_5 = i_2 * #4
+_t947_5 = board_0 + _t946_5
+_t948_5 = j_2 * #1
+_t949_5 = *_t947_5 + _t948_5
+_t950_5 = #32
+*_t949_5 = _t950_5
+goto label_420
+label_419:
+label_420:
+goto label_417
+label_418:
+goto label_413
+label_414:
+_t951_2 = #1
+_t952_2 = _t951_2 * #4
+_t953_2 = board_0 + _t952_2
+_t954_2 = #1
+_t955_2 = _t954_2 * #1
+_t956_2 = *_t953_2 + _t955_2
+_t957_2 = #32
+_t958_2 = *_t956_2 == _t957_2
+if ( _t958_2 == #0 ) goto label_424
+_t959_3 = #1
+_t960_3 = _t959_3 * #4
+_t961_3 = board_0 + _t960_3
+_t962_3 = #1
+_t963_3 = _t962_3 * #1
+_t964_3 = *_t961_3 + _t963_3
+*_t964_3 = computer_0
+_t965_3 = #0
+Return _t965_3
+goto label_425
+label_424:
+label_425:
+_t966_2 = #4
+_t967_2 = #2
+corners_1_2 = _t967_2
+corners_0_2 = _t966_2
+memory corners_2 _t966_2 #4
+_t968_2 = #0
+_t969_2 = _t968_2 * #4
+_t970_2 = corners_2 + _t969_2
+_t971_2 = #0
+_t972_2 = _t971_2 * #4
+_t973_2 = *_t970_2 + _t972_2
+_t974_2 = #0
+*_t973_2 = _t974_2
+_t975_2 = #0
+_t976_2 = _t975_2 * #4
+_t977_2 = corners_2 + _t976_2
+_t978_2 = #1
+_t979_2 = _t978_2 * #4
+_t980_2 = *_t977_2 + _t979_2
+_t981_2 = #0
+*_t980_2 = _t981_2
+_t982_2 = #1
+_t983_2 = _t982_2 * #4
+_t984_2 = corners_2 + _t983_2
+_t985_2 = #0
+_t986_2 = _t985_2 * #4
+_t987_2 = *_t984_2 + _t986_2
+_t988_2 = #0
+*_t987_2 = _t988_2
+_t989_2 = #1
+_t990_2 = _t989_2 * #4
+_t991_2 = corners_2 + _t990_2
+_t992_2 = #1
+_t993_2 = _t992_2 * #4
+_t994_2 = *_t991_2 + _t993_2
+_t995_2 = #2
+*_t994_2 = _t995_2
+_t996_2 = #2
+_t997_2 = _t996_2 * #4
+_t998_2 = corners_2 + _t997_2
+_t999_2 = #0
+_t1000_2 = _t999_2 * #4
+_t1001_2 = *_t998_2 + _t1000_2
+_t1002_2 = #2
+*_t1001_2 = _t1002_2
+_t1003_2 = #2
+_t1004_2 = _t1003_2 * #4
+_t1005_2 = corners_2 + _t1004_2
+_t1006_2 = #1
+_t1007_2 = _t1006_2 * #4
+_t1008_2 = *_t1005_2 + _t1007_2
+_t1009_2 = #0
+*_t1008_2 = _t1009_2
+_t1010_2 = #3
+_t1011_2 = _t1010_2 * #4
+_t1012_2 = corners_2 + _t1011_2
+_t1013_2 = #0
+_t1014_2 = _t1013_2 * #4
+_t1015_2 = *_t1012_2 + _t1014_2
+_t1016_2 = #2
+*_t1015_2 = _t1016_2
+_t1017_2 = #3
+_t1018_2 = _t1017_2 * #4
+_t1019_2 = corners_2 + _t1018_2
+_t1020_2 = #1
+_t1021_2 = _t1020_2 * #4
+_t1022_2 = *_t1019_2 + _t1021_2
+_t1023_2 = #2
+*_t1022_2 = _t1023_2
+_t1024_3 = #0
+i_2 = _t1024_3
+label_426:
+_t1025_3 = #4
+_t1026_3 = i_2 < _t1025_3
+if ( _t1026_3 == #0 ) goto label_429
+goto label_427
+label_428:
+_t1027_3 = i_2
+i_2 = i_2 + #1
+goto label_426
+label_427:
+_t1028_3 = i_2 * #4
+_t1029_3 = corners_2 + _t1028_3
+_t1030_3 = #0
+_t1031_3 = _t1030_3 * #4
+_t1032_3 = *_t1029_3 + _t1031_3
+row_3 = *_t1032_3
+_t1033_3 = i_2 * #4
+_t1034_3 = corners_2 + _t1033_3
+_t1035_3 = #1
+_t1036_3 = _t1035_3 * #4
+_t1037_3 = *_t1034_3 + _t1036_3
+col_3 = *_t1037_3
+_t1038_3 = row_3 * #4
+_t1039_3 = board_0 + _t1038_3
+_t1040_3 = col_3 * #1
+_t1041_3 = *_t1039_3 + _t1040_3
+_t1042_3 = #32
+_t1043_3 = *_t1041_3 == _t1042_3
+if ( _t1043_3 == #0 ) goto label_430
+_t1044_4 = row_3 * #4
+_t1045_4 = board_0 + _t1044_4
+_t1046_4 = col_3 * #1
+_t1047_4 = *_t1045_4 + _t1046_4
+*_t1047_4 = computer_0
+_t1048_4 = #0
+Return _t1048_4
+goto label_431
+label_430:
+label_431:
+goto label_428
+label_429:
+_t1049_2 = #4
+_t1050_2 = #2
+edges_1_2 = _t1050_2
+edges_0_2 = _t1049_2
+memory edges_2 _t1049_2 #4
+_t1051_2 = #0
+_t1052_2 = _t1051_2 * #4
+_t1053_2 = edges_2 + _t1052_2
+_t1054_2 = #0
+_t1055_2 = _t1054_2 * #4
+_t1056_2 = *_t1053_2 + _t1055_2
+_t1057_2 = #0
+*_t1056_2 = _t1057_2
+_t1058_2 = #0
+_t1059_2 = _t1058_2 * #4
+_t1060_2 = edges_2 + _t1059_2
+_t1061_2 = #1
+_t1062_2 = _t1061_2 * #4
+_t1063_2 = *_t1060_2 + _t1062_2
+_t1064_2 = #1
+*_t1063_2 = _t1064_2
+_t1065_2 = #1
+_t1066_2 = _t1065_2 * #4
+_t1067_2 = edges_2 + _t1066_2
+_t1068_2 = #0
+_t1069_2 = _t1068_2 * #4
+_t1070_2 = *_t1067_2 + _t1069_2
+_t1071_2 = #1
+*_t1070_2 = _t1071_2
+_t1072_2 = #1
+_t1073_2 = _t1072_2 * #4
+_t1074_2 = edges_2 + _t1073_2
+_t1075_2 = #1
+_t1076_2 = _t1075_2 * #4
+_t1077_2 = *_t1074_2 + _t1076_2
+_t1078_2 = #0
+*_t1077_2 = _t1078_2
+_t1079_2 = #2
+_t1080_2 = _t1079_2 * #4
+_t1081_2 = edges_2 + _t1080_2
+_t1082_2 = #0
+_t1083_2 = _t1082_2 * #4
+_t1084_2 = *_t1081_2 + _t1083_2
+_t1085_2 = #1
+*_t1084_2 = _t1085_2
+_t1086_2 = #2
+_t1087_2 = _t1086_2 * #4
+_t1088_2 = edges_2 + _t1087_2
+_t1089_2 = #1
+_t1090_2 = _t1089_2 * #4
+_t1091_2 = *_t1088_2 + _t1090_2
+_t1092_2 = #2
+*_t1091_2 = _t1092_2
+_t1093_2 = #3
+_t1094_2 = _t1093_2 * #4
+_t1095_2 = edges_2 + _t1094_2
+_t1096_2 = #0
+_t1097_2 = _t1096_2 * #4
+_t1098_2 = *_t1095_2 + _t1097_2
+_t1099_2 = #2
+*_t1098_2 = _t1099_2
+_t1100_2 = #3
+_t1101_2 = _t1100_2 * #4
+_t1102_2 = edges_2 + _t1101_2
+_t1103_2 = #1
+_t1104_2 = _t1103_2 * #4
+_t1105_2 = *_t1102_2 + _t1104_2
+_t1106_2 = #1
+*_t1105_2 = _t1106_2
+_t1107_3 = #0
+i_2 = _t1107_3
+label_432:
+_t1108_3 = #4
+_t1109_3 = i_2 < _t1108_3
+if ( _t1109_3 == #0 ) goto label_435
+goto label_433
+label_434:
+_t1110_3 = i_2
+i_2 = i_2 + #1
+goto label_432
+label_433:
+_t1111_3 = i_2 * #4
+_t1112_3 = edges_2 + _t1111_3
+_t1113_3 = #0
+_t1114_3 = _t1113_3 * #4
+_t1115_3 = *_t1112_3 + _t1114_3
+row_3 = *_t1115_3
+_t1116_3 = i_2 * #4
+_t1117_3 = edges_2 + _t1116_3
+_t1118_3 = #1
+_t1119_3 = _t1118_3 * #4
+_t1120_3 = *_t1117_3 + _t1119_3
+col_3 = *_t1120_3
+_t1121_3 = row_3 * #4
+_t1122_3 = board_0 + _t1121_3
+_t1123_3 = col_3 * #1
+_t1124_3 = *_t1122_3 + _t1123_3
+_t1125_3 = #32
+_t1126_3 = *_t1124_3 == _t1125_3
+if ( _t1126_3 == #0 ) goto label_436
+_t1127_4 = row_3 * #4
+_t1128_4 = board_0 + _t1127_4
+_t1129_4 = col_3 * #1
+_t1130_4 = *_t1128_4 + _t1129_4
+*_t1130_4 = computer_0
+_t1131_4 = #0
+Return _t1131_4
+goto label_437
+label_436:
+label_437:
+goto label_434
+label_435:
+_t1132_2 = #0
+Return _t1132_2
+
+label_438:
+FunctionCall set_seed
+_t1133_2 = #1
+param _t1133_2
+call label_294
+label_439:
+_t1134_2 = ReturnVal
+FunctionCall initializeBoard
+call label_296
+label_440:
+_t1135_2 = ReturnVal
+label_441:
+if ( true == #0 ) goto label_444
+goto label_442
+label_443:
+goto label_441
+label_442:
+FunctionCall clear_screen
+call label_257
+label_445:
+_t1136_3 = ReturnVal
+FunctionCall write_string
+string _t1137_3 "Welcome to Tic-Tac-Toe!\n\n"
+param _t1137_3
+_t1138_3 = #25
+param _t1138_3
+call label_93
+label_446:
+_t1139_3 = ReturnVal
+_t1140_3 = #0
+_t1141_3 = game_diff_2 == _t1140_3
+if ( _t1141_3 == #0 ) goto label_447
+FunctionCall write_string
+string _t1142_4 "Easy Mode\n\n"
+param _t1142_4
+_t1143_4 = #11
+param _t1143_4
+call label_93
+label_449:
+_t1144_4 = ReturnVal
+goto label_448
+label_447:
+_t1145_3 = #1
+_t1146_3 = game_diff_2 == _t1145_3
+if ( _t1146_3 == #0 ) goto label_450
+FunctionCall write_string
+string _t1147_4 "Medium Mode\n\n"
+param _t1147_4
+_t1148_4 = #13
+param _t1148_4
+call label_93
+label_451:
+_t1149_4 = ReturnVal
+goto label_448
+label_450:
+FunctionCall write_string
+string _t1150_4 "Hard Mode\n\n"
+param _t1150_4
+_t1151_4 = #11
+param _t1151_4
+call label_93
+label_452:
+_t1152_4 = ReturnVal
+label_448:
+FunctionCall printBoard
+call label_305
+label_453:
+_t1153_3 = ReturnVal
+FunctionCall write_string
+string _t1154_3 "Enter your move (row and column, e.g., 1 enter 2 enter): \n"
+param _t1154_3
+_t1155_3 = #58
+param _t1155_3
+call label_93
+label_454:
+_t1156_3 = ReturnVal
+FunctionCall keyboard_get_input
+call label_19
+label_455:
+_t1157_3 = ReturnVal
+row_3 = _t1157_3
+FunctionCall keyboard_get_input
+call label_19
+label_456:
+_t1158_3 = ReturnVal
+col_3 = _t1158_3
+_t1159_3 = #48
+_t1160_3 = row_3 - _t1159_3
+row_3 = _t1160_3
+_t1161_3 = #48
+_t1162_3 = col_3 - _t1161_3
+col_3 = _t1162_3
+_t1163_3 = row_3
+row_3 = row_3 - #1
+_t1164_3 = col_3
+col_3 = col_3 - #1
+FunctionCall makeMove
+param row_3
+param col_3
+param player_0
+call label_353
+label_457:
+_t1165_3 = ReturnVal
+_t1166_3 = #0
+_t1167_3 = _t1165_3 == _t1166_3
+if ( _t1167_3 == #0 ) goto label_458
+FunctionCall write_string
+string _t1168_4 "Invalid move! Try again.\n"
+param _t1168_4
+_t1169_4 = #25
+param _t1169_4
+call label_93
+label_460:
+_t1170_4 = ReturnVal
+goto label_443
+goto label_459
+label_458:
+label_459:
+FunctionCall isGameOver
+param player_0
+call label_340
+label_461:
+_t1171_3 = ReturnVal
+_t1172_3 = #1
+_t1173_3 = _t1171_3 == _t1172_3
+if ( _t1173_3 == #0 ) goto label_462
+FunctionCall printBoard
+call label_305
+label_464:
+_t1174_4 = ReturnVal
+FunctionCall write_string
+string _t1175_4 "Congratulations! You win!\n"
+param _t1175_4
+_t1176_4 = #26
+param _t1176_4
+call label_93
+label_465:
+_t1177_4 = ReturnVal
+goto label_444
+goto label_463
+label_462:
+label_463:
+FunctionCall isBoardFull
+call label_329
+label_466:
+_t1178_3 = ReturnVal
+_t1179_3 = #1
+_t1180_3 = _t1178_3 == _t1179_3
+if ( _t1180_3 == #0 ) goto label_467
+FunctionCall printBoard
+call label_305
+label_469:
+_t1181_4 = ReturnVal
+FunctionCall write_string
+string _t1182_4 "It's a draw!\n"
+param _t1182_4
+_t1183_4 = #13
+param _t1183_4
+call label_93
+label_470:
+_t1184_4 = ReturnVal
+goto label_444
+goto label_468
+label_467:
+label_468:
+_t1185_3 = #0
+_t1186_3 = game_diff_2 == _t1185_3
+if ( _t1186_3 == #0 ) goto label_471
+FunctionCall computerMove_easy
+call label_356
+label_473:
+_t1187_4 = ReturnVal
+goto label_472
+label_471:
+_t1188_3 = #1
+_t1189_3 = game_diff_2 == _t1188_3
+if ( _t1189_3 == #0 ) goto label_474
+FunctionCall computerMove_med
+call label_410
+label_475:
+_t1190_4 = ReturnVal
+goto label_472
+label_474:
+FunctionCall computerMove_hard
+call label_395
+label_476:
+_t1191_4 = ReturnVal
+label_472:
+FunctionCall isGameOver
+param computer_0
+call label_340
+label_477:
+_t1192_3 = ReturnVal
+_t1193_3 = #1
+_t1194_3 = _t1192_3 == _t1193_3
+if ( _t1194_3 == #0 ) goto label_478
+FunctionCall printBoard
+call label_305
+label_480:
+_t1195_4 = ReturnVal
+FunctionCall write_string
+string _t1196_4 "Computer wins! You lose.\n"
+param _t1196_4
+_t1197_4 = #25
+param _t1197_4
+call label_93
+label_481:
+_t1198_4 = ReturnVal
+goto label_444
+goto label_479
+label_478:
+label_479:
+FunctionCall isBoardFull
+call label_329
+label_482:
+_t1199_3 = ReturnVal
+_t1200_3 = #1
+_t1201_3 = _t1199_3 == _t1200_3
+if ( _t1201_3 == #0 ) goto label_483
+FunctionCall printBoard
+call label_305
+label_485:
+_t1202_4 = ReturnVal
+FunctionCall write_string
+string _t1203_4 "It's a draw!\n"
+param _t1203_4
+_t1204_4 = #13
+param _t1204_4
+call label_93
+label_486:
+_t1205_4 = ReturnVal
+goto label_444
+goto label_484
+label_483:
+label_484:
+goto label_443
+label_444:
+_t1206_2 = #0
+Return _t1206_2
+
+label_487:
+FunctionCall minit
+call label_8
+label_488:
+_t1207_2 = ReturnVal
+_t1208_2 = #1
+Return _t1208_2
+
+label_489:
+FunctionCall write_string
+string _t1209_2 "Inside display 1\n"
+param _t1209_2
+_t1210_2 = #17
+param _t1210_2
+call label_93
+label_490:
+_t1211_2 = ReturnVal
+FunctionCall write_face
+param font_map_0
+call label_169
+label_491:
+_t1212_2 = ReturnVal
+_t1213_2 = #1
+Return _t1213_2
+
+label_492:
+FunctionCall clear_screen
+call label_257
+label_493:
+_t1214_2 = ReturnVal
+_t1215_2 = #0
+ok_2 = _t1215_2
+FunctionCall write_string
+string _t1216_2 "Terminal Started\n"
+param _t1216_2
+_t1217_2 = #17
+param _t1217_2
+call label_93
+label_494:
+_t1218_2 = ReturnVal
+label_495:
+if ( true == #0 ) goto label_498
+goto label_496
+label_497:
+goto label_495
+label_496:
+FunctionCall keyboard_get_input
+call label_19
+label_499:
+_t1219_3 = ReturnVal
+input_3 = _t1219_3
+_t1220_3 = #1
+_t1221_3 = ok_2 == _t1220_3
+if ( _t1221_3 == #0 ) goto label_500
+FunctionCall clear_screen
+call label_257
+label_502:
+_t1222_4 = ReturnVal
+ok_2 = false
+goto label_501
+label_500:
+label_501:
+FunctionCall write_char
+param input_3
+call label_38
+label_503:
+_t1223_3 = ReturnVal
+_t1224_3 = #'d'
+_t1225_3 = input_3 == _t1224_3
+if ( _t1225_3 == #0 ) goto label_504
+FunctionCall clear_screen
+call label_257
+label_506:
+_t1226_4 = ReturnVal
+FunctionCall write_string
+string _t1227_4 "Sample display\n"
+param _t1227_4
+_t1228_4 = #15
+param _t1228_4
+call label_93
+label_507:
+_t1229_4 = ReturnVal
+FunctionCall display_1
+call label_489
+label_508:
+_t1230_4 = ReturnVal
+FunctionCall write_string
+string _t1231_4 "Terminal closed"
+param _t1231_4
+_t1232_4 = #15
+param _t1232_4
+call label_93
+label_509:
+_t1233_4 = ReturnVal
+_t1234_4 = #1
+ok_2 = _t1234_4
+goto label_505
+label_504:
+_t1235_3 = #'e'
+_t1236_3 = input_3 == _t1235_3
+if ( _t1236_3 == #0 ) goto label_510
+FunctionCall clear_screen
+call label_257
+label_511:
+_t1237_4 = ReturnVal
+FunctionCall tic_tac_toe
+_t1238_4 = #0
+param _t1238_4
+call label_438
+label_512:
+_t1239_4 = ReturnVal
+_t1240_4 = #1
+ok_2 = _t1240_4
+goto label_505
+label_510:
+_t1241_3 = #'m'
+_t1242_3 = input_3 == _t1241_3
+if ( _t1242_3 == #0 ) goto label_513
+FunctionCall clear_screen
+call label_257
+label_514:
+_t1243_4 = ReturnVal
+FunctionCall tic_tac_toe
+_t1244_4 = #1
+param _t1244_4
+call label_438
+label_515:
+_t1245_4 = ReturnVal
+_t1246_4 = #1
+ok_2 = _t1246_4
+goto label_505
+label_513:
+_t1247_3 = #'h'
+_t1248_3 = input_3 == _t1247_3
+if ( _t1248_3 == #0 ) goto label_516
+FunctionCall clear_screen
+call label_257
+label_517:
+_t1249_4 = ReturnVal
+FunctionCall tic_tac_toe
+_t1250_4 = #2
+param _t1250_4
+call label_438
+label_518:
+_t1251_4 = ReturnVal
+_t1252_4 = #1
+ok_2 = _t1252_4
+goto label_505
+label_516:
+label_505:
+goto label_497
+label_498:
+_t1253_2 = #1
+Return _t1253_2
+
+label_519:
+_t1254_2 = #10
+c1_2 = _t1254_2
+_t1255_2 = #12
+c2_2 = _t1255_2
+_t1256_2 = #9
+c3_2 = _t1256_2
+c4_2 = CTRL_CODE_BACKSPACE_0
+FunctionCall clear_screen
+call label_257
+label_520:
+_t1257_2 = ReturnVal
+FunctionCall write_string
+string _t1258_2 "Team RISC V1\n\n\n"
+param _t1258_2
+_t1259_2 = #16
+param _t1259_2
+call label_93
+label_521:
+_t1260_2 = ReturnVal
+FunctionCall write_string_at
+string _t1261_2 "Welcome to Flex OS\n\n"
+param _t1261_2
+_t1262_2 = #20
+param _t1262_2
+_t1263_2 = #24
+param _t1263_2
+_t1264_2 = #0
+param _t1264_2
+call label_103
+label_522:
+_t1265_2 = ReturnVal
+FunctionCall set_cursor_pos
+_t1266_2 = #32
+param _t1266_2
+_t1267_2 = #0
+param _t1267_2
+call label_127
+label_523:
+_t1268_2 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_524:
+_t1269_2 = ReturnVal
+FunctionCall write_string
+string _t1270_2 "Namo 2024!\n\n"
+param _t1270_2
+_t1271_2 = #12
+param _t1271_2
+call label_93
+label_525:
+_t1272_2 = ReturnVal
+FunctionCall write_string
+string _t1273_2 "India lifts the World Cup after 28 years!"
+param _t1273_2
+_t1274_2 = #42
+param _t1274_2
+call label_93
+label_526:
+_t1275_2 = ReturnVal
+_t1276_2 = #2
+val_0_2 = _t1276_2
+memory val_2 _t1276_2 #4
+FunctionCall write_char
+param c1_2
+call label_38
+label_527:
+_t1277_2 = ReturnVal
+FunctionCall write_face
+param font_map_0
+call label_169
+label_528:
+_t1278_2 = ReturnVal
+FunctionCall get_cursor_pos
+param val_2
+call label_132
+label_529:
+_t1279_2 = ReturnVal
+_t1280_2 = #0
+_t1281_2 = _t1280_2 * #4
+_t1282_2 = val_2 + _t1281_2
+line_2 = *_t1282_2
+_t1283_2 = #1
+_t1284_2 = _t1283_2 * #4
+_t1285_2 = val_2 + _t1284_2
+col_2 = *_t1285_2
+FunctionCall write_string_at
+string _t1286_2 "Hindu"
+param _t1286_2
+_t1287_2 = #5
+param _t1287_2
+_t1288_2 = #104
+_t1289_2 = line_2 - _t1288_2
+param _t1289_2
+_t1290_2 = #20
+_t1291_2 = col_2 + _t1290_2
+param _t1291_2
+call label_103
+label_530:
+_t1292_2 = ReturnVal
+FunctionCall write_string_at_col
+string _t1293_2 "Bharat"
+param _t1293_2
+_t1294_2 = #6
+param _t1294_2
+_t1295_2 = #112
+_t1296_2 = line_2 - _t1295_2
+param _t1296_2
+_t1297_2 = #35
+_t1298_2 = col_2 + _t1297_2
+param _t1298_2
+call label_133
+label_531:
+_t1299_2 = ReturnVal
+FunctionCall get_cursor_pos
+param val_2
+call label_132
+label_532:
+_t1300_2 = ReturnVal
+_t1301_2 = #0
+_t1302_2 = _t1301_2 * #4
+_t1303_2 = val_2 + _t1302_2
+line_2 = *_t1303_2
+FunctionCall set_cursor_pos
+_t1304_2 = #8
+_t1305_2 = line_2 - _t1304_2
+param _t1305_2
+_t1306_2 = #0
+param _t1306_2
+call label_127
+label_533:
+_t1307_2 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_534:
+_t1308_2 = ReturnVal
+FunctionCall write_face
+param font_map_0
+call label_169
+label_535:
+_t1309_2 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_536:
+_t1310_2 = ReturnVal
+FunctionCall write_face
+param font_map_0
+call label_169
+label_537:
+_t1311_2 = ReturnVal
+FunctionCall write_char
+param c1_2
+call label_38
+label_538:
+_t1312_2 = ReturnVal
+FunctionCall write_string
+string _t1313_2 "Kakkos: \f"
+param _t1313_2
+_t1314_2 = #9
+param _t1314_2
+call label_93
+label_539:
+_t1315_2 = ReturnVal
+FunctionCall get_cursor_pos
+param val_2
+call label_132
+label_540:
+_t1316_2 = ReturnVal
+_t1317_2 = #0
+_t1318_2 = _t1317_2 * #4
+_t1319_2 = val_2 + _t1318_2
+line_2 = *_t1319_2
+FunctionCall write_char
+param c2_2
+call label_38
+label_541:
+_t1320_2 = ReturnVal
+FunctionCall write_string
+string _t1321_2 "CS 342"
+param _t1321_2
+_t1322_2 = #6
+param _t1322_2
+call label_93
+label_542:
+_t1323_2 = ReturnVal
+FunctionCall write_char
+param c4_2
+call label_38
+label_543:
+_t1324_2 = ReturnVal
+FunctionCall write_char
+param c3_2
+call label_38
+label_544:
+_t1325_2 = ReturnVal
+FunctionCall write_string
+string _t1326_2 "After Tah"
+param _t1326_2
+_t1327_2 = #9
+param _t1327_2
+call label_93
+label_545:
+_t1328_2 = ReturnVal
+_t1329_2 = #1
+Return _t1329_2
 

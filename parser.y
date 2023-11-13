@@ -606,6 +606,26 @@ extern "C"
 						$<var.type>$ = $<var.type>1;
 						appendCode(string($<var.addr>$) + " = " + string($<var.addr>1) + " & " +  string($<var.addr>3));
 					}
+				}
+			| bitwise_expression '^' unary_expression {
+					string type1($<var.type>1);
+					string type2($<var.type>3);
+
+					if( type1 != "int" or type2 != "int" )
+					{
+						cout << "COMPILETIME ERROR: cannot apply ^ to arguements of types: " << type1 << ", " << type2 << endl;
+						cout << "At line : " << yylineno << endl;
+						error = -1;
+						return 1;
+						$<var.addr>$ = $<var.type>1;
+						$<var.type>$ = $<var.type>1;
+					}
+					else
+					{
+						$<var.addr>$ = getTemp("int");
+						$<var.type>$ = $<var.type>1;
+						appendCode(string($<var.addr>$) + " = " + string($<var.addr>1) + " ^ " +  string($<var.addr>3));
+					}
 				};
 
 	multiplicative_expression

@@ -53,6 +53,20 @@ char *memory;
 
 char **font_map;
 
+int focus_mode = 0;
+int focus_mode_col = 0;
+
+// rand_gen.h
+// rand_gen.c
+int rand_lfsr;
+int rand_bit;
+
+int rand_engine = 44257; // 0xACE1u
+
+char **board;
+char player = 'X';
+char computer = 'O';
+
 // memory.c
 int __load_char_as_bits(char c, char *out)
 {
@@ -60,7 +74,7 @@ int __load_char_as_bits(char c, char *out)
   g = c;
   for (i = 0; i < 8; i++)
   {
-    out[i] = g & 1 + '0';
+    out[i] = (g & 1) + '0';
     g = g >> 1;
   }
   return 1;
@@ -371,6 +385,7 @@ int write_string(char *msg, int len)
 int write_string_at(char *msg, int len, int line, int col)
 {
   int g, i;
+  g = 0;
   for (i = 0; i < len; i++)
   {
     g = write_char_at(msg[i], line, col);
@@ -406,7 +421,7 @@ int write_int(int a)
     count = 0;
     for (; a > 0;)
     {
-      temp[count++] = a % 10 + '0';
+      temp[count++] = (a % 10) + '0';
       a = a / 10;
     }
     int i;
@@ -442,6 +457,928 @@ int get_cursor_pos(int *vals)
 {
   vals[0] = LINE;
   vals[1] = COLUMN;
+}
+
+int write_string_at_col(char *msg, int len, int line, int col)
+{
+  if (SCREEN_LOCK == 0)
+  {
+    if (line >= 8 * COLUMN_CHAR_SIZE)
+    {
+      return 1;
+    }
+    if (col >= ROW_CHAR_SIZE || col < 0)
+    {
+      return 1;
+    }
+
+    int g, i;
+    g = 0;
+    for (i = 0; i < len; i++)
+    {
+      g = write_char_at(msg[i], line, col);
+      if (g != 0)
+      {
+        return g;
+      }
+
+      line = line + 8;
+
+      if (line == 8 * COLUMN_CHAR_SIZE)
+      {
+        line = 0;
+        col = 0;
+
+        return 1;
+      }
+
+      if (col == ROW_CHAR_SIZE)
+      {
+        col = 0;
+        line = line + 8;
+      }
+    }
+  }
+
+  return 1;
+}
+
+int write_zero_line_at(int line)
+{
+  if (SCREEN_LOCK == 0)
+  {
+    if (line < 0 || line >= 8 * COLUMN_CHAR_SIZE)
+    {
+      return 1;
+    }
+
+    int A, i;
+    char c;
+
+    A = IO_DISPLAY_START + ROW_CHAR_SIZE * line;
+    c = 0;
+    for (i = 0; i < ROW_CHAR_SIZE * 8; i++)
+    {
+      mwrite(c, A + i);
+    }
+
+    return 0;
+  }
+
+  return 1;
+}
+
+int write_zero_line()
+{
+  if (SCREEN_LOCK == 0)
+  {
+    int A, i;
+    char c;
+
+    A = IO_DISPLAY_START + ROW_CHAR_SIZE * LINE;
+    c = 0;
+    for (i = 0; i < ROW_CHAR_SIZE * 8; i++)
+    {
+      mwrite(c, A + i);
+    }
+
+    return 0;
+  }
+
+  return 1;
+}
+
+int write_face(char **font)
+{
+  if (SCREEN_LOCK == 0)
+  {
+
+    LINE = LINE + 8;
+    COLUMN = 0;
+
+    int A, i, j;
+    A = IO_DISPLAY_START + LINE * ROW_CHAR_SIZE + COLUMN;
+
+    for (i = 0; i < 128; i++)
+    {
+      for (j = 0; j < 16; j++)
+      {
+        mwrite(font[i][j], A + i * ROW_CHAR_SIZE + j);
+      }
+    }
+
+    LINE = LINE + 128;
+    COLUMN = 0;
+
+    if (LINE >= 8 * COLUMN_CHAR_SIZE)
+    {
+      LINE = 0;
+      COLUMN = 0;
+    }
+  }
+  return 1;
+}
+
+// @brief Shifts the entire display map by one 1 unit upwards
+int display_up()
+{
+  if (SCREEN_LOCK == 0)
+  {
+    int A, i, j, addr;
+    char c;
+
+    A = IO_DISPLAY_START;
+    c = 0;
+    for (j = 0; j < 8; j++)
+    {
+      for (addr = 0; addr < IO_DISPLAY_SIZE - ROW_CHAR_SIZE; addr++)
+      {
+        int temp;
+        temp = mread_char(A + addr + ROW_CHAR_SIZE);
+        // reverse temp
+        int temp2;
+        temp2 = 0;
+
+        for (i = 0; i < 8; i++)
+        {
+          if ((temp >> i) & 1)
+          {
+            temp2 = temp2 | (1 << (7 - i));
+          }
+        }
+        char temp3;
+        temp3 = temp2;
+        mwrite(temp3, A + addr);
+      }
+    }
+
+    // clear the last line (A)
+    for (i = 0; i < ROW_CHAR_SIZE * 8; i++)
+    {
+      mwrite(c, A + i);
+    }
+
+    // update the current line
+    LINE = LINE - 8;
+    if (LINE < 0)
+    {
+      LINE = 0;
+    }
+
+    return 0;
+  }
+
+  return 1;
+}
+
+// @brief Shifts the entire display map by one 1 unit downwards
+int display_down()
+{
+  if (SCREEN_LOCK == 0)
+  {
+    int A, i, j, addr;
+    char c;
+
+    A = IO_DISPLAY_START;
+    c = 0;
+    for (j = 0; j < 8; j++)
+    {
+      for (addr = IO_DISPLAY_SIZE - ROW_CHAR_SIZE; addr >= 0; addr--)
+      {
+        int temp;
+        temp = mread_char(A + addr);
+        // reverse temp
+        int temp2;
+        temp2 = 0;
+
+        for (i = 0; i < 8; i++)
+        {
+          if ((temp >> i) & 1)
+          {
+            temp2 = temp2 | (1 << (7 - i));
+          }
+        }
+
+        char temp3;
+        temp3 = temp2;
+        mwrite(temp3, A + addr + ROW_CHAR_SIZE);
+      }
+    }
+
+    // clear the first line (A)
+    for (i = 0; i < ROW_CHAR_SIZE * 8; i++)
+    {
+      mwrite(c, A + i);
+    }
+
+    // update the current line
+    LINE = LINE + 8;
+    if (LINE >= 8 * COLUMN_CHAR_SIZE)
+    {
+      LINE = 8 * COLUMN_CHAR_SIZE - 1;
+    }
+
+    return 0;
+  }
+
+  return 1;
+}
+
+// reset the entire display
+int clear_screen()
+{
+  if (SCREEN_LOCK == 0)
+  {
+    int A, i;
+    char c;
+
+    A = IO_DISPLAY_START + IO_DISPLAY_SIZE - 1;
+    c = 0;
+    for (i = A; i >= IO_DISPLAY_START; i--)
+    {
+      mwrite(c, i);
+    }
+
+    LINE = 0;
+    COLUMN = 0;
+  }
+  return 0;
+}
+
+// save only the visible content of the display while switching to focus mode
+int save_screen()
+{
+  int A, D, i;
+  A = IO_DISPLAY_START;
+  D = TEMP_START;
+
+  for (i = 0; i < IO_DISPLAY_SIZE; i++)
+  {
+    char temp, temp1;
+    int temp3;
+    temp = mread_char(A + i);
+    temp1 = D + i;
+
+    temp3 = temp;
+    mwrite(temp1, temp3);
+  }
+  return 1;
+}
+
+// retrieve the saved screen from the memory after exiting focus mode
+int retrieve_screen()
+{
+  int A, D, i;
+  A = IO_DISPLAY_START;
+  D = TEMP_START;
+
+  for (i = 0; i < IO_DISPLAY_SIZE; i++)
+  {
+    char temp, temp1;
+    int temp3;
+    temp = mread_char(D + i);
+    temp1 = A + i;
+
+    temp3 = temp;
+    mwrite(temp1, temp3);
+  }
+  return 1;
+}
+
+// reset the entire display
+int clear_screen()
+{
+  if (SCREEN_LOCK == 0)
+  {
+    int A, i;
+    char c;
+
+    A = IO_DISPLAY_START + IO_DISPLAY_SIZE - 1;
+    c = 0;
+    for (i = A; i >= IO_DISPLAY_START; i--)
+    {
+      mwrite(c, i);
+    }
+
+    LINE = 0;
+    COLUMN = 0;
+  }
+  return 1;
+}
+
+// commands supported:
+// :xx => not supported becoz we need directory structures
+
+// 1. q --> exit focus mode
+// 2. w --> save the file
+// 3. wq --> save and exit
+// 4. x --> save and exit
+// 5. i --> insert mode
+// 6. v --> visual mode
+// 7. r --> read mode
+
+// @brief: display info panel during focus mode (as seen in vim)
+// enable vim like functionality
+// store all the present content and show vim like functionality
+
+int focus_info_panel()
+{
+  if (SCREEN_LOCK == 0)
+  {
+    save_screen();
+    clear_screen();
+    focus_mode = 1;
+    focus_mode_col = 0;
+
+    int command_mode;
+    command_mode = 0;
+
+    int visual_mode;
+    visual_mode = 1;
+    int edit_mode;
+    edit_mode = 0;
+
+    for (; true;)
+    {
+      char input;
+      input = keyboard_get_input();
+      input = manipulate_input(input);
+
+      if (command_mode == 0)
+      {
+        if (isEscape(input))
+        {
+          command_mode = 1;
+        }
+
+        if (visual_mode == 1)
+        {
+          if (input == 'i')
+          {
+            visual_mode = 0;
+            edit_mode = 1;
+          }
+        }
+        elif (edit_mode == 1)
+        {
+          // non command mode and write to the display edit screen
+          char content_to_write[4];
+          convert_keyinput_to_string(input, content_to_write);
+          int i;
+          for (i = 0; i < 4; i++)
+          {
+            if (content_to_write[i] != '\0')
+            {
+              write_char(content_to_write[i]);
+            }
+          }
+        }
+      }
+      // else
+      // {
+      // qf: exit focus mode
+      // qc: exit command mode and return to visual mode
+      // w: save the file
+      // wq: save and exit focus mode
+      // }
+    }
+  }
+
+  return 1;
+}
+
+int set_seed(int seed)
+{
+  rand_engine = (((seed | rand_engine) * 7621) + 1) % 32768;
+  rand_lfsr = rand_engine;
+  return 1;
+}
+
+int rand()
+{
+  rand_bit = ((rand_lfsr >> 0) ^ (rand_lfsr >> 2) ^ (rand_lfsr >> 3) ^ (rand_lfsr >> 5)) & 1;
+  rand_lfsr = (rand_lfsr >> 1) | (rand_bit << 15);
+
+  return rand_lfsr % 100;
+}
+
+// 0 easy, 1 mid , 2 hard
+
+int initializeBoard()
+{
+  int i, j;
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
+      board[i][j] = 32; // ' '
+    }
+  }
+  return 0;
+}
+
+int printBoard()
+{
+  int i, j;
+  char c1, c2, c3, c4, c5;
+
+  c1 = 32;  // ' '
+  c4 = 124; // '|'
+  c5 = 10;  // '/n'
+  write_string("     1 2 3\n", 11);
+  for (i = 0; i < 3; i++)
+  {
+    c3 = 49 + i;
+    write_char(c1);
+    write_char(c1);
+    write_char(c1);
+    write_char(c1);
+    write_char(c3);
+    for (j = 0; j < 3; j++)
+    {
+      write_char(board[i][j]);
+      if (j < 2)
+      {
+        write_char(c4);
+      }
+    }
+    write_char(c5);
+    if (i < 2)
+    {
+      write_string("     -----\n", 11);
+    }
+  }
+  write_char(c5);
+  return 1;
+}
+
+int isBoardFull()
+{
+  int i, j;
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
+      if (board[i][j] == 32) // ' '
+      {
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
+
+int isGameOver(char player)
+{
+  int i;
+  for (i = 0; i < 3; i++)
+  {
+    if (board[i][0] == player && board[i][1] == player && board[i][2] == player)
+    {
+      return 1;
+    }
+    if (board[0][i] == player && board[1][i] == player && board[2][i] == player)
+    {
+      return 1;
+    }
+  }
+  if (board[0][0] == player && board[1][1] == player && board[2][2] == player)
+  {
+    return 1;
+  }
+  if (board[0][2] == player && board[1][1] == player && board[2][0] == player)
+  {
+    return 1;
+  }
+  return 0;
+}
+
+int makeMove(int row, int col, char player)
+{
+  if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != 32)
+  {
+    return 0;
+  }
+  board[row][col] = player;
+  return 1;
+}
+
+int computerMove_easy()
+{
+  int row, col;
+
+  row = rand() % 3;
+  col = rand() % 3;
+  for (; (makeMove(row, col, computer) == 0);)
+  {
+    row = rand() % 3;
+    col = rand() % 3;
+  }
+  return 1;
+}
+
+int minimax(char **board, int depth, int isMaximizing)
+{
+  char result;
+  if (isGameOver(computer) == 1)
+  {
+    result = 1;
+  }
+  elif (isGameOver(player) == 1)
+  {
+    result = -1;
+  }
+  elif (isBoardFull() == 1)
+  {
+    result = 0;
+  }
+  else
+  {
+    result = 2;
+  }
+
+  if (result != 2)
+  {
+    return result;
+  }
+
+  int bestScore;
+  char currentPlayer;
+
+  if (isMaximizing)
+  {
+    bestScore = -1000;
+    currentPlayer = computer;
+  }
+  else
+  {
+    bestScore = 1000;
+    currentPlayer = player;
+  }
+
+  int i, j;
+
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
+      if (board[i][j] == 32) // ' '
+      {
+        board[i][j] = currentPlayer;
+        int score;
+        score = minimax(board, depth + 1, 1 - isMaximizing);
+        board[i][j] = 32; // ' '
+        if (isMaximizing == 1)
+        {
+          if (score > bestScore)
+          {
+            bestScore = score;
+          }
+        }
+        else
+        {
+          if (score < bestScore)
+          {
+            bestScore = score;
+          }
+        }
+      }
+    }
+  }
+
+  return bestScore;
+}
+
+int computerMove_hard()
+{
+  int bestScore, bestMove[2], i, j;
+  bestScore = -1000;
+  bestMove[0] = -1;
+  bestMove[1] = -1;
+
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
+      if (board[i][j] == 32) // ' '
+      {
+        board[i][j] = computer;
+        int score;
+        score = minimax(board, 0, 0);
+        board[i][j] = 32; //' '
+        if (score > bestScore)
+        {
+          bestScore = score;
+          bestMove[0] = i;
+          bestMove[1] = j;
+        }
+      }
+    }
+  }
+
+  makeMove(bestMove[0], bestMove[1], computer);
+  return 1;
+}
+
+int computerMove_med()
+{
+  int i, j;
+  // Check for a win or block the player from winning
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
+      if (board[i][j] == 32)
+      {
+        board[i][j] = computer;
+        if (isGameOver(computer) == 1)
+        {
+          return 1; // Computer wins
+        }
+        board[i][j] = 32; // Undo the move
+      }
+    }
+  }
+
+  // Try to take the center if it's available
+  if (board[1][1] == 32)
+  {
+    board[1][1] = computer;
+    return 0; // No win yet
+  }
+
+  // Try to take a corner
+  int corners[4][2];
+  // {{0, 0}, {0, 2}, {2, 0}, {2, 2}};
+  corners[0][0] = 0;
+  corners[0][1] = 0;
+
+  corners[1][0] = 0;
+  corners[1][1] = 2;
+
+  corners[2][0] = 2;
+  corners[2][1] = 0;
+
+  corners[3][0] = 2;
+  corners[3][1] = 2;
+
+  for (i = 0; i < 4; i++)
+  {
+    int row;
+    row = corners[i][0];
+    int col;
+    col = corners[i][1];
+    if (board[row][col] == 32)
+    {
+      board[row][col] = computer;
+      return 0; // No win yet
+    }
+  }
+
+  // Take any available edge
+  int edges[4][2];
+  // {{0, 1}, {1, 0}, {1, 2}, {2, 1}};
+  edges[0][0] = 0;
+  edges[0][1] = 1;
+
+  edges[1][0] = 1;
+  edges[1][1] = 0;
+
+  edges[2][0] = 1;
+  edges[2][1] = 2;
+
+  edges[3][0] = 2;
+  edges[3][1] = 1;
+
+  for (i = 0; i < 4; i++)
+  {
+    int row;
+    row = edges[i][0];
+    int col;
+    col = edges[i][1];
+    if (board[row][col] == 32)
+    {
+      board[row][col] = computer;
+      return 0; // No win yet
+    }
+  }
+
+  return 0; // No moves left (shouldn't reach this point)
+}
+
+int tic_tac_toe(int game_diff)
+{
+  set_seed(1);
+  initializeBoard();
+
+  for (; true;)
+  {
+    clear_screen();
+    write_string("Welcome to Tic-Tac-Toe!\n\n", 25);
+
+    if (game_diff == 0)
+    {
+      write_string("Easy Mode\n\n", 11);
+    }
+    elif (game_diff == 1)
+    {
+      write_string("Medium Mode\n\n", 13);
+    }
+    else
+    {
+      write_string("Hard Mode\n\n", 11);
+    }
+
+    printBoard();
+    int row, col;
+
+    write_string("Enter your move (row and column, e.g., 1 enter 2 enter): \n", 58);
+    row = keyboard_get_input();
+    col = keyboard_get_input();
+
+    row = row - 48;
+    col = col - 48;
+
+    row--; // Adjust for 0-based indexing
+    col--;
+
+    if (makeMove(row, col, player) == 0)
+    {
+      write_string("Invalid move! Try again.\n", 25);
+      continue;
+    }
+
+    if (isGameOver(player) == 1)
+    {
+      printBoard();
+      write_string("Congratulations! You win!\n", 26);
+      break;
+    }
+
+    if (isBoardFull() == 1)
+    {
+      printBoard();
+      write_string("It's a draw!\n", 13);
+      break;
+    }
+
+    if (game_diff == 0)
+    {
+      computerMove_easy();
+    }
+    elif (game_diff == 1)
+    {
+      computerMove_med();
+    }
+    else
+    {
+      computerMove_hard();
+    }
+
+    if (isGameOver(computer) == 1)
+    {
+      printBoard();
+      write_string("Computer wins! You lose.\n", 25);
+      break;
+    }
+
+    if (isBoardFull() == 1)
+    {
+      printBoard();
+      write_string("It's a draw!\n", 13);
+      break;
+    }
+  }
+
+  return 0;
+}
+
+int os_start()
+{
+  // initialize the kernel
+  minit();
+  return 1;
+}
+
+int display_1()
+{
+  write_string("Inside display 1\n", 17);
+  write_face(font_map);
+  return 1;
+}
+
+// function to capture data from memory and update the display
+int terminal()
+{
+  // init_memory();
+  clear_screen();
+  int ok;
+  ok = 0;
+  write_string("Terminal Started\n", 17);
+  for (; true;)
+  {
+    // get input from keyboard
+    char input;
+    input = keyboard_get_input();
+    // printf("got input: %c\n", input);
+
+    if (ok == 1)
+    {
+      clear_screen();
+      ok = false;
+    }
+
+    write_char(input);
+
+    if (input == 'd')
+    {
+      clear_screen();
+      write_string("Sample display\n", 15);
+      display_1();
+      write_string("Terminal closed", 15);
+
+      ok = 1;
+    }
+    elif (input == 'e')
+    {
+      clear_screen();
+      tic_tac_toe(0);
+      ok = 1;
+    }
+    elif (input == 'm')
+    {
+      clear_screen();
+      tic_tac_toe(1);
+      ok = 1;
+    }
+    elif (input == 'h')
+    {
+      clear_screen();
+      tic_tac_toe(2);
+      ok = 1;
+    }
+  }
+  return 1;
+}
+
+int display_test()
+{
+  char c1, c2, c3, c4;
+  c1 = 10; // '\n'
+  c2 = 12; // '/r'
+  c3 = 9;  // '/t'
+  c4 = CTRL_CODE_BACKSPACE;
+
+  clear_screen();
+  write_string("Team RISC V1\n\n\n", 16);
+  write_string_at("Welcome to Flex OS\n\n", 20, 24, 0);
+
+  set_cursor_pos(32, 0);
+  write_char(c1);
+  write_string("Namo 2024!\n\n", 12);
+  write_string("India lifts the World Cup after 28 years!", 42);
+
+  int val[2];
+
+  write_char(c1);
+  write_face(font_map);
+
+  get_cursor_pos(val);
+
+  int line, col;
+  line = val[0];
+  col = val[1];
+
+  write_string_at("Hindu", 5, line - 104, col + 20);
+  write_string_at_col("Bharat", 6, line - 112, col + 35);
+
+  get_cursor_pos(val);
+  line = val[0];
+
+  set_cursor_pos(line - 8, 0);
+
+  write_char(c1);
+  write_face(font_map);
+  write_char(c1);
+  write_face(font_map);
+  write_char(c1);
+
+  write_string("Kakkos: \f", 9);
+  get_cursor_pos(val);
+  line = val[0];
+  write_char(c2);
+  // write_zero_line(line);
+  write_string("CS 342", 6);
+  write_char(c4);
+
+  write_char(c3);
+  write_string("After Tah", 9);
+
+  // display_down();
+  // display_down();
+  // display_down();
+  // display_up();
+  return 1;
 }
 
 int main()
