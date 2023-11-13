@@ -1798,7 +1798,7 @@ int main( int argcount, char* arguements[] )
 			std::cout.rdbuf(coutbuf);
 			outputFile.close();
 
-			std::ofstream outputFile1("code.txt",std::ios::trunc);
+			std::ofstream outputFile1("code.tac",std::ios::trunc);
     
 			std::streambuf *coutbuf1 = std::cout.rdbuf();
     	std::cout.rdbuf(outputFile1.rdbuf());
@@ -1816,7 +1816,7 @@ int main( int argcount, char* arguements[] )
 
     outputFile.close();
 
-		std::ofstream outputFile1("code.txt",std::ios::trunc);
+		std::ofstream outputFile1("code.tac",std::ios::trunc);
     std::streambuf *coutbuf1 = std::cout.rdbuf();
     std::cout.rdbuf(outputFile1.rdbuf());
 
