@@ -480,7 +480,7 @@ void setLabel(string fn, string label)
 	globalTable[gIndex].functionTables[fIndex].label = label;
 }
 
-bool is_Variable(string str)
+bool isVariable(string str)
 {
 	int gIndex = getStructIndex(currentStruct);
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
@@ -669,7 +669,7 @@ void addStructLevels(string var, string type)
 	stdeclevels.push_back(make_pair(var, type));
 }
 
-bool is_Valid_Attribute(string structName, string attr, string &type)
+bool isValidAttribute(string structName, string attr, string &type)
 {
 	int index = getStructIndex(currentStruct);
 	vector<SymbolTableEntry> attributes = globalTable[index].attributes;

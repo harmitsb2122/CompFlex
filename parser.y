@@ -55,7 +55,7 @@ extern "C"
 			:	IDENTIFIER POINTER IDENTIFIER {	
 					string str($<str>1);
 					string attr($<str>3);
-					if( !is_Variable(str) ){
+					if( !isVariable(str) ){
 						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
@@ -85,7 +85,7 @@ extern "C"
 								structName+=i;
 						}
 						string dtType;
-						if(!is_Valid_Attribute(structName,attr,dtType))
+						if(!isValidAttribute(structName,attr,dtType))
 						{
 							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
 							cout << "At line : " << yylineno << endl;
@@ -103,7 +103,7 @@ extern "C"
 				| IDENTIFIER '.' IDENTIFIER {	
 					string str($<str>1);
 					string attr($<str>3);
-					if( !is_Variable(str) ){
+					if( !isVariable(str) ){
 						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
@@ -122,7 +122,7 @@ extern "C"
 						}
 						
 						string dtType;
-						if(!is_Valid_Attribute(structName,attr,dtType))
+						if(!isValidAttribute(structName,attr,dtType))
 						{
 							cout << "COMPILETIME ERROR: " << string($<str>3) << " invalid attribute" << endl;
 							cout << "At line : " << yylineno << endl;
@@ -139,7 +139,7 @@ extern "C"
 				}	
 				| IDENTIFIER	{	
 					string str($<str>1);
-					if( !is_Variable(str) ){
+					if( !isVariable(str) ){
 						cout << "COMPILETIME ERROR: " << string($<str>1) << " not declared" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
@@ -191,7 +191,7 @@ extern "C"
 						$<var.addr>$ = getTemp("int");
 						appendCode(string($<var.addr>$) + " = #"+to_string(getActualSize("*")));						
 					}
-					else if(!is_Variable(str))
+					else if(!isVariable(str))
 					{
 						cout << "COMPILETIME ERROR: " << str << " not declared" << endl;	
 						cout << "At line : " << yylineno << endl;
@@ -1307,7 +1307,7 @@ extern "C"
 				{
 					string code = "asm " + string($<str>3) + " " + string($<str>5) + " ";
 					string str($<str>7);
-					if( !is_Variable(str) ){
+					if( !isVariable(str) ){
 						cout << "COMPILETIME ERROR: " << str << " not declared" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
@@ -1549,7 +1549,7 @@ extern "C"
 					 	{
 							string var($<str>1);
  
-							if(is_Variable(var))
+							if(isVariable(var))
 							{
 								SymbolTableEntry ste = getVariable(var);
 								if(ste.dataType != "int")
