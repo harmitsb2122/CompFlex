@@ -268,8 +268,8 @@ extern "C"
 					}
 					else{
 						string indexType($<var.type>3);
-						if( indexType != "int" ){
-							cout << "COMPILETIME ERROR: Cannot use non int type " << indexType << " as array index" << endl;
+						if(indexType != "int" && indexType!="char"){
+							cout << "COMPILETIME ERROR: Cannot use non int/char type " << indexType << " as array index" << endl;
 							cout << "At line : " << yylineno << endl;
 							error = -1;
 							return 1;

@@ -36,7 +36,10 @@ Struct Name = main
 				COLUMN_CHAR_SIZE		int			0		64			
 				SCREEN_LOCK		int			0		0			
 				MUL_CONS		int			0		9			
+				COLUMN		int			0		0			
+				LINE		int			0		0			
 				memory		*char			0		0			
+				font_map		**char			0		0			
 	Constants = 
 				Name	DataType	Scope	Default	pointer	
 	Functions = 
@@ -46,27 +49,25 @@ Struct Name = main
 			return value : int
 			parameters : 
 				Name	DataType	Scope	Default	pointer	
-				c		char			2		32767			
-				out		*char			2		32767			
+				c		char			2		32766			
+				out		*char			2		32766			
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
-				g		int			2		32767			
-				i		int			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t1		int			3		22048			
-				_t2		int			3		22048			
-				_t3		bool			3		22048			
-				_t4		int			3		22048			
-				_t5		int			3		22048			
-				_t6		*char			3		22048			
-				_t7		int			3		22048			
-				_t8		int			3		22048			
-				_t9		char			3		22048			
-				_t10		int			3		22048			
-				_t11		int			3		22048			
-				_t12		int			3		22048			
-				_t13		int			2		22048			
+				_t1		int			3		22075			
+				_t2		int			3		22075			
+				_t3		bool			3		22075			
+				_t4		int			3		22075			
+				_t5		int			3		22075			
+				_t6		*char			3		22075			
+				_t7		int			3		22075			
+				_t8		int			3		22075			
+				_t9		char			3		22075			
+				_t10		int			3		22075			
+				_t11		int			3		22075			
+				_t12		int			3		22075			
+				_t13		int			2		22075			
 			Code = 
 				label_1:
 				g_2 = c_2
@@ -102,13 +103,13 @@ Struct Name = main
 			return value : char
 			parameters : 
 				Name	DataType	Scope	Default	pointer	
-				addr		int			2		32767			
+				addr		int			2		32766			
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t14		int			2		32767			
-				_t15		*char			2		32767			
+				_t14		int			2		32766			
+				_t15		*char			2		32766			
 			Code = 
 				label_6:
 				_t14_2 = addr_2 * #1
@@ -120,16 +121,16 @@ Struct Name = main
 			return value : char
 			parameters : 
 				Name	DataType	Scope	Default	pointer	
-				c		char			2		32767			
-				addr		int			2		32767			
+				c		char			2		32766			
+				addr		int			2		32766			
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t16		int			2		32767			
-				_t17		*char			2		32767			
-				_t18		int			2		32767			
-				_t19		*char			2		32767			
+				_t16		int			2		32766			
+				_t17		*char			2		32766			
+				_t18		int			2		32766			
+				_t19		*char			2		32766			
 			Code = 
 				label_7:
 				_t16_2 = addr_2 * #1
@@ -146,16 +147,15 @@ Struct Name = main
 				Name	DataType	Scope	Default	pointer	
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
-				i		int			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t20		int			3		32767			
-				_t21		bool			3		32767			
-				_t22		int			3		32767			
-				_t23		int			3		32767			
-				_t24		*char			3		32767			
-				_t25		int			3		32767			
-				_t26		int			2		32767			
+				_t20		int			3		32766			
+				_t21		bool			3		32766			
+				_t22		int			3		32766			
+				_t23		int			3		32766			
+				_t24		*char			3		32766			
+				_t25		int			3		32766			
+				_t26		int			2		32766			
 			Code = 
 				label_8:
 				_t20_3 = #0
@@ -185,17 +185,13 @@ Struct Name = main
 				Name	DataType	Scope	Default	pointer	
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
-				start		int			2		32767			
-				end		int			2		32767			
-				i		int			2		32767			
-				c		char			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t27		int			2		32767			
-				_t28		int			2		32767			
-				_t29		bool			3		32767			
-				_t30		int			3		32767			
-				_t31		char			3		32767			
+				_t27		int			2		32766			
+				_t28		int			2		32766			
+				_t29		bool			3		32766			
+				_t30		int			3		32766			
+				_t31		char			3		32766			
 			Code = 
 				label_13:
 				start_2 = IO_KEYBOARD_START_0
@@ -229,20 +225,16 @@ Struct Name = main
 				Name	DataType	Scope	Default	pointer	
 			localVariables : 
 				Name	DataType	Scope	Default	pointer	
-				input		char			2		32767			
-				f		char			2		32767			
-				c		char			2		32767			
-				can_break		int			2		32767			
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t32		int			2		22048			
-				_t33		int			2		22048			
-				_t34		int			3		22048			
-				_t35		char			3		22048			
-				_t36		int			3		22048			
-				_t37		bool			3		22048			
-				_t38		int			4		22048			
-				_t39		char			4		22048			
+				_t32		int			2		22075			
+				_t33		int			2		22075			
+				_t34		int			3		22075			
+				_t35		char			3		22075			
+				_t36		int			3		22075			
+				_t37		bool			3		22075			
+				_t38		int			4		22075			
+				_t39		char			4		22075			
 			Code = 
 				label_19:
 				_t32_2 = #0
@@ -291,8 +283,1022 @@ Struct Name = main
 				label_23:
 				Return input_2
 
-		function Name = main
+		function Name = convert_keyinput_to_string
 			label = label_31
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				input		char			2		32766			
+				out		*char			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t40		bool			2		22075			
+				_t41		int			3		22075			
+				_t42		int			3		22075			
+				_t43		*char			3		22075			
+				_t44		char			3		22075			
+				_t45		int			3		22075			
+				_t46		int			3		22075			
+				_t47		*char			3		22075			
+				_t48		char			3		22075			
+				_t49		int			3		22075			
+				_t50		int			3		22075			
+				_t51		*char			3		22075			
+				_t52		char			3		22075			
+				_t53		int			3		22075			
+				_t54		int			3		22075			
+				_t55		*char			3		22075			
+				_t56		char			3		22075			
+				_t57		bool			2		22075			
+				_t58		int			3		22075			
+				_t59		int			3		22075			
+				_t60		*char			3		22075			
+				_t61		char			3		22075			
+				_t62		int			3		22075			
+				_t63		int			3		22075			
+				_t64		*char			3		22075			
+				_t65		char			3		22075			
+				_t66		int			3		22075			
+				_t67		int			3		22075			
+				_t68		*char			3		22075			
+				_t69		char			3		22075			
+				_t70		int			3		22075			
+				_t71		int			3		22075			
+				_t72		*char			3		22075			
+				_t73		int			3		22075			
+				_t74		bool			2		22075			
+				_t75		int			3		22075			
+				_t76		int			3		22075			
+				_t77		*char			3		22075			
+				_t78		char			3		22075			
+				_t79		int			3		22075			
+				_t80		int			3		22075			
+				_t81		*char			3		22075			
+				_t82		char			3		22075			
+				_t83		int			3		22075			
+				_t84		int			3		22075			
+				_t85		*char			3		22075			
+				_t86		char			3		22075			
+				_t87		int			3		22075			
+				_t88		int			3		22075			
+				_t89		*char			3		22075			
+				_t90		char			3		22075			
+				_t91		int			3		22075			
+				_t92		int			3		22075			
+				_t93		*char			3		22075			
+				_t94		int			3		22075			
+				_t95		int			3		22075			
+				_t96		*char			3		22075			
+				_t97		int			3		22075			
+				_t98		int			2		22075			
+			Code = 
+				label_31:
+				_t40_2 = input_2 == CTRL_CODE_ALT_0
+				if ( _t40_2 == #0 ) goto label_32
+				_t41_3 = #0
+				_t42_3 = _t41_3 * #1
+				_t43_3 = out_2 + _t42_3
+				_t44_3 = #'E'
+				*_t43_3 = _t44_3
+				_t45_3 = #1
+				_t46_3 = _t45_3 * #1
+				_t47_3 = out_2 + _t46_3
+				_t48_3 = #'N'
+				*_t47_3 = _t48_3
+				_t49_3 = #2
+				_t50_3 = _t49_3 * #1
+				_t51_3 = out_2 + _t50_3
+				_t52_3 = #'T'
+				*_t51_3 = _t52_3
+				_t53_3 = #3
+				_t54_3 = _t53_3 * #1
+				_t55_3 = out_2 + _t54_3
+				_t56_3 = #'R'
+				*_t55_3 = _t56_3
+				goto label_33
+				label_32:
+				_t57_2 = input_2 == CTRL_CODE_ALT_0
+				if ( _t57_2 == #0 ) goto label_34
+				_t58_3 = #0
+				_t59_3 = _t58_3 * #1
+				_t60_3 = out_2 + _t59_3
+				_t61_3 = #'A'
+				*_t60_3 = _t61_3
+				_t62_3 = #1
+				_t63_3 = _t62_3 * #1
+				_t64_3 = out_2 + _t63_3
+				_t65_3 = #'L'
+				*_t64_3 = _t65_3
+				_t66_3 = #2
+				_t67_3 = _t66_3 * #1
+				_t68_3 = out_2 + _t67_3
+				_t69_3 = #'T'
+				*_t68_3 = _t69_3
+				_t70_3 = #3
+				_t71_3 = _t70_3 * #1
+				_t72_3 = out_2 + _t71_3
+				_t73_3 = #0
+				*_t72_3 = _t73_3
+				goto label_33
+				label_34:
+				_t74_2 = input_2 == CTRL_CODE_SHIFT_0
+				if ( _t74_2 == #0 ) goto label_35
+				_t75_3 = #0
+				_t76_3 = _t75_3 * #1
+				_t77_3 = out_2 + _t76_3
+				_t78_3 = #'S'
+				*_t77_3 = _t78_3
+				_t79_3 = #1
+				_t80_3 = _t79_3 * #1
+				_t81_3 = out_2 + _t80_3
+				_t82_3 = #'H'
+				*_t81_3 = _t82_3
+				_t83_3 = #2
+				_t84_3 = _t83_3 * #1
+				_t85_3 = out_2 + _t84_3
+				_t86_3 = #'F'
+				*_t85_3 = _t86_3
+				_t87_3 = #3
+				_t88_3 = _t87_3 * #1
+				_t89_3 = out_2 + _t88_3
+				_t90_3 = #'T'
+				*_t89_3 = _t90_3
+				goto label_33
+				label_35:
+				_t91_3 = #0
+				_t92_3 = _t91_3 * #1
+				_t93_3 = out_2 + _t92_3
+				*_t93_3 = input_2
+				_t94_3 = #1
+				_t95_3 = _t94_3 * #1
+				_t96_3 = out_2 + _t95_3
+				_t97_3 = #0
+				*_t96_3 = _t97_3
+				label_33:
+				_t98_2 = #1
+				Return _t98_2
+
+		function Name = manipulate_input
+			label = label_36
+			return value : char
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				c		char			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+			Code = 
+				label_36:
+				Return c_2
+
+		function Name = isEscape
+			label = label_37
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				input		char			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t99		int			2		32766			
+				_t100		bool			2		32766			
+			Code = 
+				label_37:
+				_t99_2 = #27
+				_t100_2 = input_2 == _t99_2
+				Return _t100_2
+
+		function Name = write_char
+			label = label_38
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				c		char			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t101		int			2		32766			
+				_t102		bool			2		32766			
+				_t103		int			3		32766			
+				_t104		bool			3		32766			
+				_t105		int			4		32766			
+				_t106		int			4		32766			
+				_t107		int			4		32766			
+				_t108		int			4		32766			
+				_t109		int			4		32766			
+				_t110		bool			4		32766			
+				_t111		int			5		32766			
+				_t112		int			5		32766			
+				_t113		int			5		32766			
+				_t114		int			4		32766			
+				_t115		int			3		32766			
+				_t116		bool			3		32766			
+				_t117		int			4		32766			
+				_t118		int			4		32766			
+				_t119		int			3		32766			
+				_t120		bool			3		32766			
+				_t121		int			4		32766			
+				_t122		int			4		32766			
+				_t123		int			4		32766			
+				_t124		int			4		32766			
+				_t125		bool			4		32766			
+				_t126		int			5		32766			
+				_t127		int			5		32766			
+				_t128		int			5		32766			
+				_t129		int			4		32766			
+				_t130		int			3		32766			
+				_t131		bool			3		32766			
+				_t132		int			4		32766			
+				_t133		int			4		32766			
+				_t134		bool			4		32766			
+				_t135		int			5		32766			
+				_t136		int			5		32766			
+				_t137		int			5		32766			
+				_t138		int			5		32766			
+				_t139		int			5		32766			
+				_t140		bool			5		32766			
+				_t141		int			6		32766			
+				_t142		int			6		32766			
+				_t143		int			6		32766			
+				_t144		int			4		32766			
+				_t145		bool			3		32766			
+				_t146		int			4		32766			
+				_t147		bool			4		32766			
+				_t148		int			5		32766			
+				_t149		bool			5		32766			
+				_t150		int			6		32766			
+				_t151		int			6		32766			
+				_t152		int			6		32766			
+				_t153		int			6		32766			
+				_t154		int			6		32766			
+				_t155		int			5		32766			
+				_t156		int			4		32766			
+				_t157		int			4		32766			
+				_t158		int			4		32766			
+				_t159		int			4		32766			
+				_t160		int			5		32766			
+				_t161		int			5		32766			
+				_t162		bool			5		32766			
+				_t163		int			5		32766			
+				_t164		int			5		32766			
+				_t165		int			5		32766			
+				_t166		char			5		32766			
+				_t167		int			4		32766			
+				_t168		int			4		32766			
+				_t169		int			5		32766			
+				_t170		int			5		32766			
+				_t171		bool			5		32766			
+				_t172		int			5		32766			
+				_t173		int			5		32766			
+				_t174		*char			5		32766			
+				_t175		int			5		32766			
+				_t176		**char			5		32766			
+				_t177		int			5		32766			
+				_t178		*char			5		32766			
+				_t179		int			4		32766			
+				_t180		int			4		32766			
+				_t181		int			4		32766			
+				_t182		int			5		32766			
+				_t183		int			5		32766			
+				_t184		bool			5		32766			
+				_t185		int			5		32766			
+				_t186		int			5		32766			
+				_t187		*char			5		32766			
+				_t188		int			5		32766			
+				_t189		int			5		32766			
+				_t190		char			5		32766			
+				_t191		int			4		32766			
+				_t192		bool			4		32766			
+				_t193		int			5		32766			
+				_t194		int			5		32766			
+				_t195		int			5		32766			
+				_t196		int			5		32766			
+				_t197		int			4		32766			
+				_t198		int			4		32766			
+				_t199		bool			4		32766			
+				_t200		int			5		32766			
+				_t201		int			5		32766			
+				_t202		int			5		32766			
+				_t203		int			4		32766			
+				_t204		int			2		32766			
+			Code = 
+				label_38:
+				_t101_2 = #0
+				_t102_2 = SCREEN_LOCK_0 == _t101_2
+				if ( _t102_2 == #0 ) goto label_39
+				_t103_3 = #10
+				_t104_3 = c_2 == _t103_3
+				if ( _t104_3 == #0 ) goto label_41
+				_t105_4 = #0
+				COLUMN_0 = _t105_4
+				_t106_4 = #8
+				_t107_4 = LINE_0 + _t106_4
+				LINE_0 = _t107_4
+				_t108_4 = #8
+				_t109_4 = _t108_4 * COLUMN_CHAR_SIZE_0
+				_t110_4 = LINE_0 == _t109_4
+				if ( _t110_4 == #0 ) goto label_43
+				_t111_5 = #0
+				LINE_0 = _t111_5
+				_t112_5 = #0
+				COLUMN_0 = _t112_5
+				_t113_5 = #1
+				Return _t113_5
+				goto label_44
+				label_43:
+				label_44:
+				_t114_4 = #0
+				Return _t114_4
+				goto label_42
+				label_41:
+				_t115_3 = #13
+				_t116_3 = c_2 == _t115_3
+				if ( _t116_3 == #0 ) goto label_45
+				_t117_4 = #0
+				COLUMN_0 = _t117_4
+				_t118_4 = #0
+				Return _t118_4
+				goto label_42
+				label_45:
+				_t119_3 = #12
+				_t120_3 = c_2 == _t119_3
+				if ( _t120_3 == #0 ) goto label_46
+				_t121_4 = #8
+				_t122_4 = LINE_0 + _t121_4
+				LINE_0 = _t122_4
+				_t123_4 = #8
+				_t124_4 = _t123_4 * COLUMN_CHAR_SIZE_0
+				_t125_4 = LINE_0 >= _t124_4
+				if ( _t125_4 == #0 ) goto label_47
+				_t126_5 = #0
+				LINE_0 = _t126_5
+				_t127_5 = #0
+				COLUMN_0 = _t127_5
+				_t128_5 = #1
+				Return _t128_5
+				goto label_48
+				label_47:
+				label_48:
+				_t129_4 = #0
+				Return _t129_4
+				goto label_42
+				label_46:
+				_t130_3 = #9
+				_t131_3 = c_2 == _t130_3
+				if ( _t131_3 == #0 ) goto label_49
+				_t132_4 = #4
+				_t133_4 = COLUMN_0 + _t132_4
+				COLUMN_0 = _t133_4
+				_t134_4 = COLUMN_0 >= ROW_CHAR_SIZE_0
+				if ( _t134_4 == #0 ) goto label_50
+				_t135_5 = #0
+				COLUMN_0 = _t135_5
+				_t136_5 = #8
+				_t137_5 = LINE_0 + _t136_5
+				LINE_0 = _t137_5
+				_t138_5 = #8
+				_t139_5 = _t138_5 * COLUMN_CHAR_SIZE_0
+				_t140_5 = LINE_0 >= _t139_5
+				if ( _t140_5 == #0 ) goto label_52
+				_t141_6 = #0
+				LINE_0 = _t141_6
+				_t142_6 = #0
+				COLUMN_0 = _t142_6
+				_t143_6 = #1
+				Return _t143_6
+				goto label_53
+				label_52:
+				label_53:
+				goto label_51
+				label_50:
+				label_51:
+				_t144_4 = #0
+				Return _t144_4
+				goto label_42
+				label_49:
+				_t145_3 = c_2 == CTRL_CODE_BACKSPACE_0
+				if ( _t145_3 == #0 ) goto label_54
+				_t146_4 = #0
+				_t147_4 = COLUMN_0 == _t146_4
+				if ( _t147_4 == #0 ) goto label_55
+				_t148_5 = #0
+				_t149_5 = LINE_0 == _t148_5
+				if ( _t149_5 == #0 ) goto label_57
+				_t150_6 = #0
+				Return _t150_6
+				goto label_58
+				label_57:
+				_t151_6 = #1
+				_t152_6 = ROW_CHAR_SIZE_0 - _t151_6
+				COLUMN_0 = _t152_6
+				_t153_6 = #8
+				_t154_6 = LINE_0 - _t153_6
+				LINE_0 = _t154_6
+				label_58:
+				goto label_56
+				label_55:
+				_t155_5 = COLUMN_0
+				COLUMN_0 = COLUMN_0 - #1
+				label_56:
+				_t156_4 = ROW_CHAR_SIZE_0 * LINE_0
+				_t157_4 = IO_DISPLAY_START_0 + _t156_4
+				_t158_4 = _t157_4 + COLUMN_0
+				A_4 = _t158_4
+				_t159_4 = #0
+				c_4 = _t159_4
+				_t160_5 = #0
+				i_4 = _t160_5
+				label_59:
+				_t161_5 = #8
+				_t162_5 = i_4 < _t161_5
+				if ( _t162_5 == #0 ) goto label_62
+				goto label_60
+				label_61:
+				_t163_5 = i_4
+				i_4 = i_4 + #1
+				goto label_59
+				label_60:
+				FunctionCall mwrite
+				param c_4
+				_t164_5 = ROW_CHAR_SIZE_0 * i_4
+				_t165_5 = A_4 + _t164_5
+				param _t165_5
+				call label_7
+				label_63:
+				_t166_5 = ReturnVal
+				goto label_61
+				label_62:
+				_t167_4 = #0
+				Return _t167_4
+				goto label_42
+				label_54:
+				_t168_4 = #8
+				font_0_4 = _t168_4
+				memory font_4 _t168_4 #4
+				_t169_5 = #0
+				i_4 = _t169_5
+				label_64:
+				_t170_5 = #8
+				_t171_5 = i_4 < _t170_5
+				if ( _t171_5 == #0 ) goto label_67
+				goto label_65
+				label_66:
+				_t172_5 = i_4
+				i_4 = i_4 + #1
+				goto label_64
+				label_65:
+				_t173_5 = i_4 * #1
+				_t174_5 = font_4 + _t173_5
+				_t175_5 = c_2 * #4
+				_t176_5 = font_map_0 + _t175_5
+				_t177_5 = i_4 * #1
+				_t178_5 = *_t176_5 + _t177_5
+				*_t174_5 = *_t178_5
+				goto label_66
+				label_67:
+				_t179_4 = ROW_CHAR_SIZE_0 * LINE_0
+				_t180_4 = IO_DISPLAY_START_0 + _t179_4
+				_t181_4 = _t180_4 + COLUMN_0
+				A_4 = _t181_4
+				_t182_5 = #0
+				i_4 = _t182_5
+				label_68:
+				_t183_5 = #8
+				_t184_5 = i_4 < _t183_5
+				if ( _t184_5 == #0 ) goto label_71
+				goto label_69
+				label_70:
+				_t185_5 = i_4
+				i_4 = i_4 + #1
+				goto label_68
+				label_69:
+				FunctionCall mwrite
+				_t186_5 = i_4 * #1
+				_t187_5 = font_4 + _t186_5
+				param *_t187_5
+				_t188_5 = ROW_CHAR_SIZE_0 * i_4
+				_t189_5 = A_4 + _t188_5
+				param _t189_5
+				call label_7
+				label_72:
+				_t190_5 = ReturnVal
+				goto label_70
+				label_71:
+				_t191_4 = COLUMN_0
+				COLUMN_0 = COLUMN_0 + #1
+				_t192_4 = COLUMN_0 == ROW_CHAR_SIZE_0
+				if ( _t192_4 == #0 ) goto label_73
+				_t193_5 = #0
+				COLUMN_0 = _t193_5
+				_t194_5 = #8
+				_t195_5 = LINE_0 + _t194_5
+				LINE_0 = _t195_5
+				_t196_5 = #0
+				Return _t196_5
+				goto label_74
+				label_73:
+				label_74:
+				_t197_4 = #8
+				_t198_4 = _t197_4 * COLUMN_CHAR_SIZE_0
+				_t199_4 = LINE_0 == _t198_4
+				if ( _t199_4 == #0 ) goto label_75
+				_t200_5 = #0
+				LINE_0 = _t200_5
+				_t201_5 = #0
+				COLUMN_0 = _t201_5
+				_t202_5 = #1
+				Return _t202_5
+				goto label_76
+				label_75:
+				label_76:
+				_t203_4 = #0
+				Return _t203_4
+				label_42:
+				goto label_40
+				label_39:
+				label_40:
+				_t204_2 = #1
+				Return _t204_2
+
+		function Name = write_char_at
+			label = label_77
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				c		char			2		32766			
+				line		int			2		32766			
+				col		int			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t205		int			2		32766			
+				_t206		bool			2		32766			
+				_t207		int			3		32766			
+				_t208		bool			3		32766			
+				_t209		int			3		32766			
+				_t210		int			3		32766			
+				_t211		bool			3		32766			
+				_t212		bool			3		32766			
+				_t213		int			4		32766			
+				_t214		int			3		32766			
+				_t215		bool			3		32766			
+				_t216		bool			3		32766			
+				_t217		bool			3		32766			
+				_t218		int			4		32766			
+				_t219		int			3		32766			
+				_t220		int			4		32766			
+				_t221		int			4		32766			
+				_t222		bool			4		32766			
+				_t223		int			4		32766			
+				_t224		int			4		32766			
+				_t225		*char			4		32766			
+				_t226		int			4		32766			
+				_t227		**char			4		32766			
+				_t228		int			4		32766			
+				_t229		*char			4		32766			
+				_t230		int			3		32766			
+				_t231		int			3		32766			
+				_t232		int			3		32766			
+				_t233		int			4		32766			
+				_t234		int			4		32766			
+				_t235		bool			4		32766			
+				_t236		int			4		32766			
+				_t237		int			4		32766			
+				_t238		*char			4		32766			
+				_t239		int			4		32766			
+				_t240		int			4		32766			
+				_t241		char			4		32766			
+				_t242		int			3		32766			
+				_t243		int			2		32766			
+			Code = 
+				label_77:
+				_t205_2 = #0
+				_t206_2 = SCREEN_LOCK_0 == _t205_2
+				if ( _t206_2 == #0 ) goto label_78
+				_t207_3 = #0
+				_t208_3 = line_2 < _t207_3
+				_t209_3 = #8
+				_t210_3 = _t209_3 * COLUMN_CHAR_SIZE_0
+				_t211_3 = line_2 >= _t210_3
+				_t212_3 = _t208_3 || _t211_3
+				if ( _t212_3 == #0 ) goto label_80
+				_t213_4 = #1
+				Return _t213_4
+				goto label_81
+				label_80:
+				label_81:
+				_t214_3 = #0
+				_t215_3 = col_2 < _t214_3
+				_t216_3 = col_2 >= ROW_CHAR_SIZE_0
+				_t217_3 = _t215_3 || _t216_3
+				if ( _t217_3 == #0 ) goto label_82
+				_t218_4 = #1
+				Return _t218_4
+				goto label_83
+				label_82:
+				label_83:
+				_t219_3 = #8
+				font_0_3 = _t219_3
+				memory font_3 _t219_3 #4
+				_t220_4 = #0
+				i_3 = _t220_4
+				label_84:
+				_t221_4 = #8
+				_t222_4 = i_3 < _t221_4
+				if ( _t222_4 == #0 ) goto label_87
+				goto label_85
+				label_86:
+				_t223_4 = i_3
+				i_3 = i_3 + #1
+				goto label_84
+				label_85:
+				_t224_4 = i_3 * #1
+				_t225_4 = font_3 + _t224_4
+				_t226_4 = c_2 * #4
+				_t227_4 = font_map_0 + _t226_4
+				_t228_4 = i_3 * #1
+				_t229_4 = *_t227_4 + _t228_4
+				*_t225_4 = *_t229_4
+				goto label_86
+				label_87:
+				_t230_3 = ROW_CHAR_SIZE_0 * line_2
+				_t231_3 = IO_DISPLAY_START_0 + _t230_3
+				_t232_3 = _t231_3 + col_2
+				A_3 = _t232_3
+				_t233_4 = #0
+				i_3 = _t233_4
+				label_88:
+				_t234_4 = #8
+				_t235_4 = i_3 < _t234_4
+				if ( _t235_4 == #0 ) goto label_91
+				goto label_89
+				label_90:
+				_t236_4 = i_3
+				i_3 = i_3 + #1
+				goto label_88
+				label_89:
+				FunctionCall mwrite
+				_t237_4 = i_3 * #1
+				_t238_4 = font_3 + _t237_4
+				param *_t238_4
+				_t239_4 = ROW_CHAR_SIZE_0 * i_3
+				_t240_4 = A_3 + _t239_4
+				param _t240_4
+				call label_7
+				label_92:
+				_t241_4 = ReturnVal
+				goto label_90
+				label_91:
+				_t242_3 = #0
+				Return _t242_3
+				goto label_79
+				label_78:
+				label_79:
+				_t243_2 = #1
+				Return _t243_2
+
+		function Name = write_string
+			label = label_93
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				msg		*char			2		32766			
+				len		int			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t244		int			2		32766			
+				_t245		bool			2		32766			
+				_t246		int			3		32766			
+				_t247		int			4		32766			
+				_t248		bool			4		32766			
+				_t249		int			4		32766			
+				_t250		int			4		32766			
+				_t251		*char			4		32766			
+				_t252		int			4		32766			
+				_t253		int			4		32766			
+				_t254		bool			4		32766			
+				_t255		int			3		32766			
+			Code = 
+				label_93:
+				_t244_2 = #0
+				_t245_2 = SCREEN_LOCK_0 == _t244_2
+				if ( _t245_2 == #0 ) goto label_94
+				_t246_3 = #0
+				g_2 = _t246_3
+				_t247_4 = #0
+				i_2 = _t247_4
+				label_96:
+				_t248_4 = i_2 < len_2
+				if ( _t248_4 == #0 ) goto label_99
+				goto label_97
+				label_98:
+				_t249_4 = i_2
+				i_2 = i_2 + #1
+				goto label_96
+				label_97:
+				FunctionCall write_char
+				_t250_4 = i_2 * #1
+				_t251_4 = msg_2 + _t250_4
+				param *_t251_4
+				call label_38
+				label_100:
+				_t252_4 = ReturnVal
+				g_2 = _t252_4
+				_t253_4 = #0
+				_t254_4 = g_2 != _t253_4
+				if ( _t254_4 == #0 ) goto label_101
+				Return g_2
+				goto label_102
+				label_101:
+				label_102:
+				goto label_98
+				label_99:
+				_t255_3 = #0
+				Return _t255_3
+				goto label_95
+				label_94:
+				label_95:
+
+		function Name = write_string_at
+			label = label_103
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				msg		*char			2		32766			
+				len		int			2		32766			
+				line		int			2		32766			
+				col		int			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t256		int			3		32766			
+				_t257		bool			3		32766			
+				_t258		int			3		32766			
+				_t259		int			3		32766			
+				_t260		*char			3		32766			
+				_t261		int			3		32766			
+				_t262		int			3		32766			
+				_t263		bool			3		32766			
+				_t264		int			3		32766			
+				_t265		bool			3		32766			
+				_t266		int			4		32766			
+				_t267		int			4		32766			
+				_t268		int			4		32766			
+				_t269		int			3		32766			
+				_t270		int			3		32766			
+				_t271		bool			3		32766			
+				_t272		int			4		32766			
+				_t273		int			4		32766			
+				_t274		int			4		32766			
+				_t275		int			2		32766			
+			Code = 
+				label_103:
+				_t256_3 = #0
+				i_2 = _t256_3
+				label_104:
+				_t257_3 = i_2 < len_2
+				if ( _t257_3 == #0 ) goto label_107
+				goto label_105
+				label_106:
+				_t258_3 = i_2
+				i_2 = i_2 + #1
+				goto label_104
+				label_105:
+				FunctionCall write_char_at
+				_t259_3 = i_2 * #1
+				_t260_3 = msg_2 + _t259_3
+				param *_t260_3
+				param line_2
+				param col_2
+				call label_77
+				label_108:
+				_t261_3 = ReturnVal
+				g_2 = _t261_3
+				_t262_3 = #0
+				_t263_3 = g_2 != _t262_3
+				if ( _t263_3 == #0 ) goto label_109
+				Return g_2
+				goto label_110
+				label_109:
+				label_110:
+				_t264_3 = col_2
+				col_2 = col_2 + #1
+				_t265_3 = col_2 == ROW_CHAR_SIZE_0
+				if ( _t265_3 == #0 ) goto label_111
+				_t266_4 = #0
+				col_2 = _t266_4
+				_t267_4 = #8
+				_t268_4 = line_2 + _t267_4
+				line_2 = _t268_4
+				goto label_112
+				label_111:
+				label_112:
+				_t269_3 = #8
+				_t270_3 = _t269_3 * COLUMN_CHAR_SIZE_0
+				_t271_3 = line_2 == _t270_3
+				if ( _t271_3 == #0 ) goto label_113
+				_t272_4 = #0
+				line_2 = _t272_4
+				_t273_4 = #0
+				col_2 = _t273_4
+				_t274_4 = #1
+				Return _t274_4
+				goto label_114
+				label_113:
+				label_114:
+				goto label_106
+				label_107:
+				_t275_2 = #0
+				Return _t275_2
+
+		function Name = write_int
+			label = label_115
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				a		int			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t276		int			2		32766			
+				_t277		bool			2		32766			
+				_t278		int			3		32766			
+				_t279		int			3		32766			
+				_t280		int			4		32766			
+				_t281		bool			4		32766			
+				_t282		int			4		32766			
+				_t283		int			4		32766			
+				_t284		*char			4		32766			
+				_t285		int			4		32766			
+				_t286		int			4		32766			
+				_t287		char			4		32766			
+				_t288		int			4		32766			
+				_t289		int			4		32766			
+				_t290		int			4		32766			
+				_t291		int			4		32766			
+				_t292		int			4		32766			
+				_t293		int			4		32766			
+				_t294		bool			4		32766			
+				_t295		int			4		32766			
+				_t296		int			4		32766			
+				_t297		*char			4		32766			
+				_t298		int			4		32766			
+				_t299		int			3		32766			
+				_t300		int			2		32766			
+			Code = 
+				label_115:
+				_t276_2 = #0
+				_t277_2 = SCREEN_LOCK_0 == _t276_2
+				if ( _t277_2 == #0 ) goto label_116
+				_t278_3 = #10
+				temp_0_3 = _t278_3
+				memory temp_3 _t278_3 #4
+				_t279_3 = #0
+				count_3 = _t279_3
+				label_118:
+				_t280_4 = #0
+				_t281_4 = a_2 > _t280_4
+				if ( _t281_4 == #0 ) goto label_121
+				goto label_119
+				label_120:
+				goto label_118
+				label_119:
+				_t282_4 = count_3
+				count_3 = count_3 + #1
+				_t283_4 = _t282_4 * #1
+				_t284_4 = temp_3 + _t283_4
+				_t285_4 = #10
+				_t286_4 = a_2 % _t285_4
+				_t287_4 = #'0'
+				_t288_4 = _t286_4 + _t287_4
+				*_t284_4 = _t288_4
+				_t289_4 = #10
+				_t290_4 = a_2 / _t289_4
+				a_2 = _t290_4
+				goto label_120
+				label_121:
+				_t291_4 = #1
+				_t292_4 = count_3 - _t291_4
+				i_3 = _t292_4
+				label_122:
+				_t293_4 = #0
+				_t294_4 = i_3 >= _t293_4
+				if ( _t294_4 == #0 ) goto label_125
+				goto label_123
+				label_124:
+				_t295_4 = i_3
+				i_3 = i_3 - #1
+				goto label_122
+				label_123:
+				FunctionCall write_char
+				_t296_4 = i_3 * #1
+				_t297_4 = temp_3 + _t296_4
+				param *_t297_4
+				call label_38
+				label_126:
+				_t298_4 = ReturnVal
+				goto label_124
+				label_125:
+				_t299_3 = #0
+				Return _t299_3
+				goto label_117
+				label_116:
+				label_117:
+				_t300_2 = #1
+				Return _t300_2
+
+		function Name = set_cursor_pos
+			label = label_127
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				line		int			2		32766			
+				col		int			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t301		int			2		32766			
+				_t302		bool			2		32766			
+				_t303		int			2		32766			
+				_t304		int			2		32766			
+				_t305		bool			2		32766			
+				_t306		bool			2		32766			
+				_t307		int			3		32766			
+				_t308		int			2		32766			
+				_t309		bool			2		32766			
+				_t310		bool			2		32766			
+				_t311		bool			2		32766			
+				_t312		int			3		32766			
+				_t313		int			2		32766			
+			Code = 
+				label_127:
+				_t301_2 = #0
+				_t302_2 = line_2 < _t301_2
+				_t303_2 = #8
+				_t304_2 = _t303_2 * COLUMN_CHAR_SIZE_0
+				_t305_2 = line_2 >= _t304_2
+				_t306_2 = _t302_2 || _t305_2
+				if ( _t306_2 == #0 ) goto label_128
+				_t307_3 = #1
+				Return _t307_3
+				goto label_129
+				label_128:
+				label_129:
+				_t308_2 = #0
+				_t309_2 = col_2 < _t308_2
+				_t310_2 = col_2 >= ROW_CHAR_SIZE_0
+				_t311_2 = _t309_2 || _t310_2
+				if ( _t311_2 == #0 ) goto label_130
+				_t312_3 = #1
+				Return _t312_3
+				goto label_131
+				label_130:
+				label_131:
+				LINE_0 = line_2
+				COLUMN_0 = col_2
+				_t313_2 = #0
+				Return _t313_2
+
+		function Name = get_cursor_pos
+			label = label_132
+			return value : int
+			parameters : 
+				Name	DataType	Scope	Default	pointer	
+				vals		*int			2		32766			
+			localVariables : 
+				Name	DataType	Scope	Default	pointer	
+			tempVariables = 
+				Name	DataType	Scope	Default	pointer	
+				_t314		int			2		32766			
+				_t315		int			2		32766			
+				_t316		*int			2		32766			
+				_t317		int			2		32766			
+				_t318		int			2		32766			
+				_t319		*int			2		32766			
+			Code = 
+				label_132:
+				_t314_2 = #0
+				_t315_2 = _t314_2 * #4
+				_t316_2 = vals_2 + _t315_2
+				*_t316_2 = LINE_0
+				_t317_2 = #1
+				_t318_2 = _t317_2 * #4
+				_t319_2 = vals_2 + _t318_2
+				*_t319_2 = COLUMN_0
+
+		function Name = main
+			label = label_133
 			return value : int
 			parameters : 
 				Name	DataType	Scope	Default	pointer	
@@ -300,15 +1306,15 @@ Struct Name = main
 				Name	DataType	Scope	Default	pointer	
 			tempVariables = 
 				Name	DataType	Scope	Default	pointer	
-				_t40		int			2		32767			
-				_t41		int			2		32767			
-				_t42		*int			2		32767			
-				_t43		int			2		32767			
+				_t320		int			2		32766			
+				_t321		int			2		32766			
+				_t322		*int			2		32766			
+				_t323		int			2		32766			
 			Code = 
-				label_31:
-				_t40_2 = #1
-				_t41_2 = _t40_2 * MEMORY_SIZE_0
-				memory _t42_2 _t41_2 #1
-				memory_0 = _t42_2
-				_t43_2 = #0
-				Return _t43_2
+				label_133:
+				_t320_2 = #1
+				_t321_2 = _t320_2 * MEMORY_SIZE_0
+				memory _t322_2 _t321_2 #1
+				memory_0 = _t322_2
+				_t323_2 = #0
+				Return _t323_2

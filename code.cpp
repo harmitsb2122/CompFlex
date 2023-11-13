@@ -46,7 +46,12 @@ int COLUMN_CHAR_SIZE = 64;
 int SCREEN_LOCK = 0; // 0x00
 int MUL_CONS = 9;
 
+int COLUMN = 0;
+int LINE = 0;
+
 char *memory;
+
+char **font_map;
 
 // memory.c
 int __load_char_as_bits(char c, char *out)
@@ -138,6 +143,305 @@ char keyboard_get_input()
   }
   // mclose();
   return input;
+}
+
+int convert_keyinput_to_string(char input, char *out)
+{
+  if (input == CTRL_CODE_ALT)
+  {
+    // ENTR
+    out[0] = 'E';
+    out[1] = 'N';
+    out[2] = 'T';
+    out[3] = 'R';
+  }
+  elif (input == CTRL_CODE_ALT)
+  {
+    // ALT
+    out[0] = 'A';
+    out[1] = 'L';
+    out[2] = 'T';
+    out[3] = '\0';
+  }
+  elif (input == CTRL_CODE_SHIFT)
+  {
+    // SHFT
+    out[0] = 'S';
+    out[1] = 'H';
+    out[2] = 'F';
+    out[3] = 'T';
+  }
+  else
+  {
+    out[0] = input;
+    out[1] = '\0';
+  }
+  return 1;
+}
+
+char manipulate_input(char c)
+{
+  return c;
+}
+
+int isEscape(char input)
+{
+  return input == 27; // 0x1B
+}
+
+// **************************** UTILITY **************************
+// @brief write_char writes a character included in fontmap at the last location
+// @note takes care of word wrapping
+// @returns 1 if not able to write else 0
+int write_char(char c)
+{
+  // use write and read from mem.c
+  if (SCREEN_LOCK == 0)
+  {
+
+    if (c == 10) // '\n'
+    {
+      COLUMN = 0;
+      LINE = LINE + 8;
+      if (LINE == 8 * COLUMN_CHAR_SIZE)
+      {
+        LINE = 0;
+        COLUMN = 0;
+
+        return 1;
+      }
+
+      return 0;
+    }
+    elif (c == 13) //'\r'
+    {
+      COLUMN = 0;
+      return 0;
+    }
+    elif (c == 12) //'\f'
+    {
+      LINE = LINE + 8;
+      if (LINE >= 8 * COLUMN_CHAR_SIZE)
+      {
+        LINE = 0;
+        COLUMN = 0;
+        return 1;
+      }
+
+      return 0;
+    }
+    elif (c == 9) // '\t'
+    {
+      COLUMN = COLUMN + 4;
+      if (COLUMN >= ROW_CHAR_SIZE)
+      {
+        COLUMN = 0;
+        LINE = LINE + 8;
+        if (LINE >= 8 * COLUMN_CHAR_SIZE)
+        {
+          LINE = 0;
+          COLUMN = 0;
+          return 1;
+        }
+      }
+
+      return 0;
+    }
+    elif (c == CTRL_CODE_BACKSPACE)
+    {
+      if (COLUMN == 0)
+      {
+        if (LINE == 0)
+        {
+          return 0;
+        }
+        else
+        {
+          COLUMN = ROW_CHAR_SIZE - 1;
+          LINE = LINE - 8;
+        }
+      }
+      else
+      {
+        COLUMN--;
+      }
+
+      int A, i;
+      char c;
+      A = IO_DISPLAY_START + ROW_CHAR_SIZE * LINE + COLUMN;
+      c = 0;
+      for (i = 0; i < 8; i++)
+      {
+        mwrite(c, A + ROW_CHAR_SIZE * i);
+      }
+
+      return 0;
+    }
+    else
+    {
+      int A, i;
+      char font[8];
+      for (i = 0; i < 8; i++)
+      {
+        font[i] = font_map[c][i];
+      }
+
+      A = IO_DISPLAY_START + ROW_CHAR_SIZE * LINE + COLUMN; // location of the first character in the line
+      for (i = 0; i < 8; i++)
+      {
+        mwrite(font[i], A + ROW_CHAR_SIZE * i);
+      }
+
+      COLUMN++;
+      if (COLUMN == ROW_CHAR_SIZE)
+      { // if the row is full
+        COLUMN = 0;
+        LINE = LINE + 8;
+        return 0;
+      }
+
+      if (LINE == 8 * COLUMN_CHAR_SIZE)
+      { // if the screen is full
+        LINE = 0;
+        COLUMN = 0;
+
+        return 1;
+      }
+
+      return 0;
+    }
+  }
+  return 1;
+}
+
+int write_char_at(char c, int line, int col)
+{
+  if (SCREEN_LOCK == 0)
+  {
+
+    if (line < 0 || line >= 8 * COLUMN_CHAR_SIZE)
+    {
+      return 1;
+    }
+    if (col < 0 || col >= ROW_CHAR_SIZE)
+    {
+      return 1;
+    }
+
+    int A, i;
+    char font[8];
+    for (i = 0; i < 8; i++)
+    {
+      font[i] = font_map[c][i];
+    }
+
+    A = IO_DISPLAY_START + ROW_CHAR_SIZE * line + col; // location of the first character in the line
+    for (i = 0; i < 8; i++)
+    {
+      mwrite(font[i], A + ROW_CHAR_SIZE * i);
+    }
+
+    return 0;
+  }
+
+  return 1;
+}
+
+// ******************************************************************************
+
+int write_string(char *msg, int len)
+{
+  int g, i;
+  if (SCREEN_LOCK == 0)
+  {
+    g = 0;
+    for (i = 0; i < len; i++)
+    {
+      g = write_char(msg[i]);
+
+      if (g != 0)
+      {
+        return g;
+      }
+    }
+    return 0;
+  }
+}
+
+int write_string_at(char *msg, int len, int line, int col)
+{
+  int g, i;
+  for (i = 0; i < len; i++)
+  {
+    g = write_char_at(msg[i], line, col);
+    if (g != 0)
+    {
+      return g;
+    }
+
+    col++;
+    if (col == ROW_CHAR_SIZE)
+    {
+      col = 0;
+      line = line + 8;
+    }
+
+    if (line == 8 * COLUMN_CHAR_SIZE)
+    {
+      line = 0;
+      col = 0;
+
+      return 1;
+    }
+  }
+  return 0;
+}
+
+int write_int(int a)
+{
+  if (SCREEN_LOCK == 0)
+  {
+    char temp[10];
+    int count;
+    count = 0;
+    for (; a > 0;)
+    {
+      temp[count++] = a % 10 + '0';
+      a = a / 10;
+    }
+    int i;
+    for (i = count - 1; i >= 0; i--)
+    {
+      write_char(temp[i]);
+    }
+
+    return 0;
+  }
+
+  return 1;
+}
+
+int set_cursor_pos(int line, int col)
+{
+  if (line < 0 || line >= 8 * COLUMN_CHAR_SIZE)
+  {
+    return 1;
+  }
+  if (col < 0 || col >= ROW_CHAR_SIZE)
+  {
+    return 1;
+  }
+
+  LINE = line;
+  COLUMN = col;
+
+  return 0;
+}
+
+int get_cursor_pos(int *vals)
+{
+  vals[0] = LINE;
+  vals[1] = COLUMN;
 }
 
 int main()
