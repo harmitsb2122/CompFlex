@@ -1,10 +1,10 @@
-label_6:
-_t16_2 = #1
-_t17_2 = _t16_2 * MEMORY_SIZE_0
-memory _t18_2 _t17_2 #1
-memory_0 = _t18_2
-_t19_2 = #0
-Return _t19_2
+label_31:
+_t40_2 = #1
+_t41_2 = _t40_2 * MEMORY_SIZE_0
+memory _t42_2 _t41_2 #1
+memory_0 = _t42_2
+_t43_2 = #0
+Return _t43_2
 
 label_1:
 g_2 = c_2
@@ -23,17 +23,121 @@ label_3:
 _t5_3 = i_2 * #1
 _t6_3 = out_2 + _t5_3
 _t7_3 = #1
-_t8_3 = _t7_3 & g_2
-_t9_3 = #1
-_t10_3 = _t8_3 | _t9_3
-_t11_3 = #'0'
-_t12_3 = _t10_3 + _t11_3
-*_t6_3 = _t12_3
-_t13_3 = #1
-_t14_3 = g_2 << _t13_3
-g_2 = _t14_3
+_t8_3 = g_2 & _t7_3
+_t9_3 = #'0'
+_t10_3 = _t8_3 + _t9_3
+*_t6_3 = _t10_3
+_t11_3 = #1
+_t12_3 = g_2 >> _t11_3
+g_2 = _t12_3
 goto label_4
 label_5:
-_t15_2 = #1
-Return _t15_2
+_t13_2 = #1
+Return _t13_2
+
+label_6:
+_t14_2 = addr_2 * #1
+_t15_2 = memory_0 + _t14_2
+Return *_t15_2
+
+label_7:
+_t16_2 = addr_2 * #1
+_t17_2 = memory_0 + _t16_2
+*_t17_2 = c_2
+_t18_2 = addr_2 * #1
+_t19_2 = memory_0 + _t18_2
+Return *_t19_2
+
+label_8:
+_t20_3 = #0
+i_2 = _t20_3
+label_9:
+_t21_3 = i_2 < MEMORY_SIZE_0
+if ( _t21_3 == #0 ) goto label_12
+goto label_10
+label_11:
+_t22_3 = i_2
+i_2 = i_2 + #1
+goto label_9
+label_10:
+_t23_3 = i_2 * #1
+_t24_3 = memory_0 + _t23_3
+_t25_3 = #0
+*_t24_3 = _t25_3
+goto label_11
+label_12:
+_t26_2 = #1
+Return _t26_2
+
+label_13:
+start_2 = IO_KEYBOARD_START_0
+_t27_2 = IO_KEYBOARD_START_0 + IO_KEYBOARD_SIZE_0
+end_2 = _t27_2
+_t28_2 = #0
+c_2 = _t28_2
+i_2 = start_2
+label_14:
+_t29_3 = i_2 < end_2
+if ( _t29_3 == #0 ) goto label_17
+goto label_15
+label_16:
+_t30_3 = i_2
+i_2 = i_2 + #1
+goto label_14
+label_15:
+FunctionCall mwrite
+param c_2
+param i_2
+call label_7
+label_18:
+_t31_3 = ReturnVal
+goto label_16
+label_17:
+
+label_19:
+_t32_2 = #0
+input_2 = _t32_2
+_t33_2 = #0
+can_break_2 = _t33_2
+label_20:
+if ( true == #0 ) goto label_23
+goto label_21
+label_22:
+goto label_20
+label_21:
+can_break_2 = false
+FunctionCall minit
+call label_8
+label_24:
+_t34_3 = ReturnVal
+FunctionCall mread_char
+param IO_KEYBOARD_START_0
+call label_6
+label_25:
+_t35_3 = ReturnVal
+f_2 = _t35_3
+_t36_3 = #0
+_t37_3 = f_2 != _t36_3
+if ( _t37_3 == #0 ) goto label_26
+input_2 = f_2
+_t38_4 = #0
+c_2 = _t38_4
+FunctionCall mwrite
+param c_2
+param IO_KEYBOARD_START_0
+call label_7
+label_28:
+_t39_4 = ReturnVal
+can_break_2 = true
+if ( can_break_2 == #0 ) goto label_29
+goto label_23
+goto label_30
+label_29:
+label_30:
+goto label_27
+label_26:
+label_27:
+goto label_22
+label_23:
+Return input_2
 

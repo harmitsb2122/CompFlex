@@ -661,7 +661,7 @@ extern "C"
 
 					if( type1 != "int" or type2 != "int" )
 					{
-						cout << "COMPILETIME ERROR: cannot apply '*' to arguements of types: " << type1 << ", " << type2 << endl;
+						cout << "COMPILETIME ERROR: cannot apply '/' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
@@ -683,7 +683,7 @@ extern "C"
 
 					if( type1 != "int" or type2 != "int" )
 					{
-						cout << "COMPILETIME ERROR: cannot apply '*' to arguements of types: " << type1 << ", " << type2 << endl;
+						cout << "COMPILETIME ERROR: cannot apply '%' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
@@ -763,7 +763,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if(false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '<' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -784,7 +784,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if(false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '>' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -805,7 +805,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( false && (type1 != "int" or type2 != "int" ) )
 					{
 						cout << "COMPILETIME ERROR: cannot apply '<=' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -826,7 +826,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if(false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '<=' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -855,7 +855,8 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if(( type1 != "int" or type2 != "int" ) && type2!= "all" && type1!="all")
+					// if(( type1 != "int" or type2 != "int" ) && type2!= "all" && type1!="all")
+					if(false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '==' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -876,7 +877,8 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( (type1 != "int" or type2 != "int") && type2!= "all" && type1!="all")
+					// if( (type1 != "int" or type2 != "int") && type2!= "all" && type1!="all")
+					if(false && (type1 != "int" or type2 != "int" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '!=' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -956,6 +958,11 @@ extern "C"
 				{
 					$<var.addr>$ = $<var.addr>1;
 					$<var.type>$ = $<var.type>1;
+				}
+			| B_CONST
+				{
+					$<var.addr>$ = getCharArray($<str>1);
+					$<var.type>$ = getCharArray("bool");
 				}
 			;
 
