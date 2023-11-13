@@ -148,6 +148,18 @@ identifier		{letter}({letter}|{digit})*
 							printf("ASM : %s\n", yytext);
 						return ASM;
 					}
+">>"				{
+						if( DEBUG == 1) 
+							printf("RIGHT_SHIFT : %s\n",yytext);
+						yylval.str = strdup(yytext);
+						return RIGHT_SHIFT;
+					}	
+"<<"				{
+						if( DEBUG == 1) 
+							printf("LEFT_SHIFT : %s\n",yytext);
+						yylval.str = strdup(yytext);
+						return LEFT_SHIFT;
+					}					
 "+="				{
 						if( DEBUG == 1) 
 							printf("ADD_ASSIGN : %s\n",yytext);
@@ -303,6 +315,12 @@ identifier		{letter}({letter}|{digit})*
 							printf("& : %s\n",yytext);
 						yylval.str = strdup(yytext);
 						return '&';
+					}
+"|"				{
+						if( DEBUG == 1) 
+							printf("& : %s\n",yytext);
+						yylval.str = strdup(yytext);
+						return '|';
 					}
 "-"				{
 						if( DEBUG == 1) 
