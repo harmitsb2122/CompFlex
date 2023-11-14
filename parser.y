@@ -298,8 +298,9 @@ extern "C"
 				}
 
 			| postfix_expression INC_OP	{
-					if( strcmp($<var.type>$, "int") != 0){
-						cout << "COMPILETIME ERROR: cannot apply increment operator to non int types" << endl;
+					string type($<var.type>1);
+					if( type!="int" && type!="char" && type[0]!='*'){
+						cout << "COMPILETIME ERROR: cannot apply increment operator to non int/char/* types" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
@@ -314,8 +315,9 @@ extern "C"
 
 			| postfix_expression DEC_OP		
 				{
-					if( strcmp($<var.type>$, "int") != 0 ){
-						cout << "COMPILETIME ERROR: cannot apply increment operator to non int types" << endl;
+					string type($<var.type>$);
+					if( type!="int" && type!="char" && type[0]!='*'){
+						cout << "COMPILETIME ERROR: cannot apply decrement operator to non int/char/* types" << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
@@ -437,8 +439,9 @@ extern "C"
 					$<var.type>$ = $<var.type>1;
 				}
 			| INC_OP unary_expression{
-					if( strcmp($<var.type>2, "int") != 0 ){
-						cout << "COMPILETIME ERROR: cannot apply increment operator to non int types, applying to " << string($<var.type>2) << endl;
+					string type($<var.type>1);
+					if( type!="int" && type!="char" && type[0]!='*'){
+						cout << "COMPILETIME ERROR: cannot apply increment operator to non int/char/* types, applying to " << string($<var.type>2) << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
@@ -450,8 +453,9 @@ extern "C"
 					}
 				}
 			| DEC_OP unary_expression	{
-					if( strcmp($<var.type>2, "int") != 0 ){
-						cout << "COMPILETIME ERROR: cannot apply increment operator to non int types, applying to " << string($<var.type>2)  << endl;
+					string type($<var.type>1);
+					if(type!="int" && type!="char" && type[0]!='*'){
+						cout << "COMPILETIME ERROR: cannot apply increment operator to non int/char/* types, applying to " << string($<var.type>2)  << endl;
 						cout << "At line : " << yylineno << endl;
 						error = -1;
 						return 1;
@@ -531,7 +535,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply >> to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -551,7 +555,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply << to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -571,7 +575,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply | to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -591,7 +595,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply & to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -611,7 +615,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply ^ to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -637,7 +641,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply MAC to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -657,7 +661,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply '*' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -679,7 +683,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply '/' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -701,7 +705,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( type1 != "int" or type2 != "int" )
+					if( (type1 != "int" && type1!= "char") or (type2 != "int" && type2 != "char") )
 					{
 						cout << "COMPILETIME ERROR: cannot apply '%' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -731,7 +735,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( false && (type1 != "int" or type2 != "int" ))
+					if( (type1 != "int" && type1!= "char" && type1[0]!= '*') or (type2 != "int" && type2 != "char" && type2[0]!= '*'))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '+' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -753,7 +757,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( false && (type1 != "int" or type2 != "int" ))
+					if(  (type1 != "int" && type1!= "char" && type1[0]!= '*') or (type2 != "int" && type2 != "char" && type2[0]!= '*'))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '+' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -783,7 +787,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if(false && (type1 != "int" or type2 != "int" ))
+					if((type1 != "int" && type1 != "char" ) or (type2 != "int" && type2 != "char" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '<' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -804,7 +808,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if(false && (type1 != "int" or type2 != "int" ))
+					if((type1 != "int" && type1 != "char" ) or (type2 != "int" && type2 != "char" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '>' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -825,7 +829,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if( false && (type1 != "int" or type2 != "int" ) )
+					if( (type1 != "int" && type1 != "char" ) or (type2 != "int" && type2 != "char" ) )
 					{
 						cout << "COMPILETIME ERROR: cannot apply '<=' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;
@@ -846,7 +850,7 @@ extern "C"
 					string type1($<var.type>1);
 					string type2($<var.type>3);
 
-					if(false && (type1 != "int" or type2 != "int" ))
+					if((type1 != "int" && type1 != "char" ) or (type2 != "int" && type2 != "char" ))
 					{
 						cout << "COMPILETIME ERROR: cannot apply '<=' to arguements of types: " << type1 << ", " << type2 << endl;
 						cout << "At line : " << yylineno << endl;

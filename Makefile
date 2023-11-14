@@ -6,7 +6,7 @@ all: tokenizer.l parser.y helper.cpp helper.h
 	g++ lex.yy.o gm.cc helper.cpp -o genTemp
 
 run: genTemp code.cpp
-	./genTemp code.cpp
+	./genTemp code.cpp > verdict.txt
 
 clean:
 	rm -f genTemp
