@@ -420,15 +420,22 @@ int insertParam(string name, string type)
 
 void removeVariables()
 {
-	// return;
 	int gIndex = getStructIndex(currentStruct);
 	int fIndex = getFunctionIndex(gIndex, currentFunction);
 	vector<SymbolTableEntry> local = globalTable[gIndex].functionTables[fIndex].localVariables;
 
-	while (!local.empty() && local.back().scope > currentScope)
+	for (int i = 0; i < local.size(); i++)
 	{
-		local.pop_back();
+		if (local[i].scope > currentScope)
+		{
+			local[i].scope = 10000000;
+		}
 	}
+
+	// while (!local.empty() && local.back().scope > currentScope)
+	// {
+	// 	local.pop_back();
+	// }
 	globalTable[gIndex].functionTables[fIndex].localVariables = local;
 }
 
