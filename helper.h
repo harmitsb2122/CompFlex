@@ -13,6 +13,7 @@ public:
 	string dataType;
 	int scope;
 	int defaultValue;
+	int isActive;
 	vector<SymbolTableEntry> levels;
 
 	SymbolTableEntry(string, string, int, vector<SymbolTableEntry>);

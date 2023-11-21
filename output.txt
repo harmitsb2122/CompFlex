@@ -2,36 +2,36 @@ Successfully Compiled
 
 Struct Name = main
 	Attributes = 
-				Name	DataType	Scope	Default	pointer	
-				ALPHABET_SIZE		int			0		26			
-				TrieNode.children_0		*TrieNode			0		26			
-				TrieNode.children		**TrieNode			0		104			
-				TrieNode.isEndOfWord		int			0		4			
-				TrieNode		struct			0		108			children_0*children*isEndOfWord*
+				Name	DataType	Scope	Active	Default	pointer	
+				ALPHABET_SIZE		int			0		1		26			
+				TrieNode.children_0		*TrieNode			0		1		26			
+				TrieNode.children		**TrieNode			0		1		104			
+				TrieNode.isEndOfWord		int			0		1		4			
+				TrieNode		struct			0		1		108			children_0*children*isEndOfWord*
 	Constants = 
-				Name	DataType	Scope	Default	pointer	
+				Name	DataType	Scope	Active	Default	pointer	
 	Functions = 
 
 		function Name = getNode
 			label = label_1
 			return value : *TrieNode
 			parameters : 
-				Name	DataType	Scope	Default	pointer	
+				Name	DataType	Scope	Active	Default	pointer	
 			localVariables : 
-				Name	DataType	Scope	Default	pointer	
-				pNode		*TrieNode			10000000		32767			
-				i		int			10000000		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				pNode		*TrieNode			2		0		32766			
+				i		int			2		0		32766			
 			tempVariables = 
-				Name	DataType	Scope	Default	pointer	
-				_t1		int			2		32767			
-				_t2		*int			2		32767			
-				_t3		int			2		32767			
-				_t4		int			3		32767			
-				_t5		bool			3		32767			
-				_t6		int			3		32767			
-				_t7		int			3		32767			
-				_t8		**TrieNode			3		32767			
-				_t9		int			3		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				_t1		int			2		1		32766			
+				_t2		*int			2		1		32766			
+				_t3		int			2		1		32766			
+				_t4		int			3		1		32766			
+				_t5		bool			3		1		32766			
+				_t6		int			3		1		32766			
+				_t7		int			3		1		32766			
+				_t8		**TrieNode			3		1		32766			
+				_t9		int			3		1		32766			
 			Code = 
 				label_1:
 				_t1_2 = #108
@@ -62,21 +62,21 @@ Struct Name = main
 			label = label_6
 			return value : int
 			parameters : 
-				Name	DataType	Scope	Default	pointer	
-				str		*char			2		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				str		*char			2		1		32766			
 			localVariables : 
-				Name	DataType	Scope	Default	pointer	
-				count		int			10000000		32767			
-				ch		int			10000000		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				count		int			2		0		32766			
+				ch		int			3		0		32766			
 			tempVariables = 
-				Name	DataType	Scope	Default	pointer	
-				_t10		int			2		32767			
-				_t11		bool			3		32767			
-				_t12		int			3		32767			
-				_t13		*char			3		32767			
-				_t14		int			3		32767			
-				_t15		bool			3		32767			
-				_t16		int			3		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				_t10		int			2		1		32766			
+				_t11		bool			3		1		32766			
+				_t12		int			3		1		32766			
+				_t13		*char			3		1		32766			
+				_t14		int			3		1		32766			
+				_t15		bool			3		1		32766			
+				_t16		int			3		1		32766			
 			Code = 
 				label_6:
 				_t10_2 = #0
@@ -108,36 +108,36 @@ Struct Name = main
 			label = label_13
 			return value : int
 			parameters : 
-				Name	DataType	Scope	Default	pointer	
-				root		*TrieNode			2		32767			
-				key		*char			2		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				root		*TrieNode			2		1		32766			
+				key		*char			2		1		32766			
 			localVariables : 
-				Name	DataType	Scope	Default	pointer	
-				pCrawl		*TrieNode			10000000		32767			
-				n		int			10000000		32767			
-				i		int			10000000		32767			
-				index		int			10000000		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				pCrawl		*TrieNode			2		0		32766			
+				n		int			2		0		32766			
+				i		int			2		0		32766			
+				index		int			3		0		32766			
 			tempVariables = 
-				Name	DataType	Scope	Default	pointer	
-				_t17		int			2		32767			
-				_t18		int			3		32767			
-				_t19		bool			3		32767			
-				_t20		int			3		32767			
-				_t21		int			3		32767			
-				_t22		*char			3		32767			
-				_t23		char			3		32767			
-				_t24		int			3		32767			
-				_t25		int			3		32767			
-				_t26		**TrieNode			3		32767			
-				_t27		int			3		32767			
-				_t28		bool			3		32767			
-				_t29		int			4		32767			
-				_t30		**TrieNode			4		32767			
-				_t31		*TrieNode			4		32767			
-				_t32		int			3		32767			
-				_t33		**TrieNode			3		32767			
-				_t34		int			2		32767			
-				_t35		int			2		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				_t17		int			2		1		32766			
+				_t18		int			3		1		32766			
+				_t19		bool			3		1		32766			
+				_t20		int			3		1		32766			
+				_t21		int			3		1		32766			
+				_t22		*char			3		1		32766			
+				_t23		char			3		1		32766			
+				_t24		int			3		1		32766			
+				_t25		int			3		1		32766			
+				_t26		**TrieNode			3		1		32766			
+				_t27		int			3		1		32766			
+				_t28		bool			3		1		32766			
+				_t29		int			4		1		32766			
+				_t30		**TrieNode			4		1		32766			
+				_t31		*TrieNode			4		1		32766			
+				_t32		int			3		1		32766			
+				_t33		**TrieNode			3		1		32766			
+				_t34		int			2		1		32766			
+				_t35		int			2		1		32766			
 			Code = 
 				label_13:
 				pCrawl_2 = root_2
@@ -192,32 +192,32 @@ Struct Name = main
 			label = label_22
 			return value : int
 			parameters : 
-				Name	DataType	Scope	Default	pointer	
-				root		*TrieNode			2		32767			
-				key		*char			2		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				root		*TrieNode			2		1		32766			
+				key		*char			2		1		32766			
 			localVariables : 
-				Name	DataType	Scope	Default	pointer	
-				pCrawl		*TrieNode			10000000		32767			
-				n		int			10000000		32767			
-				i		int			10000000		32767			
-				index		int			10000000		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				pCrawl		*TrieNode			2		0		32766			
+				n		int			2		0		32766			
+				i		int			2		0		32766			
+				index		int			3		0		32766			
 			tempVariables = 
-				Name	DataType	Scope	Default	pointer	
-				_t36		int			2		32767			
-				_t37		int			3		32767			
-				_t38		bool			3		32767			
-				_t39		int			3		32767			
-				_t40		int			3		32767			
-				_t41		*char			3		32767			
-				_t42		char			3		32767			
-				_t43		int			3		32767			
-				_t44		int			3		32767			
-				_t45		**TrieNode			3		32767			
-				_t46		int			3		32767			
-				_t47		bool			3		32767			
-				_t48		int			4		32767			
-				_t49		int			3		32767			
-				_t50		**TrieNode			3		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				_t36		int			2		1		32766			
+				_t37		int			3		1		32766			
+				_t38		bool			3		1		32766			
+				_t39		int			3		1		32766			
+				_t40		int			3		1		32766			
+				_t41		*char			3		1		32766			
+				_t42		char			3		1		32766			
+				_t43		int			3		1		32766			
+				_t44		int			3		1		32766			
+				_t45		**TrieNode			3		1		32766			
+				_t46		int			3		1		32766			
+				_t47		bool			3		1		32766			
+				_t48		int			4		1		32766			
+				_t49		int			3		1		32766			
+				_t50		**TrieNode			3		1		32766			
 			Code = 
 				label_22:
 				pCrawl_2 = root_2
@@ -264,67 +264,67 @@ Struct Name = main
 			label = label_30
 			return value : int
 			parameters : 
-				Name	DataType	Scope	Default	pointer	
+				Name	DataType	Scope	Active	Default	pointer	
 			localVariables : 
-				Name	DataType	Scope	Default	pointer	
-				root		*TrieNode			10000000		32767			
-				first		*char			10000000		32767			
-				keys_0		char			10000000		32767			
-				keys		**char			10000000		32767			keys_0*
-				n		int			10000000		32767			
-				i		int			10000000		32767			
-				is_present		int			10000000		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				root		*TrieNode			2		0		32766			
+				first		*char			2		0		32766			
+				keys_0		char			2		0		32766			
+				keys		**char			2		0		32766			keys_0*
+				n		int			2		0		32766			
+				i		int			2		0		32766			
+				is_present		int			2		0		32766			
 			tempVariables = 
-				Name	DataType	Scope	Default	pointer	
-				_t51		int			2		32767			
-				_t52		*TrieNode			2		32767			
-				_t53		int			2		32767			
-				_t54		int			2		32767			
-				_t55		**char			2		32767			
-				_t56		*char			2		32767			
-				_t57		int			2		32767			
-				_t58		int			2		32767			
-				_t59		**char			2		32767			
-				_t60		*char			2		32767			
-				_t61		int			2		32767			
-				_t62		int			2		32767			
-				_t63		**char			2		32767			
-				_t64		*char			2		32767			
-				_t65		int			2		32767			
-				_t66		int			2		32767			
-				_t67		**char			2		32767			
-				_t68		*char			2		32767			
-				_t69		int			2		32767			
-				_t70		int			2		32767			
-				_t71		**char			2		32767			
-				_t72		*char			2		32767			
-				_t73		int			2		32767			
-				_t74		int			2		32767			
-				_t75		**char			2		32767			
-				_t76		*char			2		32767			
-				_t77		int			2		32767			
-				_t78		int			2		32767			
-				_t79		**char			2		32767			
-				_t80		*char			2		32767			
-				_t81		int			2		32767			
-				_t82		int			2		32767			
-				_t83		**char			2		32767			
-				_t84		*char			2		32767			
-				_t85		int			2		32767			
-				_t86		int			2		32767			
-				_t87		**char			2		32767			
-				_t88		int			2		32767			
-				_t89		int			2		32767			
-				_t90		int			2		32767			
-				_t91		int			3		32767			
-				_t92		bool			3		32767			
-				_t93		int			3		32767			
-				_t94		int			3		32767			
-				_t95		**char			3		32767			
-				_t96		int			3		32767			
-				_t97		*char			2		32767			
-				_t98		int			2		32767			
-				_t99		int			2		32767			
+				Name	DataType	Scope	Active	Default	pointer	
+				_t51		int			2		1		32766			
+				_t52		*TrieNode			2		1		32766			
+				_t53		int			2		1		32766			
+				_t54		int			2		1		32766			
+				_t55		**char			2		1		32766			
+				_t56		*char			2		1		32766			
+				_t57		int			2		1		32766			
+				_t58		int			2		1		32766			
+				_t59		**char			2		1		32766			
+				_t60		*char			2		1		32766			
+				_t61		int			2		1		32766			
+				_t62		int			2		1		32766			
+				_t63		**char			2		1		32766			
+				_t64		*char			2		1		32766			
+				_t65		int			2		1		32766			
+				_t66		int			2		1		32766			
+				_t67		**char			2		1		32766			
+				_t68		*char			2		1		32766			
+				_t69		int			2		1		32766			
+				_t70		int			2		1		32766			
+				_t71		**char			2		1		32766			
+				_t72		*char			2		1		32766			
+				_t73		int			2		1		32766			
+				_t74		int			2		1		32766			
+				_t75		**char			2		1		32766			
+				_t76		*char			2		1		32766			
+				_t77		int			2		1		32766			
+				_t78		int			2		1		32766			
+				_t79		**char			2		1		32766			
+				_t80		*char			2		1		32766			
+				_t81		int			2		1		32766			
+				_t82		int			2		1		32766			
+				_t83		**char			2		1		32766			
+				_t84		*char			2		1		32766			
+				_t85		int			2		1		32766			
+				_t86		int			2		1		32766			
+				_t87		**char			2		1		32766			
+				_t88		int			2		1		32766			
+				_t89		int			2		1		32766			
+				_t90		int			2		1		32766			
+				_t91		int			3		1		32766			
+				_t92		bool			3		1		32766			
+				_t93		int			3		1		32766			
+				_t94		int			3		1		32766			
+				_t95		**char			3		1		32766			
+				_t96		int			3		1		32766			
+				_t97		*char			2		1		32766			
+				_t98		int			2		1		32766			
+				_t99		int			2		1		32766			
 			Code = 
 				label_30:
 				_t51_2 = #8
@@ -379,8 +379,8 @@ Struct Name = main
 				_t86_2 = _t85_2 * #4
 				_t87_2 = keys_2 + _t86_2
 				first_2 = *_t87_2
-				_t88_2 = #32767
-				_t89_2 = #32767
+				_t88_2 = #32766
+				_t89_2 = #32766
 				_t90_2 = _t88_2 / _t89_2
 				n_2 = _t90_2
 				_t91_3 = #0

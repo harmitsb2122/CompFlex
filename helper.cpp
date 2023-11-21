@@ -44,6 +44,7 @@ SymbolTableEntry::SymbolTableEntry(string name, string type, int scope, vector<S
 	this->name = name;
 	this->dataType = type;
 	this->scope = scope;
+	this->isActive = 1;
 	this->levels = v;
 }
 
@@ -52,6 +53,7 @@ SymbolTableEntry::SymbolTableEntry(string name, string type, int scope, vector<S
 	this->name = name;
 	this->dataType = type;
 	this->scope = scope;
+	this->isActive = 1;
 	this->levels = v;
 	this->defaultValue = defaultValue;
 }
@@ -79,7 +81,7 @@ int FunctionTable ::insertVariable(string name, string type, vector<SymbolTableE
 {
 	for (int i = 0; i < localVariables.size(); i++)
 	{
-		if (localVariables[i].name == name and localVariables[i].scope == scopeStack.top())
+		if (localVariables[i].name == name and localVariables[i].isActive == 1)
 		{
 			return -1;
 		}
@@ -205,11 +207,12 @@ void printSymbolTable(vector<SymbolTableEntry> v)
 	cout << "\t\tName\t"
 			 << "DataType\t"
 			 << "Scope\t"
+			 << "Active\t"
 			 << "Default\t"
 			 << "pointer\t" << endl;
 	for (auto i : v)
 	{
-		cout << "\t\t\t\t" << i.name << "\t\t" << i.dataType << "\t\t\t" << i.scope << "\t\t" << i.defaultValue << "\t\t\t";
+		cout << "\t\t\t\t" << i.name << "\t\t" << i.dataType << "\t\t\t" << i.scope << "\t\t" << i.isActive << "\t\t" << i.defaultValue << "\t\t\t";
 		for (auto j : i.levels)
 		{
 			cout << j.name << "*";
@@ -428,7 +431,7 @@ void removeVariables()
 	{
 		if (local[i].scope > currentScope)
 		{
-			local[i].scope = 10000000;
+			local[i].isActive = 0;
 		}
 	}
 
@@ -498,7 +501,7 @@ bool isVariable(string str)
 
 		for (int i = 0; i < local.size(); i++)
 		{
-			if (local[i].name == str && local[i].scope <= currentScope)
+			if (local[i].name == str && local[i].isActive == 1)
 			{
 				return true;
 			}
@@ -507,7 +510,7 @@ bool isVariable(string str)
 		vector<SymbolTableEntry> parameters = globalTable[gIndex].functionTables[fIndex].parameters;
 		for (int i = 0; i < parameters.size(); i++)
 		{
-			if (parameters[i].name == str && parameters[i].scope <= currentScope)
+			if (parameters[i].name == str && parameters[i].isActive == 1)
 			{
 				return true;
 			}
@@ -517,7 +520,7 @@ bool isVariable(string str)
 	vector<SymbolTableEntry> global = globalTable[gIndex].attributes;
 	for (int i = 0; i < global.size(); i++)
 	{
-		if (global[i].name == str && global[i].scope <= currentScope)
+		if (global[i].name == str && global[i].isActive == 1)
 		{
 			return true;
 		}
