@@ -1,5 +1,5 @@
-# Compiler-CSD
-### About : A compiler built as a part of RISC-V Computer System Design project under CS401P-July23
+  # CompFlex
+### About : Compiler for CompLang, a custom C/C++ like programming language
 ### [Docs](https://docs.google.com/document/d/1a162MpKgx_Jk4WcJYFeREn-2Uoh0L4hkIjD-kF7uYv4/edit)
 ### [Video](https://drive.google.com/file/d/1qrmFISet6OyiSnUln5PkFxdPNEJX3PQW/view?usp=sharing)
 
